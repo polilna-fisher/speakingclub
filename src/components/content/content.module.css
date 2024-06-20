@@ -1,0 +1,21 @@
+.content_container{
+    height: 100%;
+    /*max-width: 260px;*/
+    width: 100%;
+    background-color: var(--beige);
+    padding: 20px;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+}
+/*.navbar_header_container{*/
+/*    margin-bottom: 30px;*/
+/*    text-align: center;*/
+/*    padding-top: 15px;*/
+/*}*/
+/*.navbar_items_container{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 10px;*/
+/*}*/

@@ -1,0 +1,18 @@
+.schedule_header{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    color: var(--brown);
+}
+.schedule_day{
+    font-size: 19px;
+    font-weight: 700;
+}
+.schedule_input{
+    color: var(--brown);
+    background-color: var(--beige);
+    padding: 3px 15px;
+    border-radius: 27px;
+    border: 1px solid var(--beige);
+}
+

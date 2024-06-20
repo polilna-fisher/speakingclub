@@ -1,0 +1,67 @@
+.item_container{
+    background: var(--green);
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    width: 85%;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--brown);
+    cursor: pointer;
+    padding: 10px 5px;
+}
+.host_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+.host_icon{
+    width: 55px;
+    height: 55px;
+    border-radius: 50px;
+    border: 3px solid var(--pink);
+}
+.host_name{
+    color: var(--brown);
+    font-size: 15px;
+    font-weight: 500;
+}
+.meeting_name_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.meeting_type{
+    color: var(--brown);
+    font-size: 14px;
+    font-weight: 500;
+}
+.meeting_name{
+    color: var(--brown);
+    font-size: 19px;
+    font-weight: 700;
+}
+.meeting_button_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.meeting_button{
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--brown);
+    font-size: 14px;
+    font-weight: 700;
+    background-color: var(--pink);
+    border: 1px solid var(--pink);
+    cursor: pointer;
+    width: 75px;
+}
