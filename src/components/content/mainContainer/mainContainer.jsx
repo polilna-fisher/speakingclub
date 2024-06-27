@@ -3,13 +3,14 @@ import {Route, Routes} from "react-router-dom";
 import PremiumPage from "../../../pages/PremiumPage";
 import SchedulePage from "../../../pages/SchedulePage";
 import ProfilePage from "../../../pages/ProfilePage";
+import GetStarted from "./getStarted/getStarted";
 
 
 const MainContainer = () => {
     return(
         <div className={styles.schedule_container}>
                 <Routes>
-                    {/*<Route path="/" element={<GettingStarted/>}/>*/}
+                    <Route path="/" element={<GetStarted/>}/>
                     <Route path="/schedule" element={<SchedulePage/>}/>
                     <Route path="/premium" element={<PremiumPage/>}/>
                     <Route path="/profile" element={<ProfilePage/>}/>
