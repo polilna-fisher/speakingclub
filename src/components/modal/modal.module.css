@@ -33,7 +33,7 @@
     padding: 20px;
     border-radius: 20px;
     background-color: var(--beige);
-    width: 50vw;
+    width: 70vw;
     transform: scale(0.5);
     transition: 0.4s all;
 }

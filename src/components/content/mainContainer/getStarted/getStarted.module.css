@@ -85,8 +85,8 @@
     border-radius: 25px;
 }
 .bullet_point{
-    width: 29px;
-    height: 29px;
+    width: 17px;
+    height: 17px;
     border-radius: 25px;
     background: var(--beige);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);

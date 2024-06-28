@@ -8,10 +8,36 @@ import GroupIcon from './icons/group.png'
 import JobIcon from './icons/job.png'
 import Modal from "../../../modal/modal";
 import {useState} from "react";
+import GroupDiscussionsModal from "./groupDiscussionsModal/groupDiscussionsModal";
+import JobInterviewModal from "./jobInterviewModal/jobInterviewModal";
+import GetStartedModal from "./getStartedModal/getStartedModal";
+import {getStartedModals} from "./getStartedModal/getStartedModalsContent";
 
 const GetStarted = () => {
-    const [modalTypes, setModalTypes] = useState(false)
+    const [modal, setModal] = useState(null)
 
+    const modals = {
+        groupDiscussion: <GetStartedModal header={getStartedModals.groupDiscussion.header}
+                                          img={getStartedModals.groupDiscussion.img}
+                                          leftList={getStartedModals.groupDiscussion.leftList}
+                                          rightList={getStartedModals.groupDiscussion.rightList} />,
+        jobInterview: <GetStartedModal header={getStartedModals.jobInterview.header}
+                                       img={getStartedModals.jobInterview.img}
+                                       leftList={getStartedModals.jobInterview.leftList}
+                                       rightList={getStartedModals.jobInterview.rightList} />,
+        ieltsPreparation: <GetStartedModal header={getStartedModals.ieltsPreparation.header}
+                                           img={getStartedModals.ieltsPreparation.img}
+                                           leftList={getStartedModals.ieltsPreparation.leftList}
+                                           rightList={getStartedModals.ieltsPreparation.rightList} />,
+        intermediate: <GetStartedModal header={getStartedModals.intermediate.header}
+                                       img={getStartedModals.intermediate.img}
+                                       leftList={getStartedModals.intermediate.leftList}
+                                       rightList={getStartedModals.intermediate.rightList} />,
+        english: <GetStartedModal header={getStartedModals.english.header}
+                                  img={getStartedModals.english.img}
+                                  leftList={getStartedModals.english.leftList}
+                                  rightList={getStartedModals.english.rightList} />
+    }
 
     return(
         <div className={styles.started_container}>
@@ -34,15 +60,15 @@ const GetStarted = () => {
                         <div className={styles.bullet_point}></div>
                         <div className={cx([styles.item_name, styles.item_name_head])}>Meeting types:</div>
                     </div>
-                    <div className={styles.items_container} onClick={() => setModalTypes(true)}>
+                    <div className={styles.items_container} onClick={() => setModal('groupDiscussion')}>
                         <img alt={'icon'} src={GroupIcon} className={styles.item_icon}/>
                         <div className={styles.item_name}>Group Discussions</div>
                     </div>
-                    <div className={styles.items_container} onClick={() => setModalTypes(true)}>
+                    <div className={styles.items_container} onClick={() => setModal('jobInterview')}>
                         <img alt={'icon'} src={JobIcon} className={styles.item_icon}/>
                         <div className={styles.item_name}>Job Interview</div>
                     </div>
-                    <div className={styles.items_container} onClick={() => setModalTypes(true)}>
+                    <div className={styles.items_container} onClick={() => setModal('ieltsPreparation')}>
                         <img alt={'icon'} src={ExamIcon} className={styles.item_icon}/>
                         <div className={styles.item_name}>IELTS preparation</div>
                     </div>
@@ -53,7 +79,7 @@ const GetStarted = () => {
                         <div className={styles.bullet_point}></div>
                         <div className={cx([styles.item_name, styles.item_name_head])}>Minimum level:</div>
                     </div>
-                    <div className={styles.items_container} onClick={() => setModalTypes(true)}>
+                    <div className={styles.items_container} onClick={() => setModal('intermediate')}>
                     <img alt={'icon'} src={IntermediateIcon} className={styles.item_icon}/>
                         <div className={styles.item_name}>Intermediate</div>
                     </div>
@@ -64,15 +90,16 @@ const GetStarted = () => {
                         <div className={styles.bullet_point}></div>
                         <div className={cx([styles.item_name, styles.item_name_head])}>Languages:</div>
                     </div>
-                    <div className={styles.items_container} onClick={() => setModalTypes(true)}>
+                    <div className={styles.items_container} onClick={() => setModal('english')}>
                     <img alt={'icon'} src={EnglishIcon} className={styles.item_icon}/>
                         <div className={styles.item_name}>English</div>
                     </div>
                 </div>
             </div>
-            <Modal modalTypes={modalTypes} setModalTypes={setModalTypes}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequuntur cupiditate dolor ea earum harum ipsa laborum nam nostrum perferendis quidem quis, quos reiciendis repellendus sit tenetur voluptatibus. Aliquid, aut commodi consequatur culpa doloribus minima perspiciatis unde! Adipisci blanditiis debitis doloremque esse eveniet hic labore natus, odit praesentium, sed sit!</p>
+            <Modal modal={!!modal} setModal={() => setModal(null)}>
+                {modals[modal]}
             </Modal>
+
         </div>
     )
 }
