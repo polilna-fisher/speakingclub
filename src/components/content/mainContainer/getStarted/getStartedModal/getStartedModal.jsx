@@ -22,7 +22,7 @@ const GetStartedModal = ({header, img, leftList, rightList}) => {
                 <div className={styles.img_container}>
                     <img alt={'icon'} src={img} className={styles.img}/>
                 </div>
-                <ul>
+                <ul className={styles.list}>
                     {
                         rightList.map(item => {
                             return (
