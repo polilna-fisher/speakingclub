@@ -37,6 +37,7 @@ const ScheduleContainer = () => {
             <div className={styles.items_container}>
                 {
                     meetingList.map((item) => (<ScheduleItem
+                        id={item._id}
                         key={item._id}
                         date={item.date}
                         type={item.type}

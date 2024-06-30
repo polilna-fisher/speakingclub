@@ -9,7 +9,7 @@
     font-size: 18px;
     font-weight: 500;
     color: var(--brown);
-    cursor: pointer;
+    /*cursor: pointer;*/
     padding: 10px 5px;
 }
 .host_container{
@@ -53,6 +53,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
 }
 .meeting_button{
     padding: 5px;

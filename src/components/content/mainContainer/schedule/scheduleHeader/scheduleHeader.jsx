@@ -6,16 +6,15 @@ const ScheduleHeader = ({getChosenDate}) => {
     const [selectValue, setSelectValue] = useState();
 
     useEffect(() => {
+        console.log(selectValue, 'selectValue')
         getChosenDate(selectValue);
     }, [selectValue]);
 
     return(
         <div className={styles.schedule_header}>
-            {/*<h3 className={styles.schedule_day}>{getToday()}</h3>*/}
             <select className={styles.schedule_input} onClick={e => (setSelectValue(e.target.value))}>
-                {countDate().map(el => (<option value={el.date}>{el.day}, {el.date}</option>))}
+                {countDate().map(el => (<option value={el.fullDate}>{el.day}, {el.month}, {el.date}</option>))}
             </select>
-            {/*<input type={'date'} defaultValue={new Date().toLocaleDateString().split('.').reverse().join('-')} className={styles.schedule_input}/>*/}
         </div>
     )
 }

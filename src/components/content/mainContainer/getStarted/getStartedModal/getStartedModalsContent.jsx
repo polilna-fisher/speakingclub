@@ -1,5 +1,8 @@
 import GroupDiscussion from './groupDiscussionImg.png'
 import JobInterview from "./jobInterviewImg.png";
+import IeltsPreparation from "./ieltsPreparationImg.png";
+import LanguageLevel from './languageLevelImg.png'
+import Languages from './languagesImg.png'
 
 export const getStartedModals = {
     groupDiscussion: {
@@ -32,7 +35,7 @@ export const getStartedModals = {
     },
     ieltsPreparation: {
         header: 'IELTS Preparation',
-        img: '',
+        img: IeltsPreparation,
         leftList: [
             'In group discussions, we will divide all participants into pairs.',
             'During your discussion, you can use the suggested questions or talk about whatever you want.',
@@ -46,7 +49,7 @@ export const getStartedModals = {
     },
     intermediate: {
         header: 'Language Level',
-        img: '',
+        img: LanguageLevel,
         leftList: [
             'In group discussions, we will divide all participants into pairs.',
             'During your discussion, you can use the suggested questions or talk about whatever you want.',
@@ -60,7 +63,7 @@ export const getStartedModals = {
     },
     english: {
         header: 'Languages',
-        img: '',
+        img: Languages,
         leftList: [
             'In group discussions, we will divide all participants into pairs.',
             'During your discussion, you can use the suggested questions or talk about whatever you want.',

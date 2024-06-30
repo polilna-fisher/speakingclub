@@ -1,8 +1,9 @@
 .schedule_header{
-    padding: 20px;
+    padding: 12px;
     display: flex;
     justify-content: space-around;
     color: var(--brown);
+    height: 68px;
 }
 .schedule_day{
     font-size: 19px;
@@ -12,7 +13,9 @@
     color: var(--brown);
     background-color: var(--beige);
     padding: 3px 15px;
-    border-radius: 27px;
+    border-radius: 6px;
     border: 1px solid var(--beige);
 }
+.option{
 
+}

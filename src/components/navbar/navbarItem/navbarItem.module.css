@@ -22,3 +22,6 @@
     font-size: 16px;
     line-height: 18px;
 }
+.navbar_item_active_container{
+    background-color: var(--violet);
+}

@@ -1,0 +1,52 @@
+
+.content{
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+
+}
+.header{
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.subheader{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.book_content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.img{
+    width: 166px;
+    height: 166px;
+    border-radius: 97px;
+}
+.img_container{
+    margin: 0 auto;
+
+}
+.list{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+}
+
+.list_item{
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.list_icon{
+    background: var(--violet);
+    border-radius: 25px;
+    max-width: 12px;
+    width: 100%;
+    height: 12px;
+}

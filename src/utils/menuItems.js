@@ -1,9 +1,9 @@
-import gettingStarted from '../menuIcons/gettingStarted.svg';
-import premium from '../menuIcons/premium.svg';
-import profile from '../menuIcons/profile.svg';
-import schedule from '../menuIcons/schedule.svg';
-import help from '../menuIcons/help.svg';
-import signOut from '../menuIcons/signOut.svg';
+import gettingStarted from '../components/navbar/menuIcons/gettingStarted.svg';
+import premium from '../components/navbar/menuIcons/premium.svg';
+import profile from '../components/navbar/menuIcons/profile.svg';
+import schedule from '../components/navbar/menuIcons/schedule.svg';
+import help from '../components/navbar/menuIcons/help.svg';
+import signOut from '../components/navbar/menuIcons/signOut.svg';
 
 
 export const menuItemsList = [
