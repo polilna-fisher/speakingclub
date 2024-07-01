@@ -13,7 +13,7 @@ const ScheduleHeader = ({getChosenDate}) => {
     return(
         <div className={styles.schedule_header}>
             <select className={styles.schedule_input} onClick={e => (setSelectValue(e.target.value))}>
-                {countDate().map(el => (<option value={el.fullDate}>{el.day}, {el.month}, {el.date}</option>))}
+                {countDate().map(el => (<option value={el.fullDate}>{el.month}, {el.date} {el.day}</option>))}
             </select>
         </div>
     )

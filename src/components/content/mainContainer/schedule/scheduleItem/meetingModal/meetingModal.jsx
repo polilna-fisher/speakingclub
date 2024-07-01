@@ -1,16 +1,9 @@
 import styles from './meetingModal.module.css'
 import MeetingImg from './bookMeetingModelImg.png'
+import {styleDateTime} from "../../../../../../utils/dateCount";
 
 
 const MeetingModal = ({type, topic, questions, name, date}) => {
-
-    const styleDateTime = (date) => {
-        //2024-06-29T06:00:00.000Z
-        const month = date.toLocaleString('EN', { month: 'long' })
-        const calendarDay = String(date.getDate()).length === 1 ? `0${String(date.getDate())}`: String(date.getDate())
-        const weekDay = daysName[date.getDay()]
-
-    }
 
     return (
         <div className={styles.container}>
@@ -32,7 +25,7 @@ const MeetingModal = ({type, topic, questions, name, date}) => {
                 <div className={styles.book_content}>
                     <img src={MeetingImg} alt="img" className={styles.img}/>
                     <h3 className={styles.subheader}>{name}</h3>
-                    <div>{date}</div>
+                    <div>{styleDateTime(date)}</div>
                     <button>Book</button>
                 </div>
             </div>
