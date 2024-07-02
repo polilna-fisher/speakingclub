@@ -8,8 +8,6 @@ import GroupIcon from './icons/group.png'
 import JobIcon from './icons/job.png'
 import Modal from "../../../modal/modal";
 import {useState} from "react";
-import GroupDiscussionsModal from "./groupDiscussionsModal/groupDiscussionsModal";
-import JobInterviewModal from "./jobInterviewModal/jobInterviewModal";
 import GetStartedModal from "./getStartedModal/getStartedModal";
 import {getStartedModals} from "./getStartedModal/getStartedModalsContent";
 

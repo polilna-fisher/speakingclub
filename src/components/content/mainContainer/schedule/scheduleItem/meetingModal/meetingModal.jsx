@@ -1,6 +1,7 @@
 import styles from './meetingModal.module.css'
 import MeetingImg from './bookMeetingModelImg.png'
 import {styleDateTime} from "../../../../../../utils/dateCount";
+import Button from "../../../../../button/button";
 
 
 const MeetingModal = ({type, topic, questions, name, date}) => {
@@ -24,9 +25,9 @@ const MeetingModal = ({type, topic, questions, name, date}) => {
                 </ul>
                 <div className={styles.book_content}>
                     <img src={MeetingImg} alt="img" className={styles.img}/>
-                    <h3 className={styles.subheader}>{name}</h3>
-                    <div>{styleDateTime(date)}</div>
-                    <button>Book</button>
+                    <h3 className={styles.meeting_name}>{name}</h3>
+                    <div className={styles.subheader}>{styleDateTime(date)}</div>
+                    <Button text={'Book now'}/>
                 </div>
             </div>
 

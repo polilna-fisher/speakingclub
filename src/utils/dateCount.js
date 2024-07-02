@@ -1,7 +1,5 @@
 import moment from "moment";
 
-export const daysName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
 export const countDate = () => {
     const dataList = []
     let n = 0
@@ -16,7 +14,7 @@ export const countDate = () => {
         })
         n = n + 1
     }
-    return dataList //'01.07.2024, 20:11:45'
+    return dataList
 }
 
 export const styleDateTime = (date) => {
