@@ -10,6 +10,7 @@ const meetingSchema = new Schema({
     questions1: {type: Array, required: true, unique: false},
     topic2: {type: String, required: true, unique: false},
     questions2: {type: Array, required: true, unique: false},
+    booked: {type: Boolean, required: true, unique: false}
 })
 
 module.exports = model('Meeting', meetingSchema);

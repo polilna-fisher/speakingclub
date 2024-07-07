@@ -2,9 +2,23 @@ import styles from './meetingModal.module.css'
 import MeetingImg from './bookMeetingModelImg.png'
 import {styleDateTime} from "../../../../../../utils/dateCount";
 import Button from "../../../../../button/button";
+import {useState} from "react";
+import Modal from "../../../../../modal/modal";
+import PurchaseModal from "../../../premium/purchaseModal/purchaseModal";
 
 
-const MeetingModal = ({type, topic, questions, name, date}) => {
+const MeetingModal = ({id, type, topic, questions, name, date}) => {
+
+    const bookItem = async () => {
+        const response = await fetch(`http://localhost:5000/api/update/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ booked: true })
+        })
+        console.log(response.body, 'resres')
+        const data = await response.json()
+        console.log(data, 'datadaata')
+    }
+
 
     return (
         <div className={styles.container}>
@@ -15,7 +29,7 @@ const MeetingModal = ({type, topic, questions, name, date}) => {
                     {
                         questions.map(item => {
                             return (
-                                <li className={styles.list_item}>
+                                <li className={styles.list_item} key={item}>
                                     <div className={styles.list_icon}></div>
                                     <p>{item}</p>
                                 </li>
@@ -27,7 +41,7 @@ const MeetingModal = ({type, topic, questions, name, date}) => {
                     <img src={MeetingImg} alt="img" className={styles.img}/>
                     <h3 className={styles.meeting_name}>{name}</h3>
                     <div className={styles.subheader}>{styleDateTime(date)}</div>
-                    <Button text={'Book now'}/>
+                    <Button text={'Book now'} onClickFn={async () => {bookItem()}}/>
                 </div>
             </div>
 
