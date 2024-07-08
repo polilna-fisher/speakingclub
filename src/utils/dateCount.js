@@ -24,3 +24,11 @@ export const styleDateTime = (date) => {
     const weekDay = moment(cutDate, 'YYYY-MM-DD').locale('en').format( 'dddd' )
     return `${weekDay}, ${month} ${calendarDay}`
 }
+
+export const dateFormats = {
+    normal: 'DD.MM.YYYY'
+}
+
+export const formatDate = (date, format) => {
+    return moment(date).format(format)
+}

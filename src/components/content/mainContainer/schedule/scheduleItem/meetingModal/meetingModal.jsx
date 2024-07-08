@@ -12,13 +12,14 @@ const MeetingModal = ({id, type, topic, questions, name, date}) => {
     const bookItem = async () => {
         const response = await fetch(`http://localhost:5000/api/update/${id}`, {
             method: 'PUT',
-            body: JSON.stringify({ booked: true })
+            body: JSON.stringify({ booked: true }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         })
-        console.log(response.body, 'resres')
-        const data = await response.json()
-        console.log(data, 'datadaata')
-    }
+        return  await response.json()
 
+    }
 
     return (
         <div className={styles.container}>
