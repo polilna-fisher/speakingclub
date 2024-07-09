@@ -1,16 +1,34 @@
 import styles from './bookedItem.module.css'
+import {styleDateTime} from "../../../../utils/dateCount";
+import Button from "../../../button/button";
 
-const BookedItem = () => {
-    return(
-        <div className={styles.booked_item_container}>
-            <div className={styles.booked_item_text_container}>
-                <h3 className={styles.booked_item_name}>What's your fav film?</h3>
-                <div className={styles.booked_item_date}>03.05.2024, Monday</div>
-                <h3 className={styles.booked_item_type}>Speaking session</h3>
+const BookedItem = ({name, type, color, part1, part2}) => {
+
+
+
+    return (
+        !!part1.booked
+            ? <div className={styles.booked_item_container} style={{backgroundColor: color}}>
+                <div className={styles.booked_item_text_container}>
+                    <h3 className={styles.booked_item_name}>{name}</h3>
+                    <h3 className={styles.booked_item_type}>{type}</h3>
+                    <div className={styles.booked_item_date}>{styleDateTime(part1.dateTime)}</div>
+                    <div className={styles.booked_item_date}>{part1.dateTime.split('T')[1].substring(0, 5)}</div>
+                </div>
             </div>
+            : null,
 
-            <button className={styles.booked_item_button}>Details</button>
-        </div>
+        !!part2.booked
+            ? <div className={styles.booked_item_container} style={{backgroundColor: color}}>
+                <div className={styles.booked_item_text_container}>
+                    <h3 className={styles.booked_item_name}>{name}</h3>
+                    <h3 className={styles.booked_item_type}>{type}</h3>
+                    <div className={styles.booked_item_date}>{styleDateTime(part2.dateTime)}</div>
+                    <div className={styles.booked_item_date}>{part2.dateTime.split('T')[1].substring(0, 5)}</div>
+                </div>
+            </div>
+            : null
+
     )
 }
 

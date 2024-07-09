@@ -41,9 +41,13 @@ class MeetingController {
 
     async createMeeting(req, res) {
         try {
-            const {part1, part2, dateTime} = req.body
+            const {part1, part2, dateTime, type, name, host, hostIcon} = req.body
             const data = await meetingService.createMeeting({
                 dateTime,
+                type,
+                name,
+                host,
+                hostIcon,
                 part1,
                 part2
             })
