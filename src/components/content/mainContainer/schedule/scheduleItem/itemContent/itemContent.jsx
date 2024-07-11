@@ -3,11 +3,11 @@ import Modal from "../../../../../modal/modal";
 import {useState} from "react";
 import MeetingModal from "../meetingModal/meetingModal";
 
-const ItemContent = ({date, type, name, host, hostIcon, topic1, topic2, questions2, questions1}) => {
+const ItemContent = ({id, dateTime, type, name, host, hostIcon, part1, part2}) => {
     const [modal, setModal] = useState(null)
     const modals = {
-        Part1: <MeetingModal type={type} topic={topic1} questions={questions1} date={date} name={name}/>,
-        Part2: <MeetingModal type={type} topic={topic2} questions={questions2} date={date} name={name}/>
+        Part1: <MeetingModal type={type} topic={part1.topic} questions={part1.questions} date={dateTime} name={name} id={id} part={part1}/>,
+        Part2: <MeetingModal type={type} topic={part2.topic} questions={part2.questions} date={dateTime} name={name} id={id} part={part2}/>
     }
 
     return(

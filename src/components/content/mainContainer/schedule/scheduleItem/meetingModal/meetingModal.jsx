@@ -2,17 +2,13 @@ import styles from './meetingModal.module.css'
 import MeetingImg from './bookMeetingModelImg.png'
 import {styleDateTime} from "../../../../../../utils/dateCount";
 import Button from "../../../../../button/button";
-import {useState} from "react";
-import Modal from "../../../../../modal/modal";
-import PurchaseModal from "../../../premium/purchaseModal/purchaseModal";
 
-
-const MeetingModal = ({id, type, topic, questions, name, date}) => {
+const MeetingModal = ({id, type, topic, questions, name, date, part}) => {
 
     const bookItem = async () => {
         const response = await fetch(`http://localhost:5000/api/update/${id}`, {
             method: 'PUT',
-            body: JSON.stringify({ booked: true }),
+            body: JSON.stringify({part1: {booked: true}}),
             headers: {
                 'Content-Type': 'application/json',
             },

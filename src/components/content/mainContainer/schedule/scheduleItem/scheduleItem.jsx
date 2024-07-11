@@ -2,21 +2,19 @@ import styles from './scheduleItem.module.css'
 import ItemTime from "./itemTime/itemTime";
 import ItemContent from "./itemContent/itemContent";
 
-const ScheduleItem = ({key, id, date, type, name, host, hostIcon, topic1, questions1, topic2, questions2}) => {
+const ScheduleItem = ({id, dateTime, type, name, host, hostIcon, part1, part2}) => {
     return(
-        <div className={styles.item_container} key={key}>
-            <ItemTime date={date}  />
+        <div className={styles.item_container} key={id}>
+            <ItemTime date={dateTime} />
             <ItemContent
                 id={id}
-                date={date}
                 type={type}
                 name={name}
                 host={host}
                 hostIcon={hostIcon}
-                topic1={topic1}
-                questions1={questions1}
-                topic2={topic2}
-                questions2={questions2} />
+                dateTime={dateTime}
+                part1={part1}
+                part2={part2}/>
         </div>
     )
 }

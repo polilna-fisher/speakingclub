@@ -1,53 +1,53 @@
 import styles from './scheduleContainer.module.css'
 import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import moment from "moment";
+import {dateFormats, formatDate} from "../../../../../utils/dateCount";
 
 
 const ScheduleContainer = () => {
+    const [data, setData] = useState([]);
+    const [chosenDate, setChosenDate] = useState();
+    const [loading, setLoading] = useState(true);
 
-    const [meetingList, setMeetingList] = useState([]);
-    const [chosenDate, setChosenDate] = useState(new Date().toLocaleDateString());
-
-    async function fetchData (date= new Date().toLocaleDateString()) {
+    async function fetchData() {
         const response = await fetch('http://localhost:5000/api/getAll')
-        const data = await response.json();
-        const todayData = data.filter(el =>
-            (moment(el.date).format("DD.MM.YYYY") === date))
-        setMeetingList(todayData.sort((a, b) => moment(a.date) - moment(b.date)))
+        return await response.json();
     }
 
-    useEffect( () => {
+    const meetingList = useMemo(() => {
+        const forChosenDateData = data?.filter(el => {
+            return (formatDate(el.date, dateFormats.normal) === chosenDate)
+        })
+        return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date))
+    }, [data, chosenDate])
+
+    useEffect(() => {
         fetchData()
+            .then(data => setData(data))
+            .catch()
+            .finally(() => {
+                setLoading(false)
+            })
     }, []);
-    useEffect( () => {
-        fetchData(chosenDate)
-    }, [chosenDate]);
-
-    const getChosenDate = (date) => {
-        setChosenDate(date)
-    }
 
 
-
-    return(
+    return (
         <div>
-            <ScheduleHeader getChosenDate={getChosenDate}/>
+            <ScheduleHeader getChosenDate={setChosenDate}/>
             <div className={styles.items_container}>
                 {
-                    meetingList.map((item) => (<ScheduleItem
+                     meetingList.map((item) => (<ScheduleItem
                         id={item._id}
                         key={item._id}
-                        date={item.date}
+                        dateTime={item.dateTime}
                         type={item.type}
                         name={item.name}
                         host={item.host}
                         hostIcon={item.hostIcon}
-                        topic1={item.topic1}
-                        questions1={item.questions1}
-                        topic2={item.topic2}
-                        questions2={item.questions2} />))
+                        part2={item.part2}
+                        part1={item.part1}/>))
                 }
             </div>
         </div>
