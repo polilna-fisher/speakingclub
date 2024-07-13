@@ -66,6 +66,18 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
+
+    async deleteMeetingsBeforeDate(req, res) {
+        try {
+            const date = req.params.date;
+            const deletedMeetings = await meetingService.deleteMeetingsBeforeDate(date)
+            res.send(deletedMeetings);
+            return res.json(deletedMeetings)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+
+    }
 }
 
 module.exports = new MeetingController();

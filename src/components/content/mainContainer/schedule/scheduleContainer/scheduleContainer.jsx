@@ -17,10 +17,12 @@ const ScheduleContainer = () => {
     }
 
     const meetingList = useMemo(() => {
-        const forChosenDateData = data?.filter(el => {
-            return (formatDate(el.date, dateFormats.normal) === chosenDate)
-        })
-        return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date))
+        if(!!data.length){
+            const forChosenDateData = data?.filter(el => {
+                return (formatDate(el.date, dateFormats.normal) === chosenDate)
+            })
+            return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date))
+        }
     }, [data, chosenDate])
 
     useEffect(() => {
@@ -38,7 +40,7 @@ const ScheduleContainer = () => {
             <ScheduleHeader getChosenDate={setChosenDate}/>
             <div className={styles.items_container}>
                 {
-                     meetingList.map((item) => (<ScheduleItem
+                     meetingList?.map((item) => (<ScheduleItem
                         id={item._id}
                         key={item._id}
                         dateTime={item.dateTime}

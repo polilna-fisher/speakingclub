@@ -4,7 +4,6 @@ class MeetingService {
     async getMeeting(id) {
         const meeting = await MeetingModel.findOne({_id: id});
         return meeting;
-
     }
     async createMeeting(data) {
         const meeting = await MeetingModel.create(data);
@@ -21,6 +20,10 @@ class MeetingService {
     async deleteMeeting(id) {
         const meeting = await MeetingModel.deleteOne({_id: id});
         return meeting
+    }
+    async deleteMeetingsBeforeDate(date){
+        const deletedMeetingsList = await  MeetingModel.deleteMany({dateTime: date})
+        return deletedMeetingsList
     }
 }
 

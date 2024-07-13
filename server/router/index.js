@@ -8,5 +8,6 @@ router.get('/:id', meetingController.getMeeting)
 router.post('/add', meetingController.createMeeting)
 router.put('/update/:id', meetingController.updateMeeting)
 router.delete('/delete/:id', meetingController.deleteMeeting)
+router.delete('deleteBefore/:date', meetingController.deleteMeetingsBeforeDate)
 
 module.exports = router
