@@ -1,4 +1,5 @@
 const MeetingModel = require('../models/meetingModel');
+const moment = require("moment/moment");
 
 class MeetingService {
     async getMeeting(id) {
@@ -21,8 +22,19 @@ class MeetingService {
         const meeting = await MeetingModel.deleteOne({_id: id});
         return meeting
     }
-    async deleteMeetingsBeforeDate(date){
-        const deletedMeetingsList = await  MeetingModel.deleteMany({dateTime: date})
+    async deleteMeetingsBeforeDate(){
+        const dates = () => {
+            const dateList = []
+            let n = 1
+            while (n < 10) {
+                let date = new Date()
+                date.setDate(date.getDate() - n);
+                dateList.push(date.toLocaleDateString())
+                n = n + 1
+            }
+            return dateList
+        }
+        const deletedMeetingsList = MeetingModel.deleteMany({date: [...dates()]})
         return deletedMeetingsList
     }
 }

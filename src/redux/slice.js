@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     loadingMeetings: true,
     errorMeetings: false,
-    meetingsList: []
+    meetingsList: [],
+    bookedMeetings: [],
 }
 
 export const meetingSlice = createSlice(
@@ -23,6 +24,9 @@ export const meetingSlice = createSlice(
             fetchMeetingsListError: (state) => {
                 state.loadingMeetings = false;
                 state.errorMeetings = true
+            },
+            fetchBookedMeetingsSuccess: (state, action) => {
+                state.bookedMeetings = action.payload?.filter(item => !!item.part1.booked || !!item.part2.booked)
             },
         }
     }

@@ -4,6 +4,7 @@ import ScheduleItem from "../scheduleItem/scheduleItem";
 import {useEffect, useMemo, useState} from "react";
 import moment from "moment";
 import {dateFormats, formatDate} from "../../../../../utils/dateCount";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const ScheduleContainer = () => {
@@ -19,7 +20,7 @@ const ScheduleContainer = () => {
     const meetingList = useMemo(() => {
         if(!!data.length){
             const forChosenDateData = data?.filter(el => {
-                return (formatDate(el.date, dateFormats.normal) === chosenDate)
+                return (formatDate(el.dateTime, dateFormats.normal) === chosenDate)
             })
             return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date))
         }
