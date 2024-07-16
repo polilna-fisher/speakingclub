@@ -15,7 +15,19 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message || 'No available meetings'));
         }
     }
-
+    async getPartsList(req, res) {
+        try {
+            const data = await meetingService.getPartsList()
+            console.log(data, 'dadadadadata')
+            if (!data || !data.length) {
+                throw new Error()
+            } else {
+                return res.json(data)
+            }
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message || 'No available meetings'));
+        }
+    }
     async getMeeting(req, res) {
         try {
             const meetingId = req.params.id;
@@ -26,6 +38,41 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
+    async getPart(req, res) {
+        try {
+            const partId = req.params.id;
+            const part = await meetingService.getPart(partId)
+            res.send(part);
+            return res.json(part)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
+    async createMeeting(req, res) {
+        try {
+            const {dateTime, date, type, name, host, hostIcon, idParts} = req.body
+            const data = await meetingService.createMeeting({
+                dateTime, date, type, name, host, hostIcon, idParts
+            })
+            return res.json(data)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     async updateMeeting(req, res) {
         try {
@@ -39,23 +86,7 @@ class MeetingController {
         }
     }
 
-    async createMeeting(req, res) {
-        try {
-            const {part1, part2, dateTime, type, name, host, hostIcon} = req.body
-            const data = await meetingService.createMeeting({
-                dateTime,
-                type,
-                name,
-                host,
-                hostIcon,
-                part1,
-                part2
-            })
-            return res.json(data)
-        } catch (e) {
-            res.send(errorHandler(res.statusCode, e.message));
-        }
-    }
+
 
     async deleteMeeting(req, res) {
         try {
@@ -69,15 +100,49 @@ class MeetingController {
 
     async deleteMeetingsBeforeDate(req, res) {
         try {
-            const date = req.params.date;
-            const deletedMeetings = await meetingService.deleteMeetingsBeforeDate(date)
-            res.send(deletedMeetings);
-            return res.json(deletedMeetings)
+            const meetingDate = req.params.date;
+            const deletedMeetings = await meetingService.deleteMeetingsBeforeDate()
+            res.send(`Items with after today was deleted successfully.`);
         } catch (e) {
             res.send(errorHandler(res.statusCode, e.message));
         }
 
     }
+
+    async createNew(req, res) {
+        try {
+            const {idParts, dateTime, date, type, name, host, hostIcon} = req.body
+            const data = await meetingService.createNew({
+                dateTime,
+                date,
+                type,
+                name,
+                host,
+                hostIcon,
+                idParts
+            })
+            return res.json(data)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
+
+    async createPart(req, res) {
+        try {
+            const {dateTime, booked, topic, questions} = req.body
+            const data = await meetingService.createPart({
+                dateTime,
+                booked,
+                topic,
+                questions
+            })
+            return res.json(data)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
+
+
 }
 
 module.exports = new MeetingController();

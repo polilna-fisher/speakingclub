@@ -1,19 +1,45 @@
 const MeetingModel = require('../models/meetingModel');
+const PartModel = require('../models/partModel');
 const moment = require("moment/moment");
 
 class MeetingService {
-    async getMeeting(id) {
-        const meeting = await MeetingModel.findOne({_id: id});
-        return meeting;
-    }
-    async createMeeting(data) {
-        const meeting = await MeetingModel.create(data);
-        return meeting
-    }
     async getMeetingList() {
         const meetingList = await MeetingModel.find();
         return meetingList;
     }
+    async getPartsList() {
+        const partsList = await PartModel.find();
+        return partsList;
+    }
+    async getMeeting(id) {
+        const meeting = await MeetingModel.findOne({_id: id});
+        return meeting;
+    }
+    async getPart(id) {
+        const part = await PartModel.findOne({_id: id});
+        return part;
+    }
+
+
+
+
+
+
+
+    async createMeeting(data) {
+        const meeting = await MeetingModel.create(data);
+        return meeting
+    }
+    async createPart(data) {
+        const meeting = await PartModel.create(data);
+        return meeting
+    }
+    async createNew(data) {
+        const meeting = await NewModel.create(data);
+        return meeting
+    }
+
+
     async updateMeeting(id, data) {
         const meeting = await MeetingModel.updateOne({_id: id}, data);
         return meeting
