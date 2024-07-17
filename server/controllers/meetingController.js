@@ -18,7 +18,6 @@ class MeetingController {
     async getPartsList(req, res) {
         try {
             const data = await meetingService.getPartsList()
-            console.log(data, 'dadadadadata')
             if (!data || !data.length) {
                 throw new Error()
             } else {
@@ -59,21 +58,23 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    async createPart(req, res) {
+        try {
+            const {dateTime, booked, topic, questions, date, type, name} = req.body
+            const data = await meetingService.createPart({
+                date,
+                type,
+                name,
+                dateTime,
+                booked,
+                topic,
+                questions
+            })
+            return res.json(data)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
     async updateMeeting(req, res) {
         try {
             const meetingData = req.body;
@@ -85,9 +86,17 @@ class MeetingController {
 
         }
     }
+    async updatePart(req, res) {
+        try {
+            const partData = req.body;
+            const partId = req.params.id;
+            const data = await meetingService.updatePart(partId, partData)
+            return res.json(partData)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
 
-
-
+        }
+    }
     async deleteMeeting(req, res) {
         try {
             const meetingId = req.params.id;
@@ -97,6 +106,23 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     async deleteMeetingsBeforeDate(req, res) {
         try {
@@ -127,20 +153,7 @@ class MeetingController {
         }
     }
 
-    async createPart(req, res) {
-        try {
-            const {dateTime, booked, topic, questions} = req.body
-            const data = await meetingService.createPart({
-                dateTime,
-                booked,
-                topic,
-                questions
-            })
-            return res.json(data)
-        } catch (e) {
-            res.send(errorHandler(res.statusCode, e.message));
-        }
-    }
+
 
 
 }

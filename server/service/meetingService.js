@@ -19,31 +19,32 @@ class MeetingService {
         const part = await PartModel.findOne({_id: id});
         return part;
     }
-
-
-
-
-
-
-
     async createMeeting(data) {
         const meeting = await MeetingModel.create(data);
         return meeting
     }
     async createPart(data) {
-        const meeting = await PartModel.create(data);
-        return meeting
+        const part = await PartModel.create(data);
+        return part
     }
-    async createNew(data) {
-        const meeting = await NewModel.create(data);
-        return meeting
-    }
-
-
     async updateMeeting(id, data) {
         const meeting = await MeetingModel.updateOne({_id: id}, data);
         return meeting
     }
+    async updatePart(id, data) {
+        const part = await PartModel.updateOne({_id: id}, data);
+        return part
+    }
+
+
+
+
+
+
+
+
+
+
     async deleteMeeting(id) {
         const meeting = await MeetingModel.deleteOne({_id: id});
         return meeting
