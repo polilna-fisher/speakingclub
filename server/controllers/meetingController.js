@@ -106,56 +106,35 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    async deleteMeetingsBeforeDate(req, res) {
+    async deletePart(req, res) {
+        try {
+            const partId = req.params.id;
+            const part = await meetingService.deletePart(partId)
+            res.send(`Item with id ${partId} was deleted successfully.`);
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+        }
+    }
+    async deleteOldMeetings(req, res) {
         try {
             const meetingDate = req.params.date;
-            const deletedMeetings = await meetingService.deleteMeetingsBeforeDate()
+            const deletedMeetings = await meetingService.deleteOldMeetings()
             res.send(`Items with after today was deleted successfully.`);
         } catch (e) {
             res.send(errorHandler(res.statusCode, e.message));
         }
 
     }
-
-    async createNew(req, res) {
+    async deleteOldParts(req, res) {
         try {
-            const {idParts, dateTime, date, type, name, host, hostIcon} = req.body
-            const data = await meetingService.createNew({
-                dateTime,
-                date,
-                type,
-                name,
-                host,
-                hostIcon,
-                idParts
-            })
-            return res.json(data)
+            const partDate = req.params.date;
+            const deletedParts = await meetingService.deleteOldParts()
+            res.send(`Items with after today was deleted successfully.`);
         } catch (e) {
             res.send(errorHandler(res.statusCode, e.message));
         }
+
     }
-
-
-
-
 }
 
 module.exports = new MeetingController();

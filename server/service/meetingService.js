@@ -35,21 +35,15 @@ class MeetingService {
         const part = await PartModel.updateOne({_id: id}, data);
         return part
     }
-
-
-
-
-
-
-
-
-
-
     async deleteMeeting(id) {
         const meeting = await MeetingModel.deleteOne({_id: id});
         return meeting
     }
-    async deleteMeetingsBeforeDate(){
+    async deletePart(id) {
+        const part = await PartModel.deleteOne({_id: id});
+        return part
+    }
+    async deleteOldMeetings(){
         const dates = () => {
             const dateList = []
             let n = 1
@@ -61,8 +55,23 @@ class MeetingService {
             }
             return dateList
         }
-        const deletedMeetingsList = MeetingModel.deleteMany({date: [...dates()]})
+        const deletedMeetingsList = MeetingModel.deleteMany({dateTime: [...dates()]})
         return deletedMeetingsList
+    }
+    async deleteOldParts(){
+        const dates = () => {
+            const dateList = []
+            let n = 1
+            while (n < 10) {
+                let date = new Date()
+                date.setDate(date.getDate() - n);
+                dateList.push(date.toLocaleDateString())
+                n = n + 1
+            }
+            return dateList
+        }
+        const deletedPartsList = PartModel.deleteMany({date: [...dates()]})
+        return deletedPartsList
     }
 }
 

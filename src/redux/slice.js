@@ -4,7 +4,9 @@ const initialState = {
     loadingMeetings: true,
     errorMeetings: false,
     meetingsList: [],
-    bookedMeetings: [],
+    loadingParts: true,
+    errorParts: false,
+    partsList: []
 }
 
 export const meetingSlice = createSlice(
@@ -25,9 +27,19 @@ export const meetingSlice = createSlice(
                 state.loadingMeetings = false;
                 state.errorMeetings = true
             },
-            fetchBookedMeetingsSuccess: (state, action) => {
-                state.bookedMeetings = action.payload?.filter(item => !!item.part1.booked || !!item.part2.booked)
+            fetchPartsList: (state) => {
+                state.loadingParts = true;
+                state.errorParts = false
             },
+            fetchPartListSuccess: (state, action) => {
+                state.loadingPart = false;
+                state.errorParts = false;
+                state.partsList = action.payload
+            },
+            fetchPartsListError: (state) => {
+                state.loadingParts = false;
+                state.errorParts = true
+            }
         }
     }
 )
