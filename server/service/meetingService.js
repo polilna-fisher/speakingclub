@@ -44,33 +44,13 @@ class MeetingService {
         return part
     }
     async deleteOldMeetings(){
-        const dates = () => {
-            const dateList = []
-            let n = 1
-            while (n < 10) {
-                let date = new Date()
-                date.setDate(date.getDate() - n);
-                dateList.push(date.toLocaleDateString())
-                n = n + 1
-            }
-            return dateList
-        }
-        const deletedMeetingsList = MeetingModel.deleteMany({dateTime: [...dates()]})
+        const deletedMeetingsList =
+            MeetingModel.deleteMany({dateTime: { $lt: new Date() }})
         return deletedMeetingsList
     }
     async deleteOldParts(){
-        const dates = () => {
-            const dateList = []
-            let n = 1
-            while (n < 10) {
-                let date = new Date()
-                date.setDate(date.getDate() - n);
-                dateList.push(date.toLocaleDateString())
-                n = n + 1
-            }
-            return dateList
-        }
-        const deletedPartsList = PartModel.deleteMany({date: [...dates()]})
+        const deletedPartsList =
+            PartModel.deleteMany({dateTime: { $lt: new Date() }})
         return deletedPartsList
     }
 }

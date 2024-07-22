@@ -49,9 +49,14 @@ class MeetingController {
     }
     async createMeeting(req, res) {
         try {
-            const {dateTime, date, type, name, host, hostIcon, idParts} = req.body
+            const {dateTime, type, name, host, hostIcon, idParts} = req.body
             const data = await meetingService.createMeeting({
-                dateTime, date, type, name, host, hostIcon, idParts
+                dateTime,
+                type,
+                name,
+                host,
+                hostIcon,
+                idParts
             })
             return res.json(data)
         } catch (e) {
@@ -60,9 +65,8 @@ class MeetingController {
     }
     async createPart(req, res) {
         try {
-            const {dateTime, booked, topic, questions, date, type, name} = req.body
+            const {dateTime, booked, topic, questions, type, name} = req.body
             const data = await meetingService.createPart({
-                date,
                 type,
                 name,
                 dateTime,
