@@ -1,20 +1,19 @@
 import styles from './scheduleItem.module.css'
 import ItemTime from "./itemTime/itemTime";
 import ItemContent from "./itemContent/itemContent";
+import {useSelector} from "react-redux";
 
-const ScheduleItem = ({id, dateTime, type, name, host, hostIcon, part1, part2}) => {
+const ScheduleItem = ({id}) => {
+    const meetingsList = useSelector(state => state.meetings.meetingsList)
+    const dateTime = meetingsList.filter(meeting => meeting._id === id)[0].dateTime
+    const idParts = meetingsList.filter(meeting => meeting._id === id)[0].idParts
+
     return(
         <div className={styles.item_container} key={id}>
             <ItemTime date={dateTime} />
             <ItemContent
-                id={id}
-                type={type}
-                name={name}
-                host={host}
-                hostIcon={hostIcon}
-                dateTime={dateTime}
-                part1={part1}
-                part2={part2}/>
+                idMeeting={id}
+                idParts={idParts}/>
         </div>
     )
 }

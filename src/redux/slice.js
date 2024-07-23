@@ -6,7 +6,9 @@ const initialState = {
     meetingsList: [],
     loadingParts: true,
     errorParts: false,
-    partsList: []
+    partsList: [],
+    newPart1: [],
+    newPart2: []
 }
 
 export const meetingSlice = createSlice(
@@ -39,7 +41,13 @@ export const meetingSlice = createSlice(
             fetchPartsListError: (state) => {
                 state.loadingParts = false;
                 state.errorParts = true
-            }
+            },
+            fetchNewPart1: (state, action) => {
+                state.newPart1 = [...state.newPart1, action.payload]
+            },
+            fetchNewPart2: (state, action) => {
+                state.newPart2 = [...state.newPart2, action.payload]
+            },
         }
     }
 )

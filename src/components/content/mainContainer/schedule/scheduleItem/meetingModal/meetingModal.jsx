@@ -2,31 +2,23 @@ import styles from './meetingModal.module.css'
 import MeetingImg from './bookMeetingModelImg.png'
 import {styleDateTime} from "../../../../../../utils/dateCount";
 import Button from "../../../../../button/button";
+import {useSelector} from "react-redux";
+import {bookPart} from "../../../../../../service/meetingService";
 
-const MeetingModal = ({id, type, topic, questions, name, date, part}) => {
-
-    const bookItem = async () => {
-        const response = await fetch(`http://localhost:5000/api/update/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({part1: {booked: true}}),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        return  await response.json()
-
-    }
+const MeetingModal = ({idPart}) => {
+    const partList = useSelector(state => state.meetings.partsList)
+    const part = partList.filter(part => part._id === idPart)[0]
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.header}>{topic}</h3>
-            <div className={styles.subheader}>{type}</div>
+            <h3 className={styles.header}>{part.topic}</h3>
+            <div className={styles.subheader}>{part.type}</div>
             <div className={styles.content}>
                 <ul className={styles.list}>
                     {
-                        questions.map(item => {
+                        part.questions.map(item => {
                             return (
-                                <li className={styles.list_item} key={item}>
+                                <li className={styles.list_item} key={Math.random()}>
                                     <div className={styles.list_icon}></div>
                                     <p>{item}</p>
                                 </li>
@@ -36,9 +28,9 @@ const MeetingModal = ({id, type, topic, questions, name, date, part}) => {
                 </ul>
                 <div className={styles.book_content}>
                     <img src={MeetingImg} alt="img" className={styles.img}/>
-                    <h3 className={styles.meeting_name}>{name}</h3>
-                    <div className={styles.subheader}>{styleDateTime(date)}</div>
-                    <Button text={'Book now'} onClickFn={async () => {bookItem()}}/>
+                    <h3 className={styles.meeting_name}>{part.name}</h3>
+                    <div className={styles.subheader}>{styleDateTime(part.dateTime)}</div>
+                    <Button text={'Book now'} onClickFn={async () => {await bookPart(part, idPart)}}/>
                 </div>
             </div>
 
