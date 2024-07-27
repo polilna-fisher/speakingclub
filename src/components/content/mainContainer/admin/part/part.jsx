@@ -155,14 +155,52 @@ const Part = () => {
                     </div>
                     </>
                 : <div className={styles.output_container}>
-                        <div>Part 1</div>
-                        <div>{savedPart1.name}</div>
-                        <div>{savedPart1.type}</div>
-                        <div>{savedPart1.dateTime}</div>
+                        <div className={styles.output_header}>Part 1</div>
+                        <div>
+                            <div>
+                                <div>Date:</div>
+                                <div>{savedPart1.dateTime}</div>
+                            </div>
+                            <div>
+                                <div>Type:</div>
+                                <div>{savedPart1.type}</div>
+                            </div>
+                            <div>
+                                <div>Name:</div>
+                                <div>{savedPart1.name}</div>
+                            </div>
+                            <div>
+                                <div>Topic:</div>
+                                <div>{savedPart1.topic}</div>
+                            </div>
+                            <div>
+                                <div>Questions:</div>
+                                <div>{savedPart1.questions}</div>
+                            </div>
+                        </div>
                         <div>Part 2</div>
-                        <div>{savedPart2.name}</div>
-                        <div>{savedPart2.type}</div>
-                        <div>{savedPart2.dateTime}</div>
+                        <div>
+                            <div>
+                                <div>Date:</div>
+                                <div>{savedPart2.dateTime}</div>
+                            </div>
+                            <div>
+                                <div>Type:</div>
+                                <div>{savedPart2.type}</div>
+                            </div>
+                            <div>
+                                <div>Name:</div>
+                                <div>{savedPart2.name}</div>
+                            </div>
+                            <div>
+                                <div>Topic:</div>
+                                <div>{savedPart2.topic}</div>
+                            </div>
+                            <div>
+                                <div>Questions:</div>
+                                <div>{savedPart2.questions}</div>
+                            </div>
+                        </div>
                     </div>
             }
 
@@ -173,7 +211,7 @@ const Part = () => {
                                 onClick={() => editParts()}>Edit
                         </button>
                         <button className={styles.submit_button}
-                                >Create
+                        >Create
                         </button>
 
                     </>

@@ -4,6 +4,7 @@ import PremiumPage from "../../../pages/PremiumPage";
 import SchedulePage from "../../../pages/SchedulePage";
 import ProfilePage from "../../../pages/ProfilePage";
 import GetStarted from "./getStarted/getStarted";
+import AdminPage from "../../../pages/AdminPage";
 
 
 const MainContainer = () => {
@@ -16,6 +17,7 @@ const MainContainer = () => {
                     <Route path="/profile" element={<ProfilePage/>}/>
                     {/*<Route path="/help" element={<Help/>}/>*/}
                     {/*<Route path="*" element={<Page404/>}/>*/}
+                    <Route path="/admin" element={<AdminPage/>}/>
                 </Routes>
         </div>
     )

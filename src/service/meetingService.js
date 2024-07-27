@@ -54,7 +54,7 @@ export const createMeeting = async (meeting, partIds) => {
             name: meeting.name,
             dateTime: meeting.dateTime,
             host: meeting.host,
-            hostIcon: findHostIcon(meeting.host),
+            hostIcon: meeting.hostIcon,
             idParts: [...partIds]
         }),
         headers: {
@@ -62,4 +62,12 @@ export const createMeeting = async (meeting, partIds) => {
         },
     })
     return  await response.json()
+}
+
+export const createAll = async (part1, part2, meeting) => {
+    const firstPart = await createPart(part1)
+    const secondPart = await createPart(part2)
+    const partIds = [firstPart._id, secondPart._id]
+    const wholeMeeting = await createMeeting(meeting, partIds)
+    console.log(partIds, wholeMeeting, 'wholeMeeting')
 }

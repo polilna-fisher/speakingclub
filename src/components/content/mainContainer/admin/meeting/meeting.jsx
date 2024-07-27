@@ -2,6 +2,8 @@ import styles from './meeting.module.css'
 import {useState} from "react";
 import {meetingActions} from "../../../../../redux/slice";
 import {useDispatch, useSelector} from "react-redux";
+import {createAll} from "../../../../../service/meetingService";
+import {findHostIcon} from "../../../../../utils/hosts";
 
 const Meeting = () => {
     const savedMeeting = useSelector(state => state.meetings.isMeetingReceived)
@@ -21,7 +23,7 @@ const Meeting = () => {
             name: name,
             dateTime: dateTime,
             host: host,
-            hostIcon: '',
+            hostIcon: () => findHostIcon(host),
             idParts: []
         }
 
@@ -92,7 +94,7 @@ const Meeting = () => {
                         <button className={styles.edit_button}
                                 onClick={() => editMeeting()}>Edit
                         </button>
-                        <button className={styles.submit_button}
+                        <button className={styles.submit_button} onClick={() => createAll(newPart1, newPart2, newMeeting)}
                         >Create
                         </button>
 
