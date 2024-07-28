@@ -1,4 +1,4 @@
-import styles from './infoblock.module.css'
+import styles from './infoblock.module.sass'
 
 const InfoBlock = () => {
     return(

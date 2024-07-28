@@ -1,12 +1,11 @@
 import {baseURL} from "../constants";
-import {findHostIcon} from "../utils/hosts";
 
 export async function fetchMeetingsList() {
-    const response = await fetch('http://localhost:5000/api/getMeetingsList')
+    const response = await fetch(`${baseURL}/api/getMeetingsList`)
     return await response.json();
 }
 export async function fetchPartsList() {
-    const response = await fetch('http://localhost:5000/api/getPartsList')
+    const response = await fetch(`${baseURL}/api/getPartsList`)
     return await response.json();
 }
 

@@ -1,4 +1,4 @@
-import './App.css';
+import './App.sass';
 import Layout from "./components/layout/layout";
 import {BrowserRouter as Router} from "react-router-dom";
 

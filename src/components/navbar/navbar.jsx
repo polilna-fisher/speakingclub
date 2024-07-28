@@ -1,14 +1,8 @@
-import styles from './navbar.module.css'
+import styles from './navbar.module.sass'
 import NavbarItem from "./navbarItem/navbarItem";
 import {menuItemsList} from "../../utils/menuItems";
-import {useState} from "react";
 
 const Navbar = () => {
-    const [activeButton, setActiveButton] = useState(null);
-
-    const getActiveButton = (activeButtonId) => {
-        setActiveButton(activeButtonId)
-    }
 
     return(
         <div className={styles.navbar_container}>
@@ -18,13 +12,8 @@ const Navbar = () => {
             <div className={styles.navbar_items_container}>
                 {
                     menuItemsList.map((item) => (<NavbarItem
-                        isActive={activeButton === item.id}
                         key={item.id}
-                        id={item.id}
-                        name={item.name}
-                        icon={item.icon}
-                        link={item.link}
-                        getActiveButton={getActiveButton}/>))
+                        id={item.id}/>))
                 }
             </div>
         </div>

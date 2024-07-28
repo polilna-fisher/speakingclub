@@ -18,12 +18,15 @@ const Meeting = () => {
     const [host, setHost] = useState()
 
     const saveMeeting = async () => {
+        const hostIcon = findHostIcon(host)
+        console.log(hostIcon, 'hostIconhostIcon')
+
         const meeting = {
             type: type,
             name: name,
             dateTime: dateTime,
             host: host,
-            hostIcon: () => findHostIcon(host),
+            hostIcon: hostIcon,
             idParts: []
         }
 

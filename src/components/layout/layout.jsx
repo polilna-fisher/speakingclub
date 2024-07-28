@@ -1,4 +1,4 @@
-import styles from './layout.module.css'
+import styles from './layout.module.sass'
 import Navbar from "../navbar/navbar";
 import Infobar from "../infobar/infobar";
 import Content from "../content/content";

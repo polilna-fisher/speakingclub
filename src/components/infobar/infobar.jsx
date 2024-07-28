@@ -1,4 +1,4 @@
-import styles from './infobar.module.css'
+import styles from './infobar.module.sass'
 import Infoblock from "./infoBlock/infoblock";
 import Footer from "./footer/footer";
 

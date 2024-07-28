@@ -12,6 +12,7 @@ const initialState = {
     isPartsReceived: false,
     newMeeting: null,
     isMeetingReceived: false,
+    activeNavItem: null
 }
 
 export const meetingSlice = createSlice(
@@ -59,6 +60,9 @@ export const meetingSlice = createSlice(
             },
             receiveMeeting: (state, action) => {
                 state.isMeetingReceived = action.payload
+            },
+            toggleActiveNavItem: (state, action) => {
+                state.activeNavItem = action.payload
             }
         }
     }

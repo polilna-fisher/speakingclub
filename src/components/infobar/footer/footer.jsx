@@ -1,4 +1,4 @@
-import styles from './footer.module.css'
+import styles from './footer.module.sass'
 import FacebookIcon from './facebook.svg'
 import InstagramIcon from './instagram.svg'
 import LinkedInIcon from './linkedIn.svg'

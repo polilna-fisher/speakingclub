@@ -1,4 +1,4 @@
-import styles from './profile.module.css'
+import styles from './profile.module.sass'
 
 const Profile = () => {
     return(

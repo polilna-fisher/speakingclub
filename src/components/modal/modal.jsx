@@ -1,4 +1,4 @@
-import styles from './modal.module.css'
+import styles from './modal.module.sass'
 import cx from "classnames";
 import CloseIcon from './close.svg'
 

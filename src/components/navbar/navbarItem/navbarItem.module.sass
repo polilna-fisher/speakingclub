@@ -1,0 +1,24 @@
+@import "../../../App"
+.navbar_item_container
+    border: 1px solid var(--violet)
+    padding: 2px 10px
+    height: 55px
+    cursor: pointer
+    border-radius: 15px
+    display: flex
+    align-items: center
+    justify-content: left
+    gap: 10px
+
+.navbar_item_container:hover
+    background-color: var(--violet)
+
+.navbar_item_icon
+    width: 24px
+    height: 24px
+
+.navbar_item_name
+    @include h3_light
+
+.navbar_item_active_container
+    background-color: var(--violet)
