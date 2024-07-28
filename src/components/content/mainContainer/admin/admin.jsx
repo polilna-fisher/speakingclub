@@ -1,9 +1,13 @@
 import styles from './admin.module.css'
 import {useState} from "react";
 import Part from "./part/part";
+import {useSelector} from "react-redux";
+import Meeting from "./meeting/meeting";
 
 const Admin = () => {
-    const [section, setSection] = useState('part1')
+    const [section, setSection] = useState('parts')
+    const savedParts = useSelector(state => state.meetings.isPartsReceived)
+
     // const [part1, setPart1] = useState(false);
     // const [part2, setPart2] = useState(false);
 
@@ -19,7 +23,7 @@ const Admin = () => {
         ),
         meeting: (
             <div>
-
+                <Meeting/>
             </div>
         ),
     };
@@ -35,7 +39,7 @@ const Admin = () => {
                                 setSection('parts')
                             }}>Create Parts
                     </button>
-                    <button className={styles.button} disabled={!'parts'} onClick={() => {
+                    <button className={styles.button} disabled={!savedParts} onClick={() => {
                         setSection('meeting')
                     }}
                             >Create Meeting
