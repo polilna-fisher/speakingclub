@@ -12,7 +12,9 @@ const Modal = ({modal, setModal, children}) => {
                     <div className={styles.positioned_space}></div>
                     <img alt={'close'} src={CloseIcon} className={styles.modal_close_icon} onClick={() => setModal()}/>
                 </div>
-                {children}
+                <div className={styles.children}>
+                    {children}
+                </div>
             </div>
         </div>
     )

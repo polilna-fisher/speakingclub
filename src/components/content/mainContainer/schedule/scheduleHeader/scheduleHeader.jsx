@@ -11,7 +11,7 @@ const ScheduleHeader = ({getChosenDate}) => {
 
     return(
         <div className={styles.schedule_header}>
-            <select className={styles.schedule_input} onClick={e => (setSelectValue(e.target.value))}>
+            <select className={styles.schedule_input} onChange={e => (setSelectValue(e.target.value))}>
                 {countDate().map(el => (<option key={el.fullDate} value={el.fullDate}>{el.month}, {el.date} {el.day}</option>))}
             </select>
         </div>
