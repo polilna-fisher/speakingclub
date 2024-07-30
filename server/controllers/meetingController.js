@@ -79,6 +79,17 @@ class MeetingController {
             res.send(errorHandler(res.statusCode, e.message));
         }
     }
+    async bookPart(req, res) {
+        try {
+            const booked = req.body.booked;
+            const partId = req.params.id;
+            const data = await meetingService.bookPart(partId, booked)
+            return res.json(partId)
+        } catch (e) {
+            res.send(errorHandler(res.statusCode, e.message));
+
+        }
+    }
     async updateMeeting(req, res) {
         try {
             const meetingData = req.body;

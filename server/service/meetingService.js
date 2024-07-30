@@ -27,6 +27,10 @@ class MeetingService {
         const part = await PartModel.create(data);
         return part
     }
+    async bookPart(id, booked) {
+        const part = await PartModel.updateOne({_id: id}, {booked: booked});
+        return part
+    }
     async updateMeeting(id, data) {
         const meeting = await MeetingModel.updateOne({_id: id}, data);
         return meeting

@@ -9,17 +9,11 @@ export async function fetchPartsList() {
     return await response.json();
 }
 
-export const bookPart = async (part, idPart) => {
-    const response = await fetch(`${baseURL}/api/updatePart/${idPart}`, {
-        method: 'PUT',
+export const bookPart = async (idPart, status) => {
+    const response = await fetch(`${baseURL}/api/bookPart/${idPart}`, {
+        method: 'PATCH',
         body: JSON.stringify({
-            date: part.date,
-            type: part.type,
-            name: part.name,
-            dateTime: part.dateTime,
-            booked: true,
-            topic: part.topic,
-            questions: part.questions
+            booked: status
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -27,6 +21,7 @@ export const bookPart = async (part, idPart) => {
     })
     return  await response.json()
 }
+
 export const createPart = async (part) => {
     const response = await fetch(`${baseURL}/api/createPart`, {
         method: 'POST',
