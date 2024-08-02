@@ -1,41 +1,56 @@
-import styles from './scheduleContainer.module.css'
+import styles from "./scheduleContainer.module.css";
 import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import moment from "moment";
-import {dateFormats, formatDate} from "../../../../../utils/dateCount";
-import {useSelector} from "react-redux";
-
+import { dateFormats, formatDate } from "../../../../../utils/dateCount";
+import { useSelector } from "react-redux";
+import PartModal from "../partModal/partModal";
+import ItemModal from "../itemModal/itemModal";
+import Modal from "../../../../modal/modal";
 
 const ScheduleContainer = () => {
-    const [chosenDate, setChosenDate] = useState();
+  const [chosenDate, setChosenDate] = useState();
 
-    const meetingsList = useSelector(state => state.meetings.meetingsList)
-    const loading = useSelector(state => state.meetings.loadingMeetings)
-    const error = useSelector(state => state.meetings.loadingMeetings)
-
-    const meetingList = useMemo(() => {
-        if(!!meetingsList.length){
-            const forChosenDateData = meetingsList?.filter(el => {
-                return (formatDate(el.dateTime, dateFormats.normal) === chosenDate)
-            })
-            return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date))
-        }
-    }, [meetingsList, chosenDate])
+  const meetingsList = useSelector((state) => state.meetings.meetingsList);
+  const loading = useSelector((state) => state.meetings.loadingMeetings);
+  const error = useSelector((state) => state.meetings.loadingMeetings);
+  const [modal, setModal] = useState(null);
+  const [modalData, setModalData] = useState([])
 
 
-    return (
-        <div>
-            <ScheduleHeader getChosenDate={setChosenDate}/>
-            <div className={styles.items_container}>
-                {
-                     meetingList?.map((item) => (<ScheduleItem
-                        id={item._id}
-                        key={item._id}/>))
-                }
-            </div>
-        </div>
-    )
-}
+  const meetingList = useMemo(() => {
+    if (!!meetingsList.length) {
+      const forChosenDateData = meetingsList?.filter((el) => {
+        return formatDate(el.dateTime, dateFormats.normal) === chosenDate;
+      });
+      return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date));
+    }
+  }, [meetingsList, chosenDate]);
+
+  const openModal = (info) => {
+      setModalData(info.data)
+      setModal(info.type)
+  }
+
+  const modalMeeting = {
+    Part: <PartModal  part={modalData}  />,
+    Item: <ItemModal parts={modalData}  />
+  };
+
+  return (
+    <div>
+      <ScheduleHeader getChosenDate={setChosenDate} />
+      <div className={styles.items_container}>
+        {meetingList?.map((item) => (
+          <ScheduleItem item={item} key={item._id} openModal={openModal}/>
+        ))}
+      </div>
+      <Modal modal={!!modal} setModal={() => setModal(null)}>
+        {modalMeeting[modal]}
+      </Modal>
+    </div>
+  );
+};
 
 export default ScheduleContainer;

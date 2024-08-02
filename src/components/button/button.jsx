@@ -1,11 +1,16 @@
-import styles from './button.module.sass'
+import styles from "./button.module.sass";
 
-
-const Button = ({text, onClickFn = () => {}}) => {
-    return(
-            <button className={styles.button} onClick={() => {onClickFn()}}>{text}</button>
-
-    )
-}
+const Button = ({ text, onClickFn = () => {} }) => {
+  return (
+    <button
+      className={styles.button}
+      onClick={() => {
+        onClickFn();
+      }}
+    >
+      {text}
+    </button>
+  );
+};
 
 export default Button;

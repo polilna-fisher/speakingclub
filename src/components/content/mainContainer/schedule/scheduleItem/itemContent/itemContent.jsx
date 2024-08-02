@@ -1,39 +1,50 @@
-import styles from './itemContent.module.css'
+import styles from "./itemContent.module.css";
 import Modal from "../../../../../modal/modal";
-import {useState} from "react";
-import MeetingModal from "../meetingModal/meetingModal";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import PartModal from "../../partModal/partModal";
+import ItemModal from "../../itemModal/itemModal";
+import { useSelector } from "react-redux";
 
-const ItemContent = ({idParts, idMeeting}) => {
-    const [modal, setModal] = useState(null)
-    const meetingsList = useSelector(state => state.meetings.meetingsList)
-    const meeting = meetingsList.filter(meeting => meeting._id === idMeeting)[0]
+const ItemContent = ({ item, openModal }) => {
+  const partList = useSelector((state) => state.parts.partsList);
+  const part1 = partList.filter((part) => part._id === item.idParts[0])[0];
+  const part2 = partList.filter((part) => part._id === item.idParts[1])[0];
+  const parts = [{...part1}, {...part2}]
 
-    const modalMeeting = {
-        Part1: <MeetingModal idPart={idParts[0]}/>,
-        Part2: <MeetingModal idPart={idParts[1]}/>
-    }
-
-    return(
-        <div className={styles.item_container}>
-            <div className={styles.host_container}>
-                <img alt={'hostIcon'} src={meeting.hostIcon} className={styles.host_icon}/>
-                <div className={styles.host_name}>{meeting.host}</div>
-            </div>
-            <div className={styles.meeting_name_container}>
-                <div className={styles.meeting_type}>{meeting.type}</div>
-                <div className={styles.meeting_name}>{meeting.name}</div>
-            </div>
-            <div className={styles.meeting_button_container}>
-                <button className={styles.meeting_button} onClick={() => setModal('Part1')}>Part 1</button>
-                <button className={styles.meeting_button} onClick={() => setModal('Part2')}>Part 2</button>
-            </div>
-
-            <Modal modal={!!modal} setModal={() => setModal(null)}>
-                {modalMeeting[modal]}
-            </Modal>
-        </div>
-    )
-}
+  return (
+    <div className={styles.item_container}>
+      <div className={styles.host_container}
+           onClick={() => openModal({type: "Item", data: parts})}>
+        <img
+          alt={"hostIcon"}
+          src={item.hostIcon}
+          className={styles.host_icon}
+        />
+        <div className={styles.host_name}>{item.host}</div>
+      </div>
+      <div
+        className={styles.meeting_name_container}
+        onClick={() => openModal({type: "Item", data: parts})}
+      >
+        <div className={styles.meeting_type}>{item.type}</div>
+        <div className={styles.meeting_name}>{item.name}</div>
+      </div>
+      <div className={styles.meeting_button_container}>
+        <button
+          className={styles.meeting_button}
+          onClick={() => openModal({type: "Part", data: {...part1}})}
+        >
+          Part 1
+        </button>
+        <button
+          className={styles.meeting_button}
+          onClick={() => openModal({type: "Part", data: {...part2}})}
+        >
+          Part 2
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default ItemContent;

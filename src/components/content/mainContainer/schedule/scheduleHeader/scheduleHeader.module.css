@@ -1,21 +1,20 @@
-.schedule_header{
-    padding: 12px;
-    display: flex;
-    justify-content: space-around;
-    color: var(--brown);
-    height: 68px;
+.schedule_header {
+  padding: 12px;
+  display: flex;
+  justify-content: space-around;
+  color: var(--brown);
+  height: 68px;
 }
-.schedule_day{
-    font-size: 19px;
-    font-weight: 700;
+.schedule_day {
+  font-size: 19px;
+  font-weight: 700;
 }
-.schedule_input{
-    color: var(--brown);
-    background-color: var(--beige);
-    padding: 3px 15px;
-    border-radius: 6px;
-    border: 1px solid var(--beige);
+.schedule_input {
+  color: var(--brown);
+  background-color: var(--beige);
+  padding: 3px 15px;
+  border-radius: 6px;
+  border: 1px solid var(--beige);
 }
-.option{
-
+.option {
 }

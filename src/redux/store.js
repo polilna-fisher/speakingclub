@@ -1,18 +1,20 @@
-import {configureStore} from "@reduxjs/toolkit";
-import reducer from './slice';
-import createSagaMiddleware from 'redux-saga'
-import {meetingCurrentWatcher} from "./saga";
+import { configureStore } from "@reduxjs/toolkit";
+import meetingReducer from "./meetingSlice";
+import partReducer from "./partSlice"
+import commonReducer from "./commonSlice"
+import createSagaMiddleware from "redux-saga";
+import { meetingCurrentWatcher } from "./saga";
 
-
-const saga = createSagaMiddleware()
+const saga = createSagaMiddleware();
 const store = configureStore({
-    reducer: {
-        meetings: reducer
-    },middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
+  reducer: {
+    meetings: meetingReducer,
+    parts: partReducer,
+    common: commonReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
+});
 
-})
+saga.run(meetingCurrentWatcher);
 
-saga.run(meetingCurrentWatcher)
-
-
-export default store
+export default store;

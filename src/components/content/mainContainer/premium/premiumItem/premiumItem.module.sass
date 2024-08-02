@@ -1,0 +1,54 @@
+@import "../../../../../App"
+
+.item_container
+  background-color: var(--green)
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 13px
+  padding: 15px
+  color: var(--brown)
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+  border-radius: 10px
+  height: 467px
+
+.item_period
+  @include h2_light
+  text-decoration: underline
+
+.item_benefits
+  display: flex
+  gap: 5px
+  padding-bottom: 10px
+  align-items: start
+
+.item_price
+  @include h2_light
+
+.item_sale
+  @include h3_light
+
+.item_button
+  border-radius: 10px
+  padding: 5px
+  background-color: var(--beige)
+  @include h3_light
+  cursor: pointer
+
+.item_img
+  width: 93px
+  height: 93px
+  border-radius: 66px
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+
+.bullet_point
+  max-width: 12px
+  width: 100%
+  height: 12px
+  border-radius: 25px
+  background: var(--beige)
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+
+.item_benefits:hover > .bullet_point
+  background-color: var(--violet)
+
