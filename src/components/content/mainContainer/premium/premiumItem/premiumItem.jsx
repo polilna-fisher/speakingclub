@@ -17,7 +17,7 @@ const PremiumItem = () => {
             <ul className={styles.item_benefits_list}>
               {el.benefits.map((item) => {
                 return (
-                  <li className={styles.item_benefits}>
+                  <li className={styles.item_benefits} key={item}>
                     <div className={styles.bullet_point}></div>
                     <div>{item}</div>
                   </li>

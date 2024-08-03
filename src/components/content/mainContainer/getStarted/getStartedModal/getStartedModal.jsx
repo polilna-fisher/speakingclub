@@ -1,4 +1,4 @@
-import styles from "./getStartedModal.module.css";
+import styles from "./getStartedModal.module.sass";
 
 const GetStartedModal = ({ header, img, leftList, rightList }) => {
   return (

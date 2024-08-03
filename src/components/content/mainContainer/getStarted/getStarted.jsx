@@ -1,4 +1,4 @@
-import styles from "./getStarted.module.css";
+import styles from "./getStarted.module.sass";
 import Picture from "./getStarted.png";
 import cx from "classnames";
 import IntermediateIcon from "./icons/intermediate.png";

@@ -1,4 +1,4 @@
-import styles from "./groupDiscussionsModal.module.css";
+import styles from "./groupDiscussionsModal.module.sass";
 import ModalImg from "../getStartedModal/groupDiscussionImg.png";
 
 const GroupDiscussionsModal = () => {

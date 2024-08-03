@@ -1,4 +1,4 @@
-import styles from "./jobInterviewModal.module.css";
+import styles from "./jobInterviewModal.module.sass";
 import ModalImg from "../getStartedModal/jobInterviewImg.png";
 
 const JobInterviewModal = () => {

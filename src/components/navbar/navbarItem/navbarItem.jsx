@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import cx from "classnames";
 import { menuItemsList } from "../../../utils/menuItems";
 import { useDispatch, useSelector } from "react-redux";
-import { meetingActions } from "../../../redux/meetingSlice";
+import {commonActions} from "../../../redux/commonSlice";
 
 const NavbarItem = ({ id }) => {
   const activeItem = useSelector((state) => state.meetings.activeNavItem);
   const chosenItem = menuItemsList.filter((item) => item.id === id)[0];
   const dispatch = useDispatch();
   const activateItem = (id) => {
-    dispatch(meetingActions.toggleActiveNavItem(id));
+    dispatch(commonActions.toggleActiveNavItem(id));
   };
 
   return (
