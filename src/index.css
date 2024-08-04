@@ -28,4 +28,6 @@ body,
 
 .App {
   overflow: hidden;
+  --swiper-theme-color: var(--brown) !important;
+
 }

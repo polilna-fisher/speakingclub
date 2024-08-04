@@ -9,8 +9,11 @@ class MeetingController {
         throw new Error();
       } else {
         const date = new Date();
+        const yesterday = date.setDate(date.getDate() - 1)
         const filteredData = data.filter(
-          (item) => item.dateTime > date.setDate(date.getDate() - 1),
+          item => {
+            return new Date(item.dateTime) >= new Date(yesterday)
+          },
         );
         return res.json(filteredData);
       }
@@ -27,8 +30,11 @@ class MeetingController {
         throw new Error();
       } else {
         const date = new Date();
+        const yesterday = date.setDate(date.getDate() - 1)
         const filteredData = data.filter(
-          (item) => item.dateTime > date.setDate(date.getDate() - 1),
+            item => {
+              return new Date(item.dateTime) >= new Date(yesterday)
+            },
         );
         return res.json(filteredData);
       }
