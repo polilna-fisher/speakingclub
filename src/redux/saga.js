@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { meetingActions } from "./meetingSlice";
-import { fetchMeetingsList, fetchPartsList } from "../service/meetingService";
+import {bookPart, fetchMeetingsList, fetchPartsList} from "../service/meetingService";
 import {partActions} from "./partSlice";
 
 export function* getMeetingsList(action) {
@@ -20,7 +20,18 @@ export function* getPartsList(action) {
   }
 }
 
+export function* bookingPart(action) {
+  console.log(action, 'action')
+  try {
+    const payload = yield call(bookPart, {...action.payload});
+    yield put(partActions.fetchBookingPartSuccess(payload.id));
+  } catch (e) {
+    yield put(partActions.fetchBookingPartError());
+  }
+}
+
 export function* meetingCurrentWatcher() {
   yield takeLatest(meetingActions.fetchMeetingsList, getMeetingsList);
   yield takeLatest(partActions.fetchPartsList, getPartsList);
+  yield takeLatest(partActions.fetchBookingPart, bookingPart);
 }

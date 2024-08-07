@@ -4,6 +4,9 @@ const initialState = {
   loadingParts: true,
   errorParts: false,
   partsList: [],
+  loadingBooking: false,
+  errorBooking: false,
+  bookedParts: [],
   newPart1: null,
   newPart2: null,
   isPartsReceived: false
@@ -25,6 +28,19 @@ export const partSlice = createSlice({
     fetchPartsListError: (state) => {
       state.loadingParts = false;
       state.errorParts = true;
+    },
+    fetchBookingPart: (state, _action) => {
+      state.loadingBooking = true;
+      state.errorBooking = false;
+    },
+    fetchBookingPartSuccess: (state, action) => {
+      state.loadingBooking = false;
+      state.errorBooking = false;
+      state.bookedParts =  !!state.partsList.length && state.partsList.filter(item => !!item.booked)
+    },
+    fetchBookingPartError: (state) => {
+      state.loadingBooking = false;
+      state.errorBooking = true;
     },
     fetchNewPart1: (state, action) => {
       state.newPart1 = action.payload;

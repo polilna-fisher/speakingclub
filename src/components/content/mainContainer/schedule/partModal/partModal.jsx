@@ -3,12 +3,14 @@ import MeetingImg from "./partModelImg.png";
 import { styleDateTime } from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
 import { bookPart } from "../../../../../service/meetingService";
+import {partActions} from "../../../../../redux/partSlice";
+import {useDispatch} from "react-redux";
 
 const PartModal = ({ part }) => {
+    const dispatch = useDispatch()
 
-    const bookingPart = async (id, status) => {
-    const fetchBooking = await bookPart(id, status);
-    return fetchBooking;
+    const bookingPart = async (id, isBooked) => {
+        dispatch(partActions.fetchBookingPart({id, isBooked}))
   };
 
   return (
@@ -31,8 +33,8 @@ const PartModal = ({ part }) => {
           <h3 className={styles.meeting_name}>{part.name}</h3>
           <div className={styles.subheader}>{styleDateTime(part.dateTime)}</div>
           <Button
-            text={"Book now"}
-            onClickFn={() => bookingPart(part._id, true)}
+              text={part.booked ? "Cancel" : "Book now"}
+            onClickFn={() => bookingPart(part._id, part.booked)}
           />
         </div>
       </div>

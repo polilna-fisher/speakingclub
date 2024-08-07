@@ -2,7 +2,7 @@ import Icon1 from "./month1.png";
 import Icon2 from "./month3.png";
 import Icon3 from "./month6.png";
 
-const premiumItemInfo = [
+const premiumItemsInfo = [
   {
     title: "1 month",
     icon: Icon1,
@@ -41,4 +41,4 @@ const premiumItemInfo = [
   },
 ];
 
-export default premiumItemInfo;
+export default premiumItemsInfo;

@@ -2,13 +2,16 @@ import styles from "./itemModal.module.css";
 import { bookPart } from "../../../../../service/meetingService";
 import { styleDateTime } from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
+import {useDispatch} from "react-redux";
+import {partActions} from "../../../../../redux/partSlice";
 
 const ItemModal = ({parts}) => {
   const part1 = parts[0]
   const part2 = parts[1]
-  const bookingPart = async (id, status) => {
-    const fetchBooking = await bookPart(id, status);
-    return fetchBooking;
+  const dispatch = useDispatch()
+
+  const bookingPart = async (id, isBooked) => {
+    dispatch(partActions.fetchBookingPart({id, isBooked}))
   };
 
   return (
@@ -30,7 +33,7 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-          text={"Book now"}
+            text={part1.booked ? "Cancel" : "Book now"}
           onClickFn={() => bookingPart(part1._id, true)}
         />
       </div>
@@ -52,7 +55,7 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-          text={"Book now"}
+            text={part2.booked ? "Cancel" : "Book now"}
           onClickFn={() => bookingPart(part2._id, true)}
         />
       </div>

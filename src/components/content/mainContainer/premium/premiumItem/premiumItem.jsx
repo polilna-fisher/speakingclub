@@ -1,6 +1,6 @@
 import styles from "./premiumItem.module.sass";
 import Button from "../../../../button/button";
-import premiumItemInfo from "./premiunItemInfo";
+import premiumItemsInfo from "./premiunItemInfo";
 import { useState } from "react";
 import Modal from "../../../../modal/modal";
 import PurchaseModal from "../purchaseModal/purchaseModal";
@@ -9,7 +9,7 @@ const PremiumItem = () => {
   const [modal, setModal] = useState(false);
   return (
     <>
-      {premiumItemInfo.map((el) => {
+      {premiumItemsInfo.map((el) => {
         return (
           <div className={styles.item_container} key={el.title}>
             <h3 className={styles.item_period}>{el.title}</h3>

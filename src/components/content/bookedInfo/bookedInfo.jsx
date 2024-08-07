@@ -1,41 +1,53 @@
 import styles from "./bookedInfo.module.sass";
 import BookedItem from "./bookedItem/bookedItem";
-import {useEffect, useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {meetingActions} from "../../../redux/meetingSlice";
 import {baseRoute} from "../../../constants";
 import {routes} from "../../../routes";
 import {partActions} from "../../../redux/partSlice";
 import {Swiper, SwiperSlide} from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import  'swiper/css'
 import './swiper.css'
+import 'swiper/css/pagination';
+import PartModal from "../mainContainer/schedule/partModal/partModal";
+import Modal from "../../modal/modal";
+import ItemModal from "../mainContainer/schedule/itemModal/itemModal";
 
 const BookedInfo = () => {
     const meetingsList = useSelector((state) => state.meetings.meetingsList);
     const partList = useSelector((state) => state.parts.partsList);
+    const bookedPartList = useSelector((state) => state.parts.bookedParts);
     const loading = useSelector((state) => state.parts.loadingParts);
     const error = useSelector((state) => state.parts.errorParts);
     const dispatch = useDispatch();
+    const [modal, setModal] = useState(null);
+    const [modalData, setModalData] = useState([])
+
+    const openModal = (info) => {
+        setModalData(info.data)
+        setModal(info.type)
+    }
+
+    const modalMeeting = {
+        Part: <PartModal  part={modalData}  />,
+    };
 
     useEffect(() => {
         dispatch(meetingActions.fetchMeetingsList());
         dispatch(partActions.fetchPartsList());
+        dispatch(partActions.fetchBookingPartSuccess());
     }, []);
 
-    const bookedItemsList = useMemo(() => {
-        if (!!partList.length) {
-            const bookedItems = partList.filter(
-                (item) => !!item.booked,
-                // && item.dateTime > new Date().toJSON()
-            );
-            return bookedItems;
-        }
+    useEffect(() => {
+        dispatch(partActions.fetchBookingPartSuccess());
     }, [partList]);
 
     return (
         <div className={styles.booked_info_container}>
 
-            {!bookedItemsList?.length
+            {!bookedPartList?.length
                 ? (
                     <div className={styles.booked_info_no_items_container}>
                         <a
@@ -49,15 +61,17 @@ const BookedInfo = () => {
                 : (
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        pagination={{ clickable: true }}
                         slidesPerView={3}>
                         {
-                            bookedItemsList?.map((bookedItem, i) => {
+                            bookedPartList?.map((bookedItem, i) => {
                                 return (
                                     <SwiperSlide>
                                         <BookedItem
                                             key={bookedItem._id}
                                             item={bookedItem}
                                             color={i % 2 === 0 || 0 ? "#FFCACC" : "#D4E2D4"}
+                                            openModal={openModal}
                                         />
                                     </SwiperSlide>
                                 );
@@ -66,6 +80,9 @@ const BookedInfo = () => {
                     </Swiper>
                 )
             }
+            <Modal modal={!!modal} setModal={() => setModal(null)}>
+                {modalMeeting[modal]}
+            </Modal>
         </div>
     )
         ;

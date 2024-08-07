@@ -9,11 +9,12 @@ export async function fetchPartsList() {
   return await response.json();
 }
 
-export const bookPart = async (idPart, status) => {
-  const response = await fetch(`${baseURL}/api/bookPart/${idPart}`, {
+export const bookPart = async (data) => {
+  console.log(data.isBooked,'gog')
+  const response = await fetch(`${baseURL}/api/bookPart/${data.id}`, {
     method: "PATCH",
     body: JSON.stringify({
-      booked: status,
+      booked: !data.isBooked,
     }),
     headers: {
       "Content-Type": "application/json",
