@@ -101,7 +101,7 @@ class MeetingController {
       const booked = req.body.booked;
       const partId = req.params.id;
       const data = await meetingService.bookPart(partId, booked);
-      return res.json(partId);
+      return res.json(data);
     } catch (e) {
       res.send(errorHandler(res.statusCode, e.message));
     }
@@ -148,7 +148,7 @@ class MeetingController {
     try {
       const meetingDate = req.params.date;
       const deletedMeetings = await meetingService.deleteOldMeetings();
-      res.send(`Items with after today was deleted successfully.`);
+      res.send(`Items with before yesterday was deleted successfully.`);
     } catch (e) {
       res.send(errorHandler(res.statusCode, e.message));
     }
@@ -157,7 +157,7 @@ class MeetingController {
     try {
       const partDate = req.params.date;
       const deletedParts = await meetingService.deleteOldParts();
-      res.send(`Items with after today was deleted successfully.`);
+      res.send(`Items with before yesterday was deleted successfully.`);
     } catch (e) {
       res.send(errorHandler(res.statusCode, e.message));
     }

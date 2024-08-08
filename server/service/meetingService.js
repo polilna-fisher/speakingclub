@@ -29,7 +29,7 @@ class MeetingService {
   }
   async bookPart(id, booked) {
     const part = await PartModel.updateOne({ _id: id }, { booked: booked });
-    return part;
+    return {id, booked};
   }
   async updateMeeting(id, data) {
     const meeting = await MeetingModel.updateOne({ _id: id }, data);
@@ -48,14 +48,18 @@ class MeetingService {
     return part;
   }
   async deleteOldMeetings() {
+    const date = new Date();
+    const yesterday = date.setDate(date.getDate() - 1)
     const deletedMeetingsList = MeetingModel.deleteMany({
-      dateTime: { $lt: new Date() },
+      dateTime: { $lt: yesterday},
     });
     return deletedMeetingsList;
   }
   async deleteOldParts() {
+    const date = new Date();
+    const yesterday = date.setDate(date.getDate() - 1)
     const deletedPartsList = PartModel.deleteMany({
-      dateTime: { $lt: new Date() },
+      dateTime: { $lt: yesterday},
     });
     return deletedPartsList;
   }

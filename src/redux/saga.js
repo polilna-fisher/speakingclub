@@ -21,10 +21,9 @@ export function* getPartsList(action) {
 }
 
 export function* bookingPart(action) {
-  console.log(action, 'action')
   try {
     const payload = yield call(bookPart, {...action.payload});
-    yield put(partActions.fetchBookingPartSuccess(payload.id));
+    yield put(partActions.updatePartList(payload.id, payload.booked));
   } catch (e) {
     yield put(partActions.fetchBookingPartError());
   }

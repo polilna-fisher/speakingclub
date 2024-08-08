@@ -14,48 +14,14 @@ import { getStartedModals } from "./getStartedModal/getStartedModalsContent";
 const GetStarted = () => {
   const [modal, setModal] = useState(null);
 
-  const modals = {
-    groupDiscussion: (
-      <GetStartedModal
-        header={getStartedModals.groupDiscussion.header}
-        img={getStartedModals.groupDiscussion.img}
-        leftList={getStartedModals.groupDiscussion.leftList}
-        rightList={getStartedModals.groupDiscussion.rightList}
-      />
-    ),
-    jobInterview: (
-      <GetStartedModal
-        header={getStartedModals.jobInterview.header}
-        img={getStartedModals.jobInterview.img}
-        leftList={getStartedModals.jobInterview.leftList}
-        rightList={getStartedModals.jobInterview.rightList}
-      />
-    ),
-    ieltsPreparation: (
-      <GetStartedModal
-        header={getStartedModals.ieltsPreparation.header}
-        img={getStartedModals.ieltsPreparation.img}
-        leftList={getStartedModals.ieltsPreparation.leftList}
-        rightList={getStartedModals.ieltsPreparation.rightList}
-      />
-    ),
-    intermediate: (
-      <GetStartedModal
-        header={getStartedModals.intermediate.header}
-        img={getStartedModals.intermediate.img}
-        leftList={getStartedModals.intermediate.leftList}
-        rightList={getStartedModals.intermediate.rightList}
-      />
-    ),
-    english: (
-      <GetStartedModal
-        header={getStartedModals.english.header}
-        img={getStartedModals.english.img}
-        leftList={getStartedModals.english.leftList}
-        rightList={getStartedModals.english.rightList}
-      />
-    ),
-  };
+  const modals = (modal) => {
+    for(let key in getStartedModals){
+      if(key === modal){
+        return (<GetStartedModal key={modal} header={getStartedModals[key].header} img={getStartedModals[key].img}
+                                          leftList={getStartedModals[key].leftList} rightList={getStartedModals[key].rightList}/>)
+      }
+    }
+  }
 
   return (
     <div className={styles.started_container}>
@@ -153,7 +119,7 @@ const GetStarted = () => {
         </div>
       </div>
       <Modal modal={!!modal} setModal={() => setModal(null)}>
-        {modals[modal]}
+        {modals(modal)}
       </Modal>
     </div>
   );

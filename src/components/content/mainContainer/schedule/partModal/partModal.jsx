@@ -2,7 +2,6 @@ import styles from "./partModal.module.css";
 import MeetingImg from "./partModelImg.png";
 import { styleDateTime } from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
-import { bookPart } from "../../../../../service/meetingService";
 import {partActions} from "../../../../../redux/partSlice";
 import {useDispatch} from "react-redux";
 

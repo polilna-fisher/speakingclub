@@ -13,10 +13,8 @@ import './swiper.css'
 import 'swiper/css/pagination';
 import PartModal from "../mainContainer/schedule/partModal/partModal";
 import Modal from "../../modal/modal";
-import ItemModal from "../mainContainer/schedule/itemModal/itemModal";
 
 const BookedInfo = () => {
-    const meetingsList = useSelector((state) => state.meetings.meetingsList);
     const partList = useSelector((state) => state.parts.partsList);
     const bookedPartList = useSelector((state) => state.parts.bookedParts);
     const loading = useSelector((state) => state.parts.loadingParts);

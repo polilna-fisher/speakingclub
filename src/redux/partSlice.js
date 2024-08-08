@@ -38,6 +38,11 @@ export const partSlice = createSlice({
       state.errorBooking = false;
       state.bookedParts =  !!state.partsList.length && state.partsList.filter(item => !!item.booked)
     },
+    updatePartList: (state, action) => {
+      const changedPart = state.partsList.filter(item => item._id === action.payload.id);
+      changedPart.booked = action.payload.booked
+      state.partsList = [...state.partsList, changedPart];
+    },
     fetchBookingPartError: (state) => {
       state.loadingBooking = false;
       state.errorBooking = true;

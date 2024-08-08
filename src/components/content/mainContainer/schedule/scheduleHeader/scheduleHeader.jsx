@@ -6,13 +6,13 @@ import {
 } from "../../../../../utils/dateCount";
 import { useEffect, useState } from "react";
 
-const ScheduleHeader = ({ getChosenDate }) => {
+const ScheduleHeader = ({ setChosenDate }) => {
   const [selectValue, setSelectValue] = useState(
     formatDate(new Date(), dateFormats.normal),
   );
 
   useEffect(() => {
-    getChosenDate(selectValue);
+      setChosenDate(selectValue);
   }, [selectValue]);
 
   return (

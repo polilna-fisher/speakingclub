@@ -8,7 +8,7 @@ const GetStartedModal = ({ header, img, leftList, rightList }) => {
         <ul className={styles.list}>
           {leftList.map((item) => {
             return (
-              <li className={styles.list_item}>
+              <li className={styles.list_item} key={item}>
                 <div className={styles.list_icon}></div>
                 <p>{item}</p>
               </li>
@@ -21,7 +21,7 @@ const GetStartedModal = ({ header, img, leftList, rightList }) => {
         <ul className={styles.list}>
           {rightList.map((item) => {
             return (
-              <li className={styles.list_item}>
+              <li className={styles.list_item} key={item}>
                 <div className={styles.list_icon}></div>
                 <p>{item}</p>
               </li>

@@ -40,7 +40,7 @@ const ScheduleContainer = () => {
 
   return (
     <div>
-      <ScheduleHeader getChosenDate={setChosenDate} />
+      <ScheduleHeader setChosenDate={setChosenDate} />
       <div className={styles.items_container}>
         {meetingList?.map((item) => (
           <ScheduleItem item={item} key={item._id} openModal={openModal}/>

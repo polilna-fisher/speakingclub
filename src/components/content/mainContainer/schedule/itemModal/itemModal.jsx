@@ -1,5 +1,4 @@
 import styles from "./itemModal.module.css";
-import { bookPart } from "../../../../../service/meetingService";
 import { styleDateTime } from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
 import {useDispatch} from "react-redux";

@@ -10,7 +10,6 @@ export async function fetchPartsList() {
 }
 
 export const bookPart = async (data) => {
-  console.log(data.isBooked,'gog')
   const response = await fetch(`${baseURL}/api/bookPart/${data.id}`, {
     method: "PATCH",
     body: JSON.stringify({
