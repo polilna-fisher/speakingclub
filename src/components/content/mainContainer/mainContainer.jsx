@@ -8,6 +8,8 @@ import Help from "./help/help";
 import Profile from "./profile/profile";
 import { routes } from "../../../routes";
 import ScheduleContainer from "./schedule/scheduleContainer/scheduleContainer";
+import Create from "./admin/create/create";
+import Update from "./admin/update/update";
 
 const MainContainer = () => {
   return (
@@ -20,6 +22,8 @@ const MainContainer = () => {
         <Route path={routes.help} element={<Help />} />
         <Route path={routes.notFound} element={<NotFound />} />
         <Route path={routes.admin} element={<Admin />} />
+        <Route path={routes.create} element={<Create/>} />
+        <Route path={routes.update} element={<Update/>} />
       </Routes>
     </div>
   );

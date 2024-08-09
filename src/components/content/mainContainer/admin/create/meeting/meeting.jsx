@@ -1,9 +1,9 @@
 import styles from "./meeting.module.css";
 import { useState } from "react";
-import { meetingActions } from "../../../../../redux/meetingSlice";
+import { meetingActions } from "../../../../../../redux/meetingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { createAll } from "../../../../../service/meetingService";
-import { findHostIcon } from "../../../../../utils/hosts";
+import { createAll } from "../../../../../../service/meetingService";
+import { findHostIcon } from "../../../../../../utils/hosts";
 
 const Meeting = () => {
   const savedMeeting = useSelector((state) => state.meetings.isMeetingReceived);
