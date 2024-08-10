@@ -1,6 +1,6 @@
 import styles from "./bookedInfo.module.sass";
 import BookedItem from "./bookedItem/bookedItem";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {meetingActions} from "../../../redux/meetingSlice";
 import {baseRoute} from "../../../constants";
@@ -23,7 +23,16 @@ const BookedInfo = () => {
     const [modal, setModal] = useState(null);
     const [modalData, setModalData] = useState([])
 
+    // const sortedBookedPartsList = useMemo(() => {
+    //     if (!!bookedPartList.length) {
+    //         const sortedList = bookedPartList.sort((a, b) => a.dateTime - b.dateTime)
+    //         // return bookedPartList.sort((a, b) => moment((a.dateTime)) - moment(b.dateTime)))
+    //         return sortedList
+    //     }
+    // }, [bookedPartList]);
+
     const openModal = (info) => {
+        console.log(bookedPartList, 'bookes')
         setModalData(info.data)
         setModal(info.type)
     }
@@ -40,6 +49,7 @@ const BookedInfo = () => {
 
     useEffect(() => {
         dispatch(partActions.fetchBookingPartSuccess());
+        console.log(partList, 'partList')
     }, [partList]);
 
     return (
@@ -64,7 +74,7 @@ const BookedInfo = () => {
                         {
                             bookedPartList?.map((bookedItem, i) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={bookedItem._id}>
                                         <BookedItem
                                             key={bookedItem._id}
                                             item={bookedItem}

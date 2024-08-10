@@ -11,9 +11,9 @@ export function* getMeetingsList(action) {
     yield put(meetingActions.fetchMeetingsListError());
   }
 }
-export function* getPartsList(action) {
+export function* getPartsList() {
   try {
-    const payload = yield call(fetchPartsList, action.payload);
+    const payload = yield call(fetchPartsList);
     yield put(partActions.fetchPartListSuccess(payload));
   } catch (e) {
     yield put(partActions.fetchPartsListError());
@@ -23,7 +23,7 @@ export function* getPartsList(action) {
 export function* bookingPart(action) {
   try {
     const payload = yield call(bookPart, {...action.payload});
-    yield put(partActions.updatePartList(payload.id, payload.booked));
+    yield put(partActions.updatePartList(payload));
   } catch (e) {
     yield put(partActions.fetchBookingPartError());
   }

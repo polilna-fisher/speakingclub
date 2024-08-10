@@ -3,7 +3,7 @@ import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
 import {useEffect, useMemo, useState} from "react";
 import moment from "moment";
-import { dateFormats, formatDate } from "../../../../../utils/dateCount";
+import {dateFormats, formatDate, fromUtcToLocalTime} from "../../../../../utils/dateCount";
 import { useSelector } from "react-redux";
 import PartModal from "../partModal/partModal";
 import ItemModal from "../itemModal/itemModal";
@@ -22,11 +22,13 @@ const ScheduleContainer = () => {
   const meetingList = useMemo(() => {
     if (!!meetingsList.length) {
       const forChosenDateData = meetingsList?.filter((el) => {
-        return formatDate(el.dateTime, dateFormats.normal) === chosenDate;
+        return formatDate(fromUtcToLocalTime(el.dateTime), dateFormats.normal) === chosenDate;
       });
-      return forChosenDateData.sort((a, b) => moment(a.date) - moment(b.date));
+      return forChosenDateData.sort((a, b) => moment((a.dateTime)) - moment(b.dateTime));
     }
   }, [meetingsList, chosenDate]);
+
+
 
   const openModal = (info) => {
       setModalData(info.data)

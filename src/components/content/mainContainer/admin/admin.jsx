@@ -1,6 +1,4 @@
-import Button from "../../../button/button";
 import styles from "./admin.module.css";
-import Create from "./create/create";
 import {Link} from "react-router-dom";
 import {routes} from "../../../../routes";
 

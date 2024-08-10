@@ -13,7 +13,7 @@ const ScheduleHeader = ({ setChosenDate }) => {
 
   useEffect(() => {
       setChosenDate(selectValue);
-  }, [selectValue]);
+  }, [setChosenDate, selectValue]);
 
   return (
     <div className={styles.schedule_header}>

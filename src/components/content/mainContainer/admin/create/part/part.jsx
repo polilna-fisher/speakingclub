@@ -2,7 +2,6 @@ import styles from "./part.module.css";
 import { useState } from "react";
 import { meetingActions } from "../../../../../../redux/meetingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Meeting from "../meeting/meeting";
 
 const Part = () => {
   const [dateTimePart1, setDateTimePart1] = useState();

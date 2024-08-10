@@ -1,5 +1,10 @@
 import moment from "moment";
 
+export const fromUtcToLocalTime = (date) => {
+  const localTime = moment.utc(date).local().format('YYYY-MM-DDTHH:mm:ss');
+  return localTime
+}
+
 export const countDate = () => {
   const dataList = [];
   let n = 0;

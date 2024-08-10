@@ -1,12 +1,14 @@
 import styles from "./bookedItem.module.sass";
-import { styleDateTime } from "../../../../utils/dateCount";
+import {fromUtcToLocalTime, styleDateTime} from "../../../../utils/dateCount";
 import cx from "classnames";
 
 const BookedItem = ({ item, color, openModal }) => {
+
   const itemOlderThenNow = (dateTime) => {
-    let currentDateTime = new Date().toJSON();
-    return dateTime < currentDateTime;
+      let currentDateTime = fromUtcToLocalTime(new Date().toJSON())
+      return fromUtcToLocalTime(dateTime) < currentDateTime;
   };
+
 
   return (
     <div
@@ -21,10 +23,10 @@ const BookedItem = ({ item, color, openModal }) => {
         <h3 className={styles.booked_item_name}>{item.name}</h3>
         <h3 className={styles.booked_item_type}>{item.type}</h3>
         <div className={styles.booked_item_date}>
-          {styleDateTime(item.dateTime)}
+          {styleDateTime(fromUtcToLocalTime(item.dateTime))}
         </div>
         <div className={styles.booked_item_date}>
-          {item.dateTime.split("T")[1].substring(0, 5)}
+          {fromUtcToLocalTime(item.dateTime).split("T")[1].substring(0, 5)}
         </div>
       </div>
     </div>

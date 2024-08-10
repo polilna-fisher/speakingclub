@@ -1,5 +1,5 @@
 import styles from "./itemModal.module.css";
-import { styleDateTime } from "../../../../../utils/dateCount";
+import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
 import {useDispatch} from "react-redux";
 import {partActions} from "../../../../../redux/partSlice";
@@ -18,7 +18,7 @@ const ItemModal = ({parts}) => {
       <div className={styles.part_container}>
         <h3 className={styles.meeting_name}>Part 1</h3>
         <h3 className={styles.header}>{part1.topic}</h3>
-        <div className={styles.subheader}>{styleDateTime(part1.dateTime)}</div>
+        <div className={styles.subheader}>{styleDateTime(fromUtcToLocalTime(part1.dateTime))}</div>
         <div>
           <ul className={styles.list}>
             {part1.questions.map((item) => {
@@ -33,14 +33,14 @@ const ItemModal = ({parts}) => {
         </div>
         <Button
             text={part1.booked ? "Cancel" : "Book now"}
-          onClickFn={() => bookingPart(part1._id, true)}
+          onClickFn={() => bookingPart(part1._id, part1.booked)}
         />
       </div>
 
       <div className={styles.part_container}>
         <h3 className={styles.meeting_name}>Part 2</h3>
         <h3 className={styles.header}>{part2.topic}</h3>
-        <div className={styles.subheader}>{styleDateTime(part2.dateTime)}</div>
+        <div className={styles.subheader}>{styleDateTime(fromUtcToLocalTime(part2.dateTime))}</div>
         <div>
           <ul className={styles.list}>
             {part2.questions.map((item) => {
@@ -55,7 +55,7 @@ const ItemModal = ({parts}) => {
         </div>
         <Button
             text={part2.booked ? "Cancel" : "Book now"}
-          onClickFn={() => bookingPart(part2._id, true)}
+          onClickFn={() => bookingPart(part2._id, part2.booked)}
         />
       </div>
     </div>
