@@ -49,7 +49,6 @@ const BookedInfo = () => {
 
     useEffect(() => {
         dispatch(partActions.fetchBookingPartSuccess());
-        console.log(partList, 'partList')
     }, [partList]);
 
     return (

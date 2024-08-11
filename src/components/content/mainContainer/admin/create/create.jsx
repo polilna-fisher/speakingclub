@@ -3,6 +3,8 @@ import { useState } from "react";
 import Part from "./part/part";
 import { useSelector } from "react-redux";
 import Meeting from "./meeting/meeting";
+import {routes} from "../../../../../routes";
+import {Link} from "react-router-dom";
 
 const Create = () => {
   const [section, setSection] = useState("parts");
@@ -31,12 +33,14 @@ const Create = () => {
   return (
     <div className={styles.admin_container}>
       <div className={styles.admin_items_container}>
-        <h3 className={styles.admin_header}>Meeting constructor</h3>
+        <div className={styles.header_container}>
+          <Link to={routes.admin} className={styles.admin_header}>Meeting constructor</Link>
+        </div>
         <div className={styles.link_container}>
           <button
-            className={styles.button}
-            onClick={() => {
-              setSection("parts");
+              className={styles.button}
+              onClick={() => {
+                setSection("parts");
             }}
           >
             Create Parts

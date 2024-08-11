@@ -44,6 +44,7 @@ export const partSlice = createSlice({
                 changedPart.booked = action.payload.booked
                 state.partsList = state.partsList.filter(item => item._id !== action.payload.id)
                 state.partsList = [...state.partsList, changedPart];
+                state.bookedParts = !!state.partsList.length && state.partsList.filter(item => !!item.booked)
             }
         },
         fetchBookingPartError: (state) => {

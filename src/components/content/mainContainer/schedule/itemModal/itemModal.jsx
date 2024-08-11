@@ -1,13 +1,18 @@
 import styles from "./itemModal.module.css";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {partActions} from "../../../../../redux/partSlice";
 
 const ItemModal = ({parts}) => {
   const part1 = parts[0]
   const part2 = parts[1]
   const dispatch = useDispatch()
+  const loadingBooking = useSelector(state => state.parts.loadingBooking)
+  const errorBooking = useSelector(state => state.parts.errorBooking)
+  const bookedParts = useSelector(state => state.parts.bookedParts)
+  const part1Status = bookedParts.find(item => item._id === part1._id)
+  const part2Status = bookedParts.find(item => item._id === part2._id)
 
   const bookingPart = async (id, isBooked) => {
     dispatch(partActions.fetchBookingPart({id, isBooked}))
@@ -32,8 +37,8 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-            text={part1.booked ? "Cancel" : "Book now"}
-          onClickFn={() => bookingPart(part1._id, part1.booked)}
+            text={loadingBooking && "Loading..." || errorBooking && "Try again" || part1Status ? "Cancel" : "Book now"}
+          onClickFn={() => bookingPart(part1._id, part1Status)}
         />
       </div>
 
@@ -54,8 +59,8 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-            text={part2.booked ? "Cancel" : "Book now"}
-          onClickFn={() => bookingPart(part2._id, part2.booked)}
+            text={loadingBooking && "Loading..." || errorBooking && "Try again" || part2Status ? "Cancel" : "Book now"}
+          onClickFn={() => bookingPart(part2._id, part2Status)}
         />
       </div>
     </div>

@@ -6,6 +6,7 @@ import ItemModal from "../../itemModal/itemModal";
 import { useSelector } from "react-redux";
 
 const ItemContent = ({ item, openModal }) => {
+
   const partList = useSelector((state) => state.parts.partsList);
   const part1 = partList.filter((part) => part._id === item.idParts[0])[0];
   const part2 = partList.filter((part) => part._id === item.idParts[1])[0];

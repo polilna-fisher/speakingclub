@@ -3,14 +3,24 @@ import MeetingImg from "./partModelImg.png";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
 import {partActions} from "../../../../../redux/partSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 
 const PartModal = ({ part }) => {
     const dispatch = useDispatch()
+    const loadingBooking = useSelector(state => state.parts.loadingBooking)
+    const errorBooking = useSelector(state => state.parts.errorBooking)
+    const bookedParts = useSelector(state => state.parts.bookedParts)
+    const partStatus = bookedParts.find(item => item._id === part._id)
 
     const bookingPart = async (id, isBooked) => {
         dispatch(partActions.fetchBookingPart({id, isBooked}))
   };
+
+    useEffect(() => {
+        console.log(partStatus, 'partStatus')
+        console.log(bookedParts, 'bookedParts')
+    }, [bookedParts]);
 
   return (
     <div className={styles.container}>
@@ -32,8 +42,9 @@ const PartModal = ({ part }) => {
           <h3 className={styles.meeting_name}>{part.name}</h3>
           <div className={styles.subheader}>{styleDateTime(fromUtcToLocalTime(part.dateTime))}</div>
           <Button
-              text={part.booked ? "Cancel" : "Book now"}
-            onClickFn={() => bookingPart(part._id, part.booked)}
+              // text={partStatus ? "Cancel" : "Book now"}
+              text={loadingBooking && "Loading..." || errorBooking && "Try again" || partStatus ? "Cancel" : "Book now"}
+            onClickFn={() => bookingPart(part._id, partStatus)}
           />
         </div>
       </div>

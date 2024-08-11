@@ -12,6 +12,10 @@
   justify-content: center;
   gap: 20px;
 }
+.header_container{
+  margin-bottom: 30px;
+  text-align: center;
+}
 .admin_header {
   color: var(--brown);
   font-size: 17px;
