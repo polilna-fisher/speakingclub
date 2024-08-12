@@ -17,11 +17,6 @@ const PartModal = ({ part }) => {
         dispatch(partActions.fetchBookingPart({id, isBooked}))
   };
 
-    useEffect(() => {
-        console.log(partStatus, 'partStatus')
-        console.log(bookedParts, 'bookedParts')
-    }, [bookedParts]);
-
   return (
     <div className={styles.container}>
       <h3 className={styles.header}>{part.topic}</h3>
@@ -43,7 +38,7 @@ const PartModal = ({ part }) => {
           <div className={styles.subheader}>{styleDateTime(fromUtcToLocalTime(part.dateTime))}</div>
           <Button
               // text={partStatus ? "Cancel" : "Book now"}
-              text={loadingBooking && "Loading..." || errorBooking && "Try again" || partStatus ? "Cancel" : "Book now"}
+              text={(loadingBooking && "Loading..." )|| (errorBooking && "Try again") || (partStatus ? "Cancel" : "Book now")}
             onClickFn={() => bookingPart(part._id, partStatus)}
           />
         </div>

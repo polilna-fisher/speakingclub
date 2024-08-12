@@ -1,8 +1,4 @@
 import styles from "./itemContent.module.css";
-import Modal from "../../../../../modal/modal";
-import {useEffect, useState} from "react";
-import PartModal from "../../partModal/partModal";
-import ItemModal from "../../itemModal/itemModal";
 import { useSelector } from "react-redux";
 
 const ItemContent = ({ item, openModal }) => {

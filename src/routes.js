@@ -7,6 +7,5 @@ export const routes = {
   admin: "/admin",
   create: "/create",
   update: "/update",
-  updateMeeting: "update/:_id",
   notFound: "*",
 };

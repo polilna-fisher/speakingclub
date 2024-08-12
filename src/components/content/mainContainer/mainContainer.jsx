@@ -10,6 +10,7 @@ import { routes } from "../../../routes";
 import ScheduleContainer from "./schedule/scheduleContainer/scheduleContainer";
 import Create from "./admin/create/create";
 import Update from "./admin/update/update";
+import MeetingItemForUpdate from "./admin/update/meetingItemForUpdate/meetingItemForUpdate";
 
 const MainContainer = () => {
   return (
@@ -24,6 +25,7 @@ const MainContainer = () => {
         <Route path={routes.admin} element={<Admin />} />
         <Route path={routes.create} element={<Create/>} />
         <Route path={routes.update} element={<Update/>} />
+        <Route path={`${routes.update}/:id`} element={<MeetingItemForUpdate/>}/>
       </Routes>
     </div>
   );

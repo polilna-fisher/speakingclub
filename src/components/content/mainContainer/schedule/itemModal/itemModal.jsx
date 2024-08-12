@@ -37,7 +37,7 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-            text={loadingBooking && "Loading..." || errorBooking && "Try again" || part1Status ? "Cancel" : "Book now"}
+            text={(loadingBooking && "Loading...") || (errorBooking && "Try again") || (part1Status ? "Cancel" : "Book now")}
           onClickFn={() => bookingPart(part1._id, part1Status)}
         />
       </div>
@@ -59,7 +59,7 @@ const ItemModal = ({parts}) => {
           </ul>
         </div>
         <Button
-            text={loadingBooking && "Loading..." || errorBooking && "Try again" || part2Status ? "Cancel" : "Book now"}
+            text={(loadingBooking && "Loading...") || (errorBooking && "Try again") || (part2Status ? "Cancel" : "Book now")}
           onClickFn={() => bookingPart(part2._id, part2Status)}
         />
       </div>
