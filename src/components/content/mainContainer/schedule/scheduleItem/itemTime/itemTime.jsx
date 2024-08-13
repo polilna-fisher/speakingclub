@@ -1,4 +1,4 @@
-import styles from "./itemTime.module.css";
+import styles from "./itemTime.module.sass";
 
 const ItemTime = ({ date }) => {
   return (

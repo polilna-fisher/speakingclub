@@ -1,4 +1,4 @@
-import styles from "./scheduleContainer.module.css";
+import styles from "./scheduleContainer.module.sass";
 import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
 import {useEffect, useMemo, useState} from "react";

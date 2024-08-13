@@ -1,4 +1,4 @@
-import styles from "./itemContent.module.css";
+import styles from "./itemContent.module.sass";
 import { useSelector } from "react-redux";
 
 const ItemContent = ({ item, openModal }) => {

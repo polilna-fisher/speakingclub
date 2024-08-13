@@ -1,4 +1,4 @@
-import styles from "./itemModal.module.css";
+import styles from "./itemModal.module.sass";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
 import {useDispatch, useSelector} from "react-redux";

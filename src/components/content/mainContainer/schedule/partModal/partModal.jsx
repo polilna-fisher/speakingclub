@@ -1,4 +1,4 @@
-import styles from "./partModal.module.css";
+import styles from "./partModal.module.sass";
 import MeetingImg from "./partModelImg.png";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";

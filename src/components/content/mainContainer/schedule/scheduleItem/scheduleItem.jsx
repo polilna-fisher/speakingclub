@@ -1,4 +1,4 @@
-import styles from "./scheduleItem.module.css";
+import styles from "./scheduleItem.module.sass";
 import ItemTime from "./itemTime/itemTime";
 import ItemContent from "./itemContent/itemContent";
 import cx from "classnames";

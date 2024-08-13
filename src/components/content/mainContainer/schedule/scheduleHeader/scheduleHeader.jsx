@@ -1,4 +1,4 @@
-import styles from "./scheduleHeader.module.css";
+import styles from "./scheduleHeader.module.sass";
 import {
   countDate,
   dateFormats,
