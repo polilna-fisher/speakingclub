@@ -22,4 +22,4 @@
 //
 // })
 //
-// module.exports = model('Meeting', meetingSchema);
+// module.exports = model('CreateMeeting', meetingSchema);

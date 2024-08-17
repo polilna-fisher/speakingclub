@@ -5,30 +5,26 @@ import { useSelector } from "react-redux";
 import Meeting from "./meeting/meeting";
 import {routes} from "../../../../../routes";
 import {Link} from "react-router-dom";
+import CreateMeeting from "./createMeeting/createMeeting";
 
 const Create = () => {
-  const [section, setSection] = useState("parts");
-  const savedParts = useSelector((state) => state.meetings.isPartsReceived);
 
-  // const [part1, setPart1] = useState(false);
-  // const [part2, setPart2] = useState(false);
+  // const [section, setSection] = useState("parts");
+  // const savedParts = useSelector((state) => state.meetings.isPartsReceived);
 
-  // const getPartSubmission = (part, isSubmit) => {
-  //     part === 'part1' ? setPart1(isSubmit)  : setPart2(isSubmit)
-  // }
 
-  const sections = {
-    parts: (
-      <div>
-        <Part />
-      </div>
-    ),
-    meeting: (
-      <div>
-        <Meeting />
-      </div>
-    ),
-  };
+  // const sections = {
+  //   parts: (
+  //     <div>
+  //       <Part />
+  //     </div>
+  //   ),
+  //   meeting: (
+  //     <div>
+  //       <CreateMeeting />
+  //     </div>
+  //   ),
+  // };
 
   return (
     <div className={styles.admin_container}>
@@ -39,23 +35,25 @@ const Create = () => {
         <div className={styles.link_container}>
           <button
               className={styles.button}
-              onClick={() => {
-                setSection("parts");
-            }}
+              // onClick={() => {
+              //   setSection("parts");
+              // }}
           >
             Create Parts
           </button>
           <button
             className={styles.button}
-            disabled={!savedParts}
-            onClick={() => {
-              setSection("meeting");
-            }}
+            // disabled={!savedParts}
+            // onClick={() => {
+            //   setSection("meeting");
+            // }}
           >
             Create Meeting
           </button>
         </div>
-        {sections[section]}
+
+        {/*{sections[section]}*/}
+        <CreateMeeting/>
       </div>
     </div>
   );
