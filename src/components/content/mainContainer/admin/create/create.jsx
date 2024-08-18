@@ -1,4 +1,4 @@
-import styles from "./create.module.css";
+import styles from "./create.module.sass";
 import { useState } from "react";
 import Part from "./part/part";
 import { useSelector } from "react-redux";

@@ -1,4 +1,4 @@
-import styles from "./createMeeting.module.css";
+import styles from "./createMeeting.module.sass";
 import {useForm} from "react-hook-form"
 
 

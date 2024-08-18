@@ -1,4 +1,4 @@
-import styles from "./part.module.css";
+import styles from "./part.module.sass";
 import { useState } from "react";
 import { meetingActions } from "../../../../../../redux/meetingSlice";
 import { useDispatch, useSelector } from "react-redux";
