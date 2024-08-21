@@ -3,6 +3,7 @@ const meetingController = require("../controllers/meetingController");
 const partController = require("../controllers/partController");
 const userController = require("../controllers/userController");
 const router = new Router();
+const {body} = require('express-validator')
 
 router.get("/getMeetingsList", meetingController.getMeetingList);
 router.get("/getPartsList", partController.getPartsList);
@@ -17,7 +18,10 @@ router.delete("/deleteMeeting/:id", meetingController.deleteMeeting);
 router.delete("/deletePart/:id", partController.deletePart);
 router.delete("/deleteOldMeetings/", meetingController.deleteOldMeetings);
 router.delete("/deleteOldParts/", partController.deleteOldParts);
-router.post("/registration", userController.registration)
+router.post("/registration",
+    body('email').isEmail(),
+    body('password').isLength({min:3, max:50}),
+    userController.registration)
 router.post("/login", userController.login)
 router.post("/logout", userController.logout)
 router.get("/activate/:link", userController.activate)
