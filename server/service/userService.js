@@ -1,5 +1,5 @@
 const UserModel = require('../models/userModel')
-const {hash} = require("bcrypt");
+const {hash, compare} = require("bcrypt");
 const uuid = require("uuid")
 const MailService = require('../service/mailService')
 const TokenService = require('../service/tokenService')
@@ -35,6 +35,29 @@ class UserService{
         }
         user.isActivated = true
         await user.save()
+    }
+
+    async login(email, password){
+        const user = await UserModel.findOne({email})
+        if(!user){
+            throw ApiError.BadRequest('User is not exist')
+        }
+        const isPassEqual = await compare(password, user.password)
+        if(!isPassEqual){
+            throw ApiError.BadRequest('Password is incorrect')
+        }
+        const userDto = new UserDto(user)
+        const tokens = TokenService.generateTokens({...userDto})
+        await TokenService.saveToken(userDto.id, tokens.refreshToken)
+        return{
+            ...tokens,
+            user: userDto
+
+        }
+    }
+    async logout(refreshToken){
+        const token = await TokenService.removeToken(refreshToken)
+        return token
     }
 }
 module.exports = new UserService()
