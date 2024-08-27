@@ -3,8 +3,9 @@ import Navbar from "../navbar/navbar";
 import Infobar from "../infobar/infobar";
 import Content from "../content/content";
 import Header from "../content/header/header";
+import {FC} from "react";
 
-const Layout = () => {
+const Layout:FC = () => {
   return (
     <div className={styles.section}>
       <Header />

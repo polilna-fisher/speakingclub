@@ -6,8 +6,10 @@ import help from "../components/navbar/menuIcons/help.svg";
 import signOut from "../components/navbar/menuIcons/signOut.svg";
 import Admin from "../components/navbar/menuIcons/admin.svg";
 import { routes } from "../routes";
+import {IMenuItem} from '../interfaces/menu'
 
-export const menuItemsList = [
+
+export const menuItemsList:IMenuItem[] = [
   {
     name: "Getting started",
     icon: gettingStarted,
