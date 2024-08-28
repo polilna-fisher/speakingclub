@@ -1,7 +1,8 @@
 import styles from "./jobInterviewModal.module.sass";
 import ModalImg from "../getStartedModal/jobInterviewImg.png";
+import {FC} from "react";
 
-const JobInterviewModal = () => {
+const JobInterviewModal:FC = () => {
   return (
     <div className={styles.container}>
       <h3 className={styles.header}>Job Interview</h3>

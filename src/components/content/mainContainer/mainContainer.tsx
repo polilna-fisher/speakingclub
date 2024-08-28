@@ -11,8 +11,9 @@ import ScheduleContainer from "./schedule/scheduleContainer/scheduleContainer";
 import Create from "./admin/create/create";
 import Update from "./admin/update/update";
 import MeetingItemForUpdate from "./admin/update/meetingItemForUpdate/meetingItemForUpdate";
+import {FC} from "react";
 
-const MainContainer = () => {
+const MainContainer:FC = () => {
   return (
     <div className={styles.schedule_container}>
       <Routes>

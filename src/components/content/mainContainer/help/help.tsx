@@ -1,6 +1,7 @@
 import styles from "./help.module.sass";
+import {FC} from "react";
 
-const Help = () => {
+const Help:FC = () => {
   return (
     <div className={styles.profile_container}>
       <div className={styles.profile_info}>
