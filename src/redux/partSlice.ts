@@ -1,6 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {IPart} from "../interfaces/part";
 
-const initialState = {
+interface IPartState {
+    loadingParts: boolean,
+    errorParts: boolean,
+    partsList: IPart[] | [],
+    loadingBooking: boolean,
+    errorBooking: boolean,
+    bookedParts: IPart[] | [] | any,
+    newPart1: IPart | null,
+    newPart2: IPart | null,
+    isPartsReceived: boolean
+}
+
+const initialState:IPartState = {
     loadingParts: true,
     errorParts: false,
     partsList: [],
@@ -21,7 +34,7 @@ export const partSlice = createSlice({
             state.errorParts = false;
         },
         fetchPartListSuccess: (state, action) => {
-            state.loadingPart = false;
+            state.loadingParts = false;
             state.errorParts = false;
             state.partsList = action.payload;
         },

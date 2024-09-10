@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {IMeeting} from "../interfaces/meeting";
 
-const initialState = {
+interface IInitialMeetingState{
+  loadingMeetings: boolean,
+  errorMeetings: boolean,
+  meetingsList: IMeeting[] | [],
+  newMeeting: IMeeting | null,
+  isMeetingReceived: boolean,
+}
+
+const initialState:IInitialMeetingState = {
   loadingMeetings: true,
   errorMeetings: false,
   meetingsList: [],

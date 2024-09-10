@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface IInitialCommonState{
+  activeNavItem: null | number
+}
+
+const initialState:IInitialCommonState = {
   activeNavItem: null
 };
 
