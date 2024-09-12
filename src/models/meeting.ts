@@ -6,5 +6,6 @@ export interface IMeeting {
     name: string,
     host: string,
     hostIcon: string,
-    idParts: Array<string>
+    idParts: Array<string>,
+    _id?: string
 }

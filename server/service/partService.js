@@ -1,4 +1,4 @@
-const PartModel = require("../models/partModel");
+import PartModel from "../models/partModel"
 
 class PartService {
   async getPartsList() {

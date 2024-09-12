@@ -2,16 +2,27 @@ import { takeLatest, put, call } from "redux-saga/effects";
 import { meetingActions } from "./meetingSlice";
 import {bookPart, fetchMeetingsList, fetchPartsList} from "../service/meetingService";
 import {partActions} from "./partSlice";
+import {IMeeting} from "../models/meeting";
+import {PayloadAction} from "@reduxjs/toolkit";
 
-export function* getMeetingsList(action) {
+interface IBookingPartAction {
+  "type": "parts/fetchBookingPart",
+  "payload": {
+    "id": string,
+    "isBooked": boolean
+  }
+}
+
+export function* getMeetingsList():Generator<any> {
   try {
-    const payload = yield call(fetchMeetingsList, action.payload);
+    const payload = yield call(fetchMeetingsList);
     yield put(meetingActions.fetchMeetingsListSuccess(payload));
   } catch (e) {
     yield put(meetingActions.fetchMeetingsListError());
   }
 }
-export function* getPartsList() {
+
+export function* getPartsList():Generator<any>  {
   try {
     const payload = yield call(fetchPartsList);
     yield put(partActions.fetchPartListSuccess(payload));
@@ -20,7 +31,7 @@ export function* getPartsList() {
   }
 }
 
-export function* bookingPart(action) {
+export function* bookingPart(action:IBookingPartAction):Generator<any>  {
   try {
     const payload = yield call(bookPart, {...action.payload});
     yield put(partActions.updatePartList(payload));
@@ -29,8 +40,8 @@ export function* bookingPart(action) {
   }
 }
 
-export function* meetingCurrentWatcher() {
-  yield takeLatest(meetingActions.fetchMeetingsList, getMeetingsList);
+export function* meetingCurrentWatcher():Generator<any>  {
+  yield takeLatest(meetingActions.fetchMeetingsList.type, getMeetingsList);
   yield takeLatest(partActions.fetchPartsList, getPartsList);
   yield takeLatest(partActions.fetchBookingPart, bookingPart);
 }

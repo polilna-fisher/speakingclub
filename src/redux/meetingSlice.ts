@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {IMeeting} from "../interfaces/meeting";
+import {IMeeting} from "../models/meeting";
 
 interface IInitialMeetingState{
   loadingMeetings: boolean,

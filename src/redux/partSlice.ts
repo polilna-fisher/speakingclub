@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IPart} from "../interfaces/part";
+import {IPart} from "../models/part";
 
 interface IPartState {
     loadingParts: boolean,
@@ -7,7 +7,7 @@ interface IPartState {
     partsList: IPart[] | [],
     loadingBooking: boolean,
     errorBooking: boolean,
-    bookedParts: IPart[] | [] | any,
+    bookedParts: IPart[] | [],
     newPart1: IPart | null,
     newPart2: IPart | null,
     isPartsReceived: boolean
@@ -49,7 +49,7 @@ export const partSlice = createSlice({
         fetchBookingPartSuccess: (state, action) => {
             state.loadingBooking = false;
             state.errorBooking = false;
-            state.bookedParts = !!state.partsList.length && state.partsList.filter(item => !!item.booked)
+            state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
         },
         updatePartList: (state, action) => {
             let changedPart = state.partsList.find(item => item._id === action.payload.id);
@@ -57,7 +57,7 @@ export const partSlice = createSlice({
                 changedPart.booked = action.payload.booked
                 state.partsList = state.partsList.filter(item => item._id !== action.payload.id)
                 state.partsList = [...state.partsList, changedPart];
-                state.bookedParts = !!state.partsList.length && state.partsList.filter(item => !!item.booked)
+                state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
             }
         },
         fetchBookingPartError: (state) => {

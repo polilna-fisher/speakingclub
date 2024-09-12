@@ -11,8 +11,11 @@ const ItemModal = ({parts}) => {
   const loadingBooking = useSelector(state => state.parts.loadingBooking)
   const errorBooking = useSelector(state => state.parts.errorBooking)
   const bookedParts = useSelector(state => state.parts.bookedParts)
-  const part1Status = bookedParts.find(item => item._id === part1._id)
-  const part2Status = bookedParts.find(item => item._id === part2._id)
+  const currentPart1 = !!bookedParts.find(item => item._id === part1._id)
+  const currentPart2 = !!bookedParts.find(item => item._id === part2._id)
+  const part1Status = !!currentPart1 ? currentPart1.booked : false
+  const part2Status = !!currentPart2 ? currentPart2.booked : false
+
 
   const bookingPart = async (id, isBooked) => {
     dispatch(partActions.fetchBookingPart({id, isBooked}))

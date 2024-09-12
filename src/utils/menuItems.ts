@@ -6,7 +6,7 @@ import help from "../components/navbar/menuIcons/help.svg";
 import signOut from "../components/navbar/menuIcons/signOut.svg";
 import Admin from "../components/navbar/menuIcons/admin.svg";
 import { routes } from "../routes";
-import {IMenuItem} from '../interfaces/menu'
+import {IMenuItem} from '../models/menu'
 
 
 export const menuItemsList:IMenuItem[] = [

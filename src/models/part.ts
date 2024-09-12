@@ -7,7 +7,7 @@ export interface IPart {
     booked: boolean,
     topic: string,
     questions: Array<string>
-    _id: string
+    _id?: string
 }
 
 

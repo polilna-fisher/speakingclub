@@ -2,7 +2,7 @@ import styles from "./navbar.module.sass";
 import NavbarItem from "./navbarItem/navbarItem";
 import { menuItemsList } from "../../utils/menuItems";
 import {FC} from "react";
-import {IMenuItem} from '../../interfaces/menu'
+import {IMenuItem} from '../../models/menu'
 
 const Navbar:FC = () => {
   return (
