@@ -1,10 +1,10 @@
 const Router = require("express").Router;
-const meetingController = require("../controllers/meetingController");
-const partController = require("../controllers/partController");
-const userController = require("../controllers/userController");
+import meetingController from "../controllers/meetingController";
+import partController from "../controllers/partController";
+import userController from "../controllers/userController";
 const router = new Router();
-const {body} = require('express-validator')
-const authMiddleware = require('../middlewares/authMiddleware')
+import {body} from 'express-validator';
+import authMiddleware from '../middlewares/authMiddleware';
 
 router.get("/getMeetingsList", meetingController.getMeetingList);
 router.get("/getPartsList", partController.getPartsList);
@@ -29,4 +29,4 @@ router.get("/activate/:link", userController.activate)
 router.get("/refresh", userController.refresh)
 router.get("/users", authMiddleware, userController.getUsers)
 
-module.exports = router;
+export default router;

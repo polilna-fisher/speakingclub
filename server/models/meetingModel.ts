@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
 const meetingSchema = new Schema({
   dateTime: { type: Date, required: true, unique: false },
@@ -6,7 +7,8 @@ const meetingSchema = new Schema({
   name: { type: String, required: true, unique: false },
   host: { type: String, required: true, unique: false },
   hostIcon: { type: String, required: true, unique: false },
-  idParts: { type: Array, required: false, unique: false },
+  idParts: { type: Array, required: true, unique: false },
 });
 
-module.exports = model("Meeting", meetingSchema);
+const MeetingModel = mongoose.model('Meeting', meetingSchema);
+export default MeetingModel;

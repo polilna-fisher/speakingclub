@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
 const partSchema = new Schema({
   type: { type: String, required: true, unique: false },

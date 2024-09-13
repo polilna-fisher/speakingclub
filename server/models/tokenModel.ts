@@ -1,5 +1,5 @@
-const { Schema, model } = require("mongoose");
-const {ObjectId} = require("mongodb");
+import {Schema, model} from "mongoose";
+import {ObjectId} from "mongodb";
 
 const TokenSchema = new Schema({
     user: { type: ObjectId, required: false, unique: false, ref: 'User'},

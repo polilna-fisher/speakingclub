@@ -1,9 +1,11 @@
-module.exports = class UserDto{
+import {IUserDto} from "../interfaces/IUserDto"
+
+exports = class UserDto{
     email;
     id;
     isActivated;
 
-    constructor(model) {
+    constructor(model:IUserDto) {
         this.email = model.email;
         this.id = model._id;
         this.isActivated = model.isActivated

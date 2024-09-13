@@ -1,4 +1,4 @@
-const errorHandler = (code, message) => {
+const errorHandler = (code: number, message:string):{statusCode: number, error: string} => {
   return {
     statusCode: code,
     error: message,
