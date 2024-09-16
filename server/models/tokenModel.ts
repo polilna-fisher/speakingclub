@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema, model} from "mongoose";
 import {ObjectId} from "mongodb";
 
 const TokenSchema = new Schema({
@@ -6,4 +6,5 @@ const TokenSchema = new Schema({
     refreshToken: { type: String, required: true, unique: false },
 });
 
-module.exports = model("Token", TokenSchema);
+const TokenModel = mongoose.model('Token', TokenSchema);
+export default TokenModel;

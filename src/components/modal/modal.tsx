@@ -1,8 +1,15 @@
 import styles from "./modal.module.sass";
 import cx from "classnames";
 import CloseIcon from "./close.svg";
+import {FC} from "react";
 
-const Modal = ({ modal, setModal, children }) => {
+interface IModal{
+  modal:boolean,
+  setModal: (value?: boolean) => void,
+  children: React.ReactNode,
+}
+
+const Modal:FC<IModal> = ({ modal, setModal, children }) => {
   return (
     <div
       className={cx([styles.modal_container, !!modal && styles.modal_active])}

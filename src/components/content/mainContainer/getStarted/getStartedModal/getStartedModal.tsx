@@ -1,6 +1,13 @@
 import styles from "./getStartedModal.module.sass";
+import {FC} from "react";
 
-const GetStartedModal = ({ header, img, leftList, rightList }) => {
+interface IGetStartedModal{
+    header: string,
+    leftList: Array<string>,
+    rightList: Array<string>
+}
+
+const GetStartedModal:FC<IGetStartedModal> = ({ header, leftList, rightList }) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.header}>{header}</h3>
@@ -15,9 +22,6 @@ const GetStartedModal = ({ header, img, leftList, rightList }) => {
             );
           })}
         </ul>
-        {/*<div className={styles.img_container}>*/}
-        {/*    <img alt={'icon'} src={img} className={styles.img}/>*/}
-        {/*</div>*/}
         <ul className={styles.list}>
           {rightList.map((item) => {
             return (

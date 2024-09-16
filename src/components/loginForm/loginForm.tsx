@@ -1,32 +1,38 @@
 import {useState} from "react";
 import AuthService from "../../service/authService";
-import {useDispatch} from "react-redux";
-import {partActions} from "../../redux/partSlice";
 import {userActions} from "../../redux/userSlice";
+import {useAppDispatch} from "../../redux/store";
 
 const LoginForm = () => {
 
-    const dispatch = useDispatch
+    const dispatch = useAppDispatch()
 
-    const  login = async (email, password) => {
+    const  login = async (email: string, password: string) => {
         try{
             const response = await AuthService.login(email, password)
             localStorage.setItem('token', response.data.accessToken)
             dispatch(userActions.setAuth(true))
             dispatch(userActions.setUser(response.data.user))
         }catch (e){
-            console.log(e.response?.data?.message)
-        }
+            if (e instanceof Error) {
+                console.log(e.message);
+            } else {
+                console.error('An unexpected error occurred:', e);
+            }        }
     }
 
-    const  registration = async (email, password) => {
+    const  registration = async (email:string, password: string) => {
         try{
             const response = await AuthService.registration(email, password)
             localStorage.setItem('token', response.data.accessToken)
             dispatch(userActions.setAuth(true))
             dispatch(userActions.setUser(response.data.user))
         }catch (e){
-            console.log(e.response?.data?.message)
+            if (e instanceof Error) {
+                console.log(e.message);
+            } else {
+                console.error('An unexpected error occurred:', e);
+            }
         }
     }
 
@@ -37,7 +43,11 @@ const LoginForm = () => {
             dispatch(userActions.setAuth(false))
             dispatch(userActions.setUser({}))
         }catch (e){
-            console.log(e.response?.data?.message)
+            if (e instanceof Error) {
+                console.log(e.message);
+            } else {
+                console.error('An unexpected error occurred:', e);
+            }
         }
     }
 

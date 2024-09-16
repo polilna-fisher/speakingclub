@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema, model} from "mongoose";
 
 const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
@@ -7,4 +7,5 @@ const userSchema = new Schema({
     activationLink: { type: String, required: false, unique: false },
 });
 
-module.exports = model("User", userSchema);
+const UserModel = mongoose.model('User', userSchema);
+export default UserModel;

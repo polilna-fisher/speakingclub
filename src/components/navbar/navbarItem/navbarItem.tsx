@@ -4,12 +4,13 @@ import cx from "classnames";
 import { menuItemsList } from "../../../utils/menuItems";
 import { useDispatch, useSelector } from "react-redux";
 import {commonActions} from "../../../redux/commonSlice";
+import {useAppSelector} from "../../../redux/store";
 
-const NavbarItem = ({ id }) => {
-  const activeItem = useSelector((state) => state.meetings.activeNavItem);
+const NavbarItem = ({ id } : {id: string}) => {
+  const activeItem = useAppSelector((state) => state.common.activeNavItem);
   const chosenItem = menuItemsList.filter((item) => item.id === id)[0];
   const dispatch = useDispatch();
-  const activateItem = (id) => {
+  const activateItem = (id:string) => {
     dispatch(commonActions.toggleActiveNavItem(id));
   };
 

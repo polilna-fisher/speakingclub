@@ -1,11 +1,18 @@
 import moment from "moment";
 
-export const fromUtcToLocalTime = (date) => {
+interface ICountDate{
+  month: string;
+  date: string;
+  day: string;
+  fullDate: string;
+}
+
+export const fromUtcToLocalTime = (date:string):string => {
   const localTime = moment.utc(date).local().format('YYYY-MM-DDTHH:mm:ss');
   return localTime
 }
 
-export const countDate = () => {
+export const countDate = ():Array<ICountDate> => {
   const dataList = [];
   let n = 0;
   while (n < 7) {
@@ -28,7 +35,7 @@ export const countDate = () => {
   return dataList;
 };
 
-export const styleDateTime = (date) => {
+export const styleDateTime = (date:string):string => {
   const cutDate = date.split("T")[0];
   const month = moment(cutDate, "YYYY-MM-DD").locale("en").format("MMMM");
   const calendarDay = moment(cutDate, "YYYY-MM-DD").format("DD");
@@ -40,6 +47,6 @@ export const dateFormats = {
   normal: "DD.MM.YYYY",
 };
 
-export const formatDate = (date, format) => {
+export const formatDate = (date:Date, format:string):string => {
   return moment(date).format(format);
 };

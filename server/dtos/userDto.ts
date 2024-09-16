@@ -1,6 +1,6 @@
 import {IUserDto} from "../interfaces/IUserDto"
 
-exports = class UserDto{
+export default class UserDto{
     email;
     id;
     isActivated;

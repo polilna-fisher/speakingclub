@@ -1,9 +1,11 @@
-const UserService = require('../service/userService')
-const {validationResult} = require('express-validator')
-const ApiError = require('../exceptions/apiError')
+import UserService from '../service/userService'
+import {validationResult} from 'express-validator'
+import ApiError from '../exceptions/apiError'
+import {NextFunction, Request, Response} from 'express'
+
 class UserController {
 
-    async registration(req, res, next){
+    async registration(req:Request, res:Response, next:NextFunction){
         try{
             const errors = validationResult(req)
             if(!errors.isEmpty()){
@@ -18,7 +20,7 @@ class UserController {
         }
     }
 
-    async login(req, res, next){
+    async login(req:Request, res:Response, next:NextFunction){
         try{
             const {email, password} = req.body
             const userData = await UserService.login(email, password)
@@ -31,7 +33,7 @@ class UserController {
         }
     }
 
-    async logout(req, res, next){
+    async logout(req:Request, res:Response, next:NextFunction){
         try{
             const {refreshToken} = req.cookies
             const token = await UserService.logout(refreshToken)
@@ -44,17 +46,17 @@ class UserController {
         }
     }
 
-    async activate(req, res, next){
+    async activate(req:Request, res:Response, next:NextFunction){
         try{
             const activationLink = req.params.link
             await UserService.activate(activationLink)
-            return res.redirect(process.env.CLIENT_URL)
+            return res.redirect(String(process.env.CLIENT_URL))
         }catch (e){
             next(e)
         }
     }
 
-    async refresh(req, res, next){
+    async refresh(req:Request, res:Response, next:NextFunction){
         try{
             const {refreshToken} = req.cookies
             const userData = await UserService.refresh(refreshToken)
@@ -68,7 +70,7 @@ class UserController {
         }
     }
 
-    async getUsers(req, res, next){
+    async getUsers(req:Request, res:Response, next:NextFunction){
         try{
             const users = await UserService.getAllUsers()
             return res.json(users)
@@ -81,4 +83,4 @@ class UserController {
 
 }
 
-module.exports = new UserController();
+export default new UserController();

@@ -1,23 +1,24 @@
-const UserModel = require('../models/userModel')
-const {hash, compare} = require("bcrypt");
-const uuid = require("uuid")
-const MailService = require('../service/mailService')
-const TokenService = require('../service/tokenService')
-const UserDto = require('../dtos/userDto')
-const ApiError = require('../exceptions/apiError')
+import UserModel from '../models/userModel';
+import {hash, compare} from "bcrypt";
+import uuid from "uuid";
+import MailService from './mailService';
+import TokenService from './tokenService';
+import UserDto from '../dtos/userDto';
+import ApiError from '../exceptions/apiError';
+import {IUserDto} from "../interfaces/IUserDto";
 
 class UserService{
 
-    async registration(email, password){
+    async registration(email:string, password:string){
         const candidate = await UserModel.findOne({email})
         if(candidate){
             throw ApiError.BadRequest(`User with email ${email} has already exist`)
         }
         const hashPassword = await hash(password, 3)
         const activationLink = uuid.v4()
-        const user = await UserModel.create({email: email, password: hashPassword, isActivated:false, activationLink: activationLink})
+        const user:any = await UserModel.create({email: email, password: hashPassword, isActivated:false, activationLink: activationLink})
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
-        const userDto = new UserDto(user)
+        const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
@@ -28,8 +29,8 @@ class UserService{
         }
     }
 
-    async activate(activationLink) {
-        const user = await UserModel.findOne({activationLink})
+    async activate(activationLink:string) {
+        const user:any = await UserModel.findOne({activationLink})
         if(!user){
             throw ApiError.BadRequest('Incorrect link')
         }
@@ -37,8 +38,8 @@ class UserService{
         await user.save()
     }
 
-    async login(email, password){
-        const user = await UserModel.findOne({email})
+    async login(email:string, password:string){
+        const user:any = await UserModel.findOne({email})
         if(!user){
             throw ApiError.BadRequest('User is not exist')
         }
@@ -46,7 +47,7 @@ class UserService{
         if(!isPassEqual){
             throw ApiError.BadRequest('Password is incorrect')
         }
-        const userDto = new UserDto(user)
+        const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
         return{
@@ -55,22 +56,22 @@ class UserService{
 
         }
     }
-    async logout(refreshToken){
+    async logout(refreshToken:string){
         const token = await TokenService.removeToken(refreshToken)
         return token
     }
 
-    async refresh(refreshToken){
+    async refresh(refreshToken:string){
         if(!refreshToken){
             throw ApiError.UnauthorizedError()
         }
-        const userData = TokenService.validateRefreshToken(refreshToken)
+        const userData:any = TokenService.validateRefreshToken(refreshToken)
         const tokenFromDb = await TokenService.findToken(refreshToken)
         if(!userData || !tokenFromDb){
             throw ApiError.UnauthorizedError()
         }
-        const user = await UserModel.findById(userData.id)
-        const userDto = new UserDto(user)
+        const user:any = await UserModel.findById(userData.id)
+        const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
@@ -87,4 +88,4 @@ class UserService{
     }
 
 }
-module.exports = new UserService()
+export default new UserService()

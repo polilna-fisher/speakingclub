@@ -2,7 +2,7 @@ import React from "react";
 
 export interface IMenuItem {
     name: string,
-    icon: React.SVGAttributes<SVGElement>,
+    icon: string,
     id: string,
     link: string,
 }

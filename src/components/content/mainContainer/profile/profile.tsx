@@ -1,6 +1,7 @@
 import styles from "./profile.module.sass";
+import {FC} from "react";
 
-const Profile = () => {
+const Profile:FC = () => {
   return (
     <div className={styles.profile_container}>
       <div className={styles.profile_info}>

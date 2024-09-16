@@ -1,20 +1,20 @@
 import styles from "./scheduleContainer.module.sass";
 import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
-import {useEffect, useMemo, useState} from "react";
+import {FC, SetStateAction, useEffect, useMemo, useState} from "react";
 import moment from "moment";
 import {dateFormats, formatDate, fromUtcToLocalTime} from "../../../../../utils/dateCount";
-import { useSelector } from "react-redux";
 import PartModal from "../partModal/partModal";
 import ItemModal from "../itemModal/itemModal";
 import Modal from "../../../../modal/modal";
+import {useAppSelector} from "../../../../../redux/store";
 
 const ScheduleContainer = () => {
   const [chosenDate, setChosenDate] = useState();
 
-  const meetingsList = useSelector((state) => state.meetings.meetingsList);
-  const loading = useSelector((state) => state.meetings.loadingMeetings);
-  const error = useSelector((state) => state.meetings.loadingMeetings);
+  const meetingsList = useAppSelector((state) => state.meetings.meetingsList);
+  const loading = useAppSelector((state) => state.meetings.loadingMeetings);
+  const error = useAppSelector((state) => state.meetings.loadingMeetings);
   const [modal, setModal] = useState(null);
   const [modalData, setModalData] = useState([])
 
@@ -24,7 +24,8 @@ const ScheduleContainer = () => {
       const forChosenDateData = meetingsList?.filter((el) => {
         return formatDate(fromUtcToLocalTime(el.dateTime), dateFormats.normal) === chosenDate;
       });
-      return forChosenDateData.sort((a, b) => moment((a.dateTime)) - moment(b.dateTime));
+      // @ts-ignore
+        return forChosenDateData.sort((a, b) => moment((a.dateTime)) - moment(b.dateTime));
     }
   }, [meetingsList, chosenDate]);
 

@@ -1,17 +1,18 @@
-const jwt = require('jsonwebtoken')
-const TokenModel = require('../models/tokenModel')
+import jwt from 'jsonwebtoken'
+import TokenModel from '../models/tokenModel'
+
 class TokenService{
-    generateTokens(payload){
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {expiresIn: '30m'})
-        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: '30d'})
+    generateTokens(payload:any){
+        const accessToken = jwt.sign(payload, String(process.env.JWT_ACCESS_SECRET), {expiresIn: '30m'})
+        const refreshToken = jwt.sign(payload, String(process.env.JWT_REFRESH_SECRET), {expiresIn: '30d'})
         return{
             accessToken,
             refreshToken
         }
     }
-    validateAccessToken(token) {
+    validateAccessToken(token:string) {
         try{
-            const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
+            const userData = jwt.verify(token, String(process.env.JWT_ACCESS_SECRET))
             return userData
         }
         catch (e){
@@ -20,9 +21,9 @@ class TokenService{
         }
 
     }
-    validateRefreshToken(token) {
+    validateRefreshToken(token:string) {
         try{
-            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+            const userData = jwt.verify(token, String(process.env.JWT_REFRESH_SECRET))
             return userData
         }
         catch (e){
@@ -32,7 +33,7 @@ class TokenService{
 
     }
 
-    async saveToken(userId, refreshToken){
+    async saveToken(userId:string, refreshToken:string){
         const tokenData = await TokenModel.findOne({user:userId})
         if(tokenData){
             tokenData.refreshToken = refreshToken
@@ -42,14 +43,14 @@ class TokenService{
         return token
     }
 
-    async removeToken(refreshToken){
+    async removeToken(refreshToken:string){
         const tokenData = await TokenModel.deleteOne({refreshToken})
         return tokenData
     }
-    async findToken(refreshToken){
+    async findToken(refreshToken:string){
         const tokenData = await TokenModel.findOne({refreshToken})
         return tokenData
     }
 
 }
-module.exports = new TokenService()
+export default new TokenService()

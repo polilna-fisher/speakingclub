@@ -1,6 +1,7 @@
 import styles from "./infoblock.module.sass";
+import {FC} from "react";
 
-const InfoBlock = () => {
+const RateBlock:FC = () => {
   return (
     <div className={styles.infoblock_container}>
       50% OFF ALL MEMBERSHIPS for members living in Serbia. Your country is
@@ -10,4 +11,4 @@ const InfoBlock = () => {
   );
 };
 
-export default InfoBlock;
+export default RateBlock;

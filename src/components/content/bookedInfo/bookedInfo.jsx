@@ -23,14 +23,6 @@ const BookedInfo = () => {
     const [modal, setModal] = useState(null);
     const [modalData, setModalData] = useState([])
 
-    // const sortedBookedPartsList = useMemo(() => {
-    //     if (!!bookedPartList.length) {
-    //         const sortedList = bookedPartList.sort((a, b) => a.dateTime - b.dateTime)
-    //         // return bookedPartList.sort((a, b) => moment((a.dateTime)) - moment(b.dateTime)))
-    //         return sortedList
-    //     }
-    // }, [bookedPartList]);
-
     const openModal = (info) => {
         console.log(bookedPartList, 'bookes')
         setModalData(info.data)

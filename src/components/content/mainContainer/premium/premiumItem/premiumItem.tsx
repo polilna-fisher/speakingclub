@@ -1,11 +1,11 @@
 import styles from "./premiumItem.module.sass";
 import Button from "../../../../button/button";
 import premiumItemsInfo from "./premiunItemInfo";
-import { useState } from "react";
+import {FC, useState} from "react";
 import Modal from "../../../../modal/modal";
 import PurchaseModal from "../purchaseModal/purchaseModal";
 
-const PremiumItem = () => {
+const PremiumItem:FC = () => {
   const [modal, setModal] = useState(false);
   return (
     <>

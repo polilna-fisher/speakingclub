@@ -10,4 +10,5 @@ const partSchema = new Schema({
   booked: { type: Boolean, required: true, unique: false },
 });
 
-module.exports = model("Part", partSchema);
+const PartModel = mongoose.model('Part', partSchema);
+export default PartModel;

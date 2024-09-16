@@ -1,7 +1,8 @@
 import styles from "./groupDiscussionsModal.module.sass";
 import ModalImg from "../getStartedModal/groupDiscussionImg.png";
+import {FC} from "react";
 
-const GroupDiscussionsModal = () => {
+const GroupDiscussionsModal:FC = () => {
   return (
     <div className={styles.container}>
       <h3 className={styles.header}>Group Discussions</h3>

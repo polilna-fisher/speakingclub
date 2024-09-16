@@ -5,4 +5,4 @@ const errorHandler = (code: number, message:string):{statusCode: number, error: 
   };
 };
 
-module.exports = errorHandler;
+export default errorHandler;

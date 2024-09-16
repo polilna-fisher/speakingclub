@@ -4,9 +4,12 @@ import {
   dateFormats,
   formatDate,
 } from "../../../../../utils/dateCount";
-import { useEffect, useState } from "react";
+import {Dispatch, FC, SetStateAction, useEffect, useState} from "react";
 
-const ScheduleHeader = ({ setChosenDate }) => {
+interface IScheduleHeader {
+    setChosenDate: Dispatch<SetStateAction<any>>
+}
+const ScheduleHeader:FC<IScheduleHeader> = ({ setChosenDate }) => {
   const [selectValue, setSelectValue] = useState(
     formatDate(new Date(), dateFormats.normal),
   );

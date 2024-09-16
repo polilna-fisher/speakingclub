@@ -1,31 +1,34 @@
 import PartModel from "../models/partModel"
+import {IPart} from "../interfaces/IPart";
+import {UpdateWriteOpResult} from "mongoose";
+import {DeleteResult} from "mongodb";
 
 class PartService {
-  async getPartsList() {
+  async getPartsList():Promise<IPart[]> {
     const partsList = await PartModel.find();
     return partsList;
   }
-  async getPart(id) {
+  async getPart(id:string):Promise<IPart | null> {
     const part = await PartModel.findOne({ _id: id });
     return part;
   }
-  async createPart(data) {
+  async createPart(data:IPart):Promise<IPart | null> {
     const part = await PartModel.create(data);
     return part;
   }
-  async bookPart(id, booked) {
+  async bookPart(id:string, booked:boolean):Promise<{id:string, booked: boolean}> {
     const part = await PartModel.updateOne({ _id: id }, { booked: booked });
     return {id, booked};
   }
-  async updatePart(id, data) {
+  async updatePart(id:string, data:IPart):Promise<UpdateWriteOpResult> {
     const part = await PartModel.updateOne({ _id: id }, data);
     return part;
   }
-  async deletePart(id) {
+  async deletePart(id:string):Promise<DeleteResult> {
     const part = await PartModel.deleteOne({ _id: id });
     return part;
   }
-  async deleteOldParts() {
+  async deleteOldParts():Promise<DeleteResult> {
     const date = new Date();
     const yesterday = date.setDate(date.getDate() - 1)
     const deletedPartsList = PartModel.deleteMany({
@@ -35,4 +38,4 @@ class PartService {
   }
 }
 
-module.exports = new PartService();
+export default new PartService();
