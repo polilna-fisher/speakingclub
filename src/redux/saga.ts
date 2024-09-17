@@ -2,7 +2,7 @@ import { takeLatest, put, call } from "redux-saga/effects";
 import { meetingActions } from "./meetingSlice";
 import {bookPart, fetchMeetingsList, fetchPartsList} from "../service/meetingService";
 import {partActions} from "./partSlice";
-import {IMeeting} from "../models/meeting";
+import {IMeeting} from "../models/IMeeting";
 import {PayloadAction} from "@reduxjs/toolkit";
 
 interface IBookingPartAction {

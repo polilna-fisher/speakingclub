@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IPart} from "../models/part";
+import {IPart} from "../models/IPart";
 
 interface IPartState {
     loadingParts: boolean,
@@ -46,7 +46,7 @@ export const partSlice = createSlice({
             state.loadingBooking = true;
             state.errorBooking = false;
         },
-        fetchBookingPartSuccess: (state, action) => {
+        fetchBookingPartSuccess: (state) => {
             state.loadingBooking = false;
             state.errorBooking = false;
             state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []

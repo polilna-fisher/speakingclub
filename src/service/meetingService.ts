@@ -1,6 +1,6 @@
 import { baseURL } from "../constants";
-import {IMeeting} from "../models/meeting";
-import {IPart} from "../models/part";
+import {IMeeting} from "../models/IMeeting";
+import {IPart} from "../models/IPart";
 
 export async function fetchMeetingsList(): Promise<IMeeting[] | []> {
   const response = await fetch(`${baseURL}/api/getMeetingsList`);

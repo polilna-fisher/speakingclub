@@ -2,11 +2,16 @@ import styles from "./itemContent.module.sass";
 import {useAppSelector} from "../../../../../../redux/store";
 import {FC} from "react";
 import {useSelector} from "react-redux";
+import {IMeeting} from "../../../../../../models/IMeeting";
 
+interface IItemContent {
+    item: IMeeting,
+    openModal: ({}) => void,
+}
 
-const ItemContent = ({ item, openModal }) => {
+const ItemContent:FC<IItemContent> = ({ item, openModal }) => {
 
-  const partList = useSelector((state) => state.parts.partsList);
+  const partList = useAppSelector((state) => state.parts.partsList);
   const part1 = partList.filter((part) => part._id === item.idParts[0])[0];
   const part2 = partList.filter((part) => part._id === item.idParts[1])[0];
   const parts = [{...part1}, {...part2}]

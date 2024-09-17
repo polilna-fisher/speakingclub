@@ -1,10 +1,18 @@
 import styles from "./bookedItem.module.sass";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../utils/dateCount";
 import cx from "classnames";
+import {IPart} from "../../../../models/IPart";
+import {FC} from "react";
 
-const BookedItem = ({ item, color, openModal }) => {
+interface IBookedItem {
+    item: IPart,
+    color: string,
+    openModal: ({}) => void,
+}
 
-  const itemOlderThenNow = (dateTime) => {
+const BookedItem:FC<IBookedItem> = ({ item, color, openModal }) => {
+
+  const itemOlderThenNow = (dateTime:string):boolean => {
       let currentDateTime = fromUtcToLocalTime(new Date().toJSON())
       return fromUtcToLocalTime(dateTime) < currentDateTime;
   };

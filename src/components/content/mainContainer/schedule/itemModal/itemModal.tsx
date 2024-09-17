@@ -1,23 +1,30 @@
 import styles from "./itemModal.module.sass";
 import {fromUtcToLocalTime, styleDateTime} from "../../../../../utils/dateCount";
 import Button from "../../../../button/button";
-import {useDispatch, useSelector} from "react-redux";
 import {partActions} from "../../../../../redux/partSlice";
+import {IPart} from "../../../../../models/IPart";
+import {FC} from "react";
+import {useAppDispatch, useAppSelector} from "../../../../../redux/store";
 
-const ItemModal = ({parts}) => {
+interface IItemModal {
+  parts: IPart[]
+}
+
+const ItemModal:FC<IItemModal> = ({parts}) => {
   const part1 = parts[0]
   const part2 = parts[1]
-  const dispatch = useDispatch()
-  const loadingBooking = useSelector(state => state.parts.loadingBooking)
-  const errorBooking = useSelector(state => state.parts.errorBooking)
-  const bookedParts = useSelector(state => state.parts.bookedParts)
+  const dispatch = useAppDispatch()
+  const loadingBooking = useAppSelector(state => state.parts.loadingBooking)
+  const errorBooking = useAppSelector(state => state.parts.errorBooking)
+  const bookedParts = useAppSelector(state => state.parts.bookedParts)
   const currentPart1 = !!bookedParts.find(item => item._id === part1._id)
   const currentPart2 = !!bookedParts.find(item => item._id === part2._id)
-  const part1Status = !!currentPart1 ? currentPart1.booked : false
-  const part2Status = !!currentPart2 ? currentPart2.booked : false
+  console.log(currentPart1, currentPart2, 'twwerewedcxzxc')
+  const part1Status = true
+  const part2Status = true
 
 
-  const bookingPart = async (id, isBooked) => {
+  const bookingPart = async (id: string | undefined, isBooked: any) => {
     dispatch(partActions.fetchBookingPart({id, isBooked}))
   };
 
