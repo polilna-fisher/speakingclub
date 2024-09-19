@@ -1,7 +1,6 @@
 import styles from "./bookedInfo.module.sass";
 import BookedItem from "./bookedItem/bookedItem";
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {FC, useEffect, useState} from "react";
 import {meetingActions} from "../../../redux/meetingSlice";
 import {baseRoute} from "../../../constants";
 import {routes} from "../../../routes";
@@ -13,23 +12,28 @@ import './swiper.css'
 import 'swiper/css/pagination';
 import PartModal from "../mainContainer/schedule/partModal/partModal";
 import Modal from "../../modal/modal";
+import {useAppDispatch, useAppSelector} from "../../../redux/store";
+import {IPart} from "../../../models/IPart";
 
-const BookedInfo = () => {
-    const partList = useSelector((state) => state.parts.partsList);
-    const bookedPartList = useSelector((state) => state.parts.bookedParts);
-    const loading = useSelector((state) => state.parts.loadingParts);
-    const error = useSelector((state) => state.parts.errorParts);
-    const dispatch = useDispatch();
-    const [modal, setModal] = useState(null);
-    const [modalData, setModalData] = useState([])
+interface IModalMeeting {
+    [key: string]: JSX.Element;
+}
 
-    const openModal = (info) => {
-        console.log(bookedPartList, 'bookes')
+const BookedInfo:FC = () => {
+    const partList = useAppSelector((state) => state.parts.partsList);
+    const bookedPartList = useAppSelector((state) => state.parts.bookedParts);
+    const loading = useAppSelector((state) => state.parts.loadingParts);
+    const error = useAppSelector((state) => state.parts.errorParts);
+    const dispatch = useAppDispatch();
+    const [modal, setModal] = useState<null | string>(null);
+    const [modalData, setModalData] = useState<null | IPart>(null)
+
+    const openModal = (info: {type: string, data: IPart}):void => {
         setModalData(info.data)
         setModal(info.type)
     }
 
-    const modalMeeting = {
+    const modalMeeting: IModalMeeting = {
         Part: <PartModal  part={modalData}  />,
     };
 
@@ -80,7 +84,7 @@ const BookedInfo = () => {
                 )
             }
             <Modal modal={!!modal} setModal={() => setModal(null)}>
-                {modalMeeting[modal]}
+                {modal && modalMeeting[modal]}
             </Modal>
         </div>
     )

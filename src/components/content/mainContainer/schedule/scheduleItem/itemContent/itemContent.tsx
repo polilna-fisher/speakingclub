@@ -3,10 +3,11 @@ import {useAppSelector} from "../../../../../../redux/store";
 import {FC} from "react";
 import {useSelector} from "react-redux";
 import {IMeeting} from "../../../../../../models/IMeeting";
+import {IPart} from "../../../../../../models/IPart";
 
 interface IItemContent {
     item: IMeeting,
-    openModal: ({}) => void,
+    openModal: (info: { type: string; data: IPart | IPart[] }) => void,
 }
 
 const ItemContent:FC<IItemContent> = ({ item, openModal }) => {

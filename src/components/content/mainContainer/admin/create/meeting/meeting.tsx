@@ -1,21 +1,40 @@
 import styles from "./meeting.module.sass";
-import { useState } from "react";
+import {FC, useState} from "react";
 import { meetingActions } from "../../../../../../redux/meetingSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { createAll } from "../../../../../../service/meetingService";
 import { findHostIcon } from "../../../../../../utils/hosts";
+import {useAppDispatch, useAppSelector} from "../../../../../../redux/store";
+import {IPart} from "../../../../../../models/IPart";
+import {IMeeting} from "../../../../../../models/IMeeting";
 
-const Meeting = () => {
-  const savedMeeting = useSelector((state) => state.meetings.isMeetingReceived);
-  const newMeeting = useSelector((state) => state.meetings.newMeeting);
-  const newPart1 = useSelector((state) => state.parts.newPart1);
-  const newPart2 = useSelector((state) => state.parts.newPart2);
-  const dispatch = useDispatch();
+const Meeting:FC = () => {
+  const savedMeeting = useAppSelector((state) => state.meetings.isMeetingReceived);
+  const newMeeting = useAppSelector((state) => state.meetings.newMeeting);
+  const newPart1 = useAppSelector((state) => state.parts.newPart1);
+  const newPart2 = useAppSelector((state) => state.parts.newPart2);
+  const defaultPart: IPart = {
+    type: '',
+    name: '',
+    dateTime: '',
+    booked: false,
+    topic: '',
+    questions: ['']
+  }
+  const defaultMeeting: IMeeting = {
+    dateTime: '',
+    date: '',
+    type: '',
+    name: '',
+    host: '',
+    hostIcon: '',
+    idParts: ['']
+  }
+  const dispatch = useAppDispatch();
 
-  const [dateTime, setDateTime] = useState(newPart1.dateTime);
-  const [type, setType] = useState(newPart1.type);
-  const [name, setName] = useState(newPart1.name);
-  const [host, setHost] = useState();
+  const [dateTime, setDateTime] = useState<string>(!!newPart1 ? newPart1.dateTime : defaultPart.dateTime);
+  const [type, setType] = useState<string>(!!newPart1 ? newPart1.type : defaultPart.type);
+  const [name, setName] = useState<string>(!!newPart1 ? newPart1.name : defaultPart.name);
+  const [host, setHost] = useState<string>("");
 
   const saveMeeting = async () => {
     const hostIcon = findHostIcon(host);
@@ -87,17 +106,17 @@ const Meeting = () => {
       ) : (
         <div className={styles.output_container}>
           <div>Meeting</div>
-          <div>{newMeeting.name}</div>
-          <div>{newMeeting.type}</div>
-          <div>{newMeeting.dateTime}</div>
+          <div>{newMeeting?.name}</div>
+          <div>{newMeeting?.type}</div>
+          <div>{newMeeting?.dateTime}</div>
           <div>Part 1</div>
-          <div>{newPart1.name}</div>
-          <div>{newPart1.type}</div>
-          <div>{newPart1.dateTime}</div>
+          <div>{newPart1?.name}</div>
+          <div>{newPart1?.type}</div>
+          <div>{newPart1?.dateTime}</div>
           <div>Part 2</div>
-          <div>{newPart2.name}</div>
-          <div>{newPart2.type}</div>
-          <div>{newPart2.dateTime}</div>
+          <div>{newPart2?.name}</div>
+          <div>{newPart2?.type}</div>
+          <div>{newPart2?.dateTime}</div>
         </div>
       )}
 
@@ -108,7 +127,9 @@ const Meeting = () => {
           </button>
           <button
             className={styles.submit_button}
-            onClick={() => createAll(newPart1, newPart2, newMeeting)}
+            onClick={() => createAll(!!newPart1 ? newPart1 : defaultPart,
+                !!newPart2 ? newPart2 : defaultPart,
+                !!newMeeting ? newMeeting : defaultMeeting)}
           >
             Create
           </button>

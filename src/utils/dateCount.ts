@@ -7,7 +7,7 @@ interface ICountDate{
   fullDate: string;
 }
 
-export const fromUtcToLocalTime = (date:string):string => {
+export const fromUtcToLocalTime = (date?:string):string => {
   const localTime = moment.utc(date).local().format('YYYY-MM-DDTHH:mm:ss');
   return localTime
 }
@@ -47,6 +47,6 @@ export const dateFormats = {
   normal: "DD.MM.YYYY",
 };
 
-export const formatDate = (date:Date, format:string):string => {
+export const formatDate = (date:Date | string, format:string):string => {
   return moment(date).format(format);
 };

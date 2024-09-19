@@ -4,9 +4,11 @@ import {Link} from "react-router-dom";
 import {routes} from "../../../../../routes";
 import UpdateIcon from './edit.svg'
 import DeleteIcon from './delete.svg'
+import {FC} from "react";
+import {useAppSelector} from "../../../../../redux/store";
 
-const Update = () => {
-  const meetingsList = useSelector((state) => state.meetings.meetingsList);
+const Update:FC = () => {
+  const meetingsList = useAppSelector((state) => state.meetings.meetingsList);
 
 
   return (

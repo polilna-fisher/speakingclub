@@ -7,18 +7,20 @@ import EnglishIcon from "./icons/english.png";
 import GroupIcon from "./icons/group.png";
 import JobIcon from "./icons/job.png";
 import Modal from "../../../modal/modal";
-import { useState } from "react";
+import {FC, useState} from "react";
 import GetStartedModal from "./getStartedModal/getStartedModal";
-import { getStartedModals } from "./getStartedModal/getStartedModalsContent";
+import {getStartedModals, IGetStartedModals} from "./getStartedModal/getStartedModalsContent";
 
-const GetStarted = () => {
-  const [modal, setModal] = useState(null);
+const GetStarted:FC = () => {
+  const [modal, setModal] = useState<keyof IGetStartedModals | null>(null);
 
-  const modals = (modal) => {
+  const modals = (modal: keyof IGetStartedModals | null) => {
     for(let key in getStartedModals){
       if(key === modal){
-        return (<GetStartedModal key={modal} header={getStartedModals[key].header} img={getStartedModals[key].img}
-                                          leftList={getStartedModals[key].leftList} rightList={getStartedModals[key].rightList}/>)
+        return (<GetStartedModal key={modal}
+                                 header={(getStartedModals[key].header)}
+                                 leftList={getStartedModals[key].leftList}
+                                 rightList={getStartedModals[key].rightList}/>)
       }
     }
   }
@@ -30,7 +32,7 @@ const GetStarted = () => {
       </div>
       <div className={styles.started_info}>
         <h3 className={styles.started_info_header}>
-          Welcome to our Speaking Club!
+          Welcome to the Speaking Club!
         </h3>
         <div className={styles.started_text}>
           <p>

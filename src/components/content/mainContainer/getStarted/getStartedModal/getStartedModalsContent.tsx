@@ -4,7 +4,40 @@ import IeltsPreparation from "./ieltsPreparationImg.png";
 import LanguageLevel from "./languageLevelImg.png";
 import Languages from "./languagesImg.png";
 
-export const getStartedModals = {
+export interface IGetStartedModals {
+  groupDiscussion: {
+    header: string,
+    img: string,
+    leftList: string[],
+    rightList: string[]
+  },
+  jobInterview: {
+    header: string,
+    img: string,
+    leftList: string[],
+    rightList: string[]
+  },
+  ieltsPreparation: {
+    header: string,
+    img: string,
+    leftList: string[],
+    rightList: string[]
+  },
+  intermediate: {
+    header: string,
+    img: string,
+    leftList: string[],
+    rightList: string[]
+  },
+  english: {
+    header: string,
+    img: string,
+    leftList: string[],
+    rightList: string[]
+  },
+}
+
+export const getStartedModals: IGetStartedModals = {
   groupDiscussion: {
     header: "Group Discussions",
     img: GroupDiscussion,

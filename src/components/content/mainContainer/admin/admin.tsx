@@ -1,8 +1,9 @@
 import styles from "./admin.module.sass";
 import {Link} from "react-router-dom";
 import {routes} from "../../../../routes";
+import {FC} from "react";
 
-const Admin = () => {
+const Admin:FC = () => {
 
   return (
         <div className={styles.admin_container}>

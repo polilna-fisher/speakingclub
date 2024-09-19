@@ -8,7 +8,7 @@ import {FC} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../../redux/store";
 
 interface IPartModal {
-    part: IPart
+    part: IPart | null
 }
 
 const PartModal:FC<IPartModal> = ({ part }) => {

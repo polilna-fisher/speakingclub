@@ -1,23 +1,24 @@
 import styles from "./part.module.sass";
-import { useState } from "react";
+import {FC, useState} from "react";
 import { meetingActions } from "../../../../../../redux/meetingSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {useAppDispatch, useAppSelector} from "../../../../../../redux/store";
+import {partActions} from "../../../../../../redux/partSlice";
 
-const Part = () => {
+const Part:FC = () => {
   const [dateTimePart1, setDateTimePart1] = useState();
   const [dateTimePart2, setDateTimePart2] = useState();
   const [type, setType] = useState("Speaking Session");
   const [name, setName] = useState();
   const [topicPart1, setTopicPart1] = useState();
   const [topicPart2, setTopicPart2] = useState();
-  const [questionPart1, setQuestionPart1] = useState();
-  const [questionPart2, setQuestionPart2] = useState();
-  const [questionListPart1, setQuestionListPart1] = useState([]);
-  const [questionListPart2, setQuestionListPart2] = useState([]);
-  const savedParts = useSelector((state) => state.meetings.isPartsReceived);
-  const savedPart1 = useSelector((state) => state.meetings.newPart1);
-  const savedPart2 = useSelector((state) => state.meetings.newPart2);
-  const dispatch = useDispatch();
+  const [questionPart1, setQuestionPart1] = useState<string>('');
+  const [questionPart2, setQuestionPart2] = useState<string>('');
+  const [questionListPart1, setQuestionListPart1] = useState<Array<string>>([]);
+  const [questionListPart2, setQuestionListPart2] = useState<Array<string>>([]);
+  const savedParts = useAppSelector((state) => state.parts.isPartsReceived);
+  const savedPart1 = useAppSelector((state) => state.parts.newPart1);
+  const savedPart2 = useAppSelector((state) => state.parts.newPart2);
+  const dispatch = useAppDispatch();
 
   const saveParts = async () => {
     const part1 = {
@@ -36,12 +37,12 @@ const Part = () => {
       topic: topicPart2,
       questions: [...questionListPart2],
     };
-    dispatch(meetingActions.fetchNewPart1(part1));
-    dispatch(meetingActions.fetchNewPart2(part2));
-    dispatch(meetingActions.receiveParts(true));
+    dispatch(partActions.fetchNewPart1(part1));
+    dispatch(partActions.fetchNewPart2(part2));
+    dispatch(partActions.receiveParts(true));
   };
   const editParts = () => {
-    dispatch(meetingActions.receiveParts(false));
+    dispatch(partActions.receiveParts(false));
   };
 
   return (
@@ -58,7 +59,7 @@ const Part = () => {
                 placeholder={"dateTime"}
                 name={"dateTimePart1"}
                 value={dateTimePart1}
-                onChange={(e) => setDateTimePart1(e.target.value)}
+                onChange={(e:any) => setDateTimePart1(e.target.value)}
               />
             </div>
             <div className={styles.submit_block}>
@@ -78,7 +79,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"name"}
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e:any) => setName(e.target.value)}
               />
             </div>
             <div className={styles.submit_block}>
@@ -87,7 +88,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"topic"}
                 value={topicPart1}
-                onChange={(e) => setTopicPart1(e.target.value)}
+                onChange={(e:any) => setTopicPart1(e.target.value)}
               />
             </div>
             {questionListPart1.length ? (
@@ -103,7 +104,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"questions"}
                 value={questionPart1}
-                onChange={(e) => setQuestionPart1(e.target.value)}
+                onChange={(e:any) => setQuestionPart1(e.target.value)}
               />
               <button
                 className={styles.add_button}
@@ -126,7 +127,7 @@ const Part = () => {
                 placeholder={"dateTime"}
                 name={"dateTimePart2"}
                 value={dateTimePart2}
-                onChange={(e) => setDateTimePart2(e.target.value)}
+                onChange={(e:any) => setDateTimePart2(e.target.value)}
               />
             </div>
             <div className={styles.submit_block}>
@@ -146,7 +147,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"name"}
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e:any) => setName(e.target.value)}
               />
             </div>
             <div className={styles.submit_block}>
@@ -155,7 +156,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"topic"}
                 value={topicPart2}
-                onChange={(e) => setTopicPart2(e.target.value)}
+                onChange={(e:any) => setTopicPart2(e.target.value)}
               />
             </div>
             {questionListPart2.length ? (
@@ -171,7 +172,7 @@ const Part = () => {
                 type={"text"}
                 placeholder={"questions"}
                 value={questionPart2}
-                onChange={(e) => setQuestionPart2(e.target.value)}
+                onChange={(e:any) => setQuestionPart2(e.target.value)}
               />
               <button
                 className={styles.add_button}
@@ -192,46 +193,46 @@ const Part = () => {
             <div className={styles.output_header}>Part 1</div>
             <div>
               <div className={styles.output_field_name}>Date:</div>
-              <div className={styles.output_field}>{savedPart1.dateTime}</div>
+              <div className={styles.output_field}>{savedPart1?.dateTime}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Type:</div>
-              <div className={styles.output_field}>{savedPart1.type}</div>
+              <div className={styles.output_field}>{savedPart1?.type}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Name:</div>
-              <div className={styles.output_field}>{savedPart1.name}</div>
+              <div className={styles.output_field}>{savedPart1?.name}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Topic:</div>
-              <div className={styles.output_field}>{savedPart1.topic}</div>
+              <div className={styles.output_field}>{savedPart1?.topic}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Questions:</div>
-              <div className={styles.output_field}>{savedPart1.questions}</div>
+              <div className={styles.output_field}>{savedPart1?.questions}</div>
             </div>
           </div>
           <div>
             <div className={styles.output_header}>Part 2</div>
             <div>
               <div className={styles.output_field_name}>Date:</div>
-              <div className={styles.output_field}>{savedPart2.dateTime}</div>
+              <div className={styles.output_field}>{savedPart2?.dateTime}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Type:</div>
-              <div className={styles.output_field}>{savedPart2.type}</div>
+              <div className={styles.output_field}>{savedPart2?.type}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Name:</div>
-              <div className={styles.output_field}>{savedPart2.name}</div>
+              <div className={styles.output_field}>{savedPart2?.name}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Topic:</div>
-              <div className={styles.output_field}>{savedPart2.topic}</div>
+              <div className={styles.output_field}>{savedPart2?.topic}</div>
             </div>
             <div>
               <div className={styles.output_field_name}>Questions:</div>
-              <div className={styles.output_field}>{savedPart2.questions}</div>
+              <div className={styles.output_field}>{savedPart2?.questions}</div>
             </div>
           </div>
         </div>

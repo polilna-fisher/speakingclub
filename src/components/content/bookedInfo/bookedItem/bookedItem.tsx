@@ -7,7 +7,7 @@ import {FC} from "react";
 interface IBookedItem {
     item: IPart,
     color: string,
-    openModal: ({}) => void,
+    openModal: (info: { type: string; data: IPart }) => void,
 }
 
 const BookedItem:FC<IBookedItem> = ({ item, color, openModal }) => {

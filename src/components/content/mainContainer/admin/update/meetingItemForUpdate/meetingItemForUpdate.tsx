@@ -1,11 +1,12 @@
 import styles from "./meetingItemForUpdate.module.sass";
-import { useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 import {routes} from "../../../../../../routes";
+import {FC} from "react";
+import {useAppSelector} from "../../../../../../redux/store";
 
-const MeetingItemForUpdate = () => {
+const MeetingItemForUpdate:FC = () => {
 
-  const meetingsList = useSelector((state) => state.meetings.meetingsList);
+  const meetingsList = useAppSelector((state) => state.meetings.meetingsList);
   // const meeting = meetingsList.find(item => item._id === id)
 
   return (

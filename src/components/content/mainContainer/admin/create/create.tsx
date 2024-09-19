@@ -1,13 +1,10 @@
 import styles from "./create.module.sass";
-import { useState } from "react";
-import Part from "./part/part";
-import { useSelector } from "react-redux";
-import Meeting from "./meeting/meeting";
+import {FC} from "react";
 import {routes} from "../../../../../routes";
 import {Link} from "react-router-dom";
 import CreateMeeting from "./createMeeting/createMeeting";
 
-const Create = () => {
+const Create:FC = () => {
 
   // const [section, setSection] = useState("parts");
   // const savedParts = useSelector((state) => state.meetings.isPartsReceived);

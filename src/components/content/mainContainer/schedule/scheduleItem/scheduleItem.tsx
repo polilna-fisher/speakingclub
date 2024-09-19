@@ -5,10 +5,11 @@ import cx from "classnames";
 import {fromUtcToLocalTime} from "../../../../../utils/dateCount";
 import {FC} from "react";
 import {IMeeting} from "../../../../../models/IMeeting";
+import {IPart} from "../../../../../models/IPart";
 
 interface IScheduleItem {
     item: IMeeting,
-    openModal: () => void,
+    openModal: (info: { type: string; data: IPart | IPart[] }) => void,
 }
 
 const ScheduleItem:FC<IScheduleItem> = ({ item, openModal }) => {

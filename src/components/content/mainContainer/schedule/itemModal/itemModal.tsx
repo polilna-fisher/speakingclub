@@ -17,11 +17,11 @@ const ItemModal:FC<IItemModal> = ({parts}) => {
   const loadingBooking = useAppSelector(state => state.parts.loadingBooking)
   const errorBooking = useAppSelector(state => state.parts.errorBooking)
   const bookedParts = useAppSelector(state => state.parts.bookedParts)
-  const currentPart1 = !!bookedParts.find(item => item._id === part1._id)
-  const currentPart2 = !!bookedParts.find(item => item._id === part2._id)
-  console.log(currentPart1, currentPart2, 'twwerewedcxzxc')
-  const part1Status = true
-  const part2Status = true
+  const currentPart1 = bookedParts.find(item => item._id === part1._id)
+  const currentPart2 = bookedParts.find(item => item._id === part2._id)
+  const part1Status = !!currentPart1 ?currentPart1.booked : false
+  const part2Status = !!currentPart2 ?currentPart2.booked : false
+
 
 
   const bookingPart = async (id: string | undefined, isBooked: any) => {

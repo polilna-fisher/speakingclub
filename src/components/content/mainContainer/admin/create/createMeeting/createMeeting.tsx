@@ -1,10 +1,11 @@
 import styles from "./createMeeting.module.sass";
 import {useForm} from "react-hook-form"
+import {FC} from "react";
 
 
-const CreateMeeting = () => {
+const CreateMeeting:FC = () => {
     const { handleSubmit } = useForm()
-    const onSubmit = (data) => console.log(data, 'fdfdfd')
+    const onSubmit = (data: any) => console.log(data, 'fdfdfd')
 
     return (
         <div className={styles.part_inner_container}>
