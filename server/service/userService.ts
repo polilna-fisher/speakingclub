@@ -1,11 +1,10 @@
 import UserModel from '../models/userModel';
 import {hash, compare} from "bcrypt";
-import uuid from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import MailService from './mailService';
 import TokenService from './tokenService';
 import UserDto from '../dtos/userDto';
 import ApiError from '../exceptions/apiError';
-import {IUserDto} from "../interfaces/IUserDto";
 
 class UserService{
 
@@ -15,7 +14,7 @@ class UserService{
             throw ApiError.BadRequest(`User with email ${email} has already exist`)
         }
         const hashPassword = await hash(password, 3)
-        const activationLink = uuid.v4()
+        const activationLink = uuidv4()
         const user:any = await UserModel.create({email: email, password: hashPassword, isActivated:false, activationLink: activationLink})
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
         const userDto:any = new UserDto(user)
