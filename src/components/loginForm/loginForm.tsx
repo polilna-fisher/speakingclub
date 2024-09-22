@@ -1,15 +1,16 @@
-import {useState} from "react";
+ import {FC, useState} from "react";
 import AuthService from "../../service/authService";
 import {userActions} from "../../redux/userSlice";
 import {useAppDispatch} from "../../redux/store";
 
-const LoginForm = () => {
+const LoginForm:FC = () => {
 
     const dispatch = useAppDispatch()
 
-    const  login = async (email: string, password: string) => {
+    const  login = async (email: string, password: string) =>  {
         try{
             const response = await AuthService.login(email, password)
+            console.log(response)
             localStorage.setItem('token', response.data.accessToken)
             dispatch(userActions.setAuth(true))
             dispatch(userActions.setUser(response.data.user))
@@ -24,6 +25,7 @@ const LoginForm = () => {
     const  registration = async (email:string, password: string) => {
         try{
             const response = await AuthService.registration(email, password)
+            console.log(response)
             localStorage.setItem('token', response.data.accessToken)
             dispatch(userActions.setAuth(true))
             dispatch(userActions.setUser(response.data.user))
@@ -65,8 +67,8 @@ const LoginForm = () => {
                    placeholder={'password'}
                    value={password}
                    onChange={(event) => setPassword(event.target.value)}/>
-            <button>Login</button>
-            <button>Registration</button>
+            <button onClick={() => login(email, password )}>Login</button>
+            <button onClick={() => registration(email, password)}>Registration</button>
         </div>
     )
 

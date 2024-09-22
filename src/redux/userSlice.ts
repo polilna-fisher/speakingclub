@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {IUser} from "../models/IUser";
 
 interface IUserSlice {
-  user: any,
+  user: IUser | null,
   isAuth: boolean
 }
 
 const initialState:IUserSlice = {
-  user: {},
+  user: null,
   isAuth: false
 };
 

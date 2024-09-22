@@ -1,4 +1,4 @@
-import ApiError from '../exceptions/apiError'
+ import ApiError from '../exceptions/apiError'
 import TokenService from '../service/tokenService'
 import {NextFunction, Request, Response} from "express";
 
