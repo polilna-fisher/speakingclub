@@ -8,7 +8,7 @@ interface IUserSlice {
 
 const initialState:IUserSlice = {
   user: null,
-  isAuth: false
+  isAuth: false,
 };
 
 export const userSlice = createSlice({
@@ -20,7 +20,7 @@ export const userSlice = createSlice({
     },
     setAuth: (state, action) => {
       state.isAuth = action.payload;
-    },
+    }
   },
 });
 
