@@ -3,6 +3,7 @@ import {meetingActions} from "./meetingSlice";
 import {bookPart, fetchMeetingsList, fetchPartsList} from "../service/meetingService";
 import {partActions} from "./partSlice";
 import {userActions} from "./userSlice";
+import {checkAuth} from "../utils/authFunctions";
 
 interface IBookingPartAction {
     "type": "parts/fetchBookingPart",
@@ -39,8 +40,18 @@ export function* bookingPart(action: IBookingPartAction): Generator<any> {
     }
 }
 
+export function* getUserInfo(): Generator<any> {
+    try {
+        const payload = yield call(checkAuth);
+        // yield put(userActions.updatePartList(payload));
+    } catch (e) {
+        yield put(userActions.userError());
+    }
+}
+
 export function* meetingCurrentWatcher(): Generator<any> {
     yield takeLatest(meetingActions.fetchMeetingsList.type, getMeetingsList);
     yield takeLatest(partActions.fetchPartsList, getPartsList);
     yield takeLatest(partActions.fetchBookingPart, bookingPart);
+    yield takeLatest(userActions.userLoading, getUserInfo);
 }

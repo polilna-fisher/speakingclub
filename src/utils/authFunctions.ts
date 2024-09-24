@@ -1,6 +1,5 @@
 import {userActions} from "../redux/userSlice";
 import AuthService from "../service/authService";
-import {useAppDispatch} from "../redux/store";
 import {API_URL} from "../http";
 import {AuthResponse} from "../models/authReponse";
 import axios from "axios";
@@ -52,12 +51,12 @@ export const  logout = async () => {
     }
 }
 
-export const checkAsync = async  () => {
+export const checkAuth = async  () => {
     try{
         const response = await axios.get<AuthResponse>(`${API_URL }/refresh`, {withCredentials: true })
-
-        console.log(response)
+        console.log(response, 'checkAuth')
         localStorage.setItem('token', response.data.accessToken)
+        console.log(response.data.user, 'res dada. user')
         userActions.setAuth(true)
         userActions.setUser(response.data.user)
     }
