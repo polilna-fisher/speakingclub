@@ -1,9 +1,13 @@
 import {takeLatest, put, call} from "redux-saga/effects";
-import {meetingActions} from "./meetingSlice";
-import {bookPart, fetchMeetingsList, fetchPartsList} from "../service/meetingService";
-import {partActions} from "./partSlice";
-import {userActions} from "./userSlice";
-import {checkAuth} from "../utils/authFunctions";
+import {meetingActions} from "../meetingSlice";
+import {bookPart, fetchMeetingsList, fetchPartsList} from "../../service/meetingService";
+import {partActions} from "../partSlice";
+import {userActions} from "../userSlice";
+import UserService from "../../service/userService";
+import {IUser} from "../../models/IUser";
+import {AxiosResponse} from "axios";
+
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 interface IBookingPartAction {
     "type": "parts/fetchBookingPart",
@@ -40,10 +44,13 @@ export function* bookingPart(action: IBookingPartAction): Generator<any> {
     }
 }
 
-export function* getUserInfo(): Generator<any> {
+export function* getMeSaga(): Generator<any> {
     try {
-        const payload = yield call(checkAuth);
-        // yield put(userActions.updatePartList(payload));
+        yield call(delay, 10)
+        const payload = yield call(UserService.fetchMe);
+
+        const me = (payload as AxiosResponse<IUser>).data
+        yield put(userActions.setUser(me))
     } catch (e) {
         yield put(userActions.userError());
     }
@@ -53,5 +60,5 @@ export function* meetingCurrentWatcher(): Generator<any> {
     yield takeLatest(meetingActions.fetchMeetingsList.type, getMeetingsList);
     yield takeLatest(partActions.fetchPartsList, getPartsList);
     yield takeLatest(partActions.fetchBookingPart, bookingPart);
-    yield takeLatest(userActions.userLoading, getUserInfo);
+    yield takeLatest(userActions.getMe, getMeSaga);
 }

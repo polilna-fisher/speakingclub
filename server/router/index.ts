@@ -33,14 +33,20 @@ router.delete("/deleteMeeting/:id", meetingController.deleteMeeting);
 router.delete("/deletePart/:id", partController.deletePart);
 router.delete("/deleteOldMeetings/", meetingController.deleteOldMeetings);
 router.delete("/deleteOldParts/", partController.deleteOldParts);
+
+
 router.post("/registration",
     body('email').isEmail(),
     body('password').isLength({min:3, max:50}),
     userController.registration)
 router.post("/login", userController.login)
 router.post("/logout", userController.logout)
+
 router.get("/activate/:link", userController.activate)
-router.get("/refresh", userController.refresh)
+router.post("/refresh", userController.refresh)
+
+
 router.get("/users", authMiddleware, userController.getUsers)
+router.get("/me", authMiddleware, userController.getMe)
 
 export default router;

@@ -21,11 +21,7 @@ class UserService{
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
-        return{
-            ...tokens,
-            user: userDto
-
-        }
+        return tokens
     }
 
     async activate(activationLink:string) {
@@ -49,11 +45,8 @@ class UserService{
         const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
-        return{
-            ...tokens,
-            user: userDto
 
-        }
+        return tokens
     }
     async logout(refreshToken:string){
         const token = await TokenService.removeToken(refreshToken)
@@ -61,9 +54,6 @@ class UserService{
     }
 
     async refresh(refreshToken:string){
-        if(!refreshToken){
-            throw ApiError.UnauthorizedError()
-        }
         const userData:any = TokenService.validateRefreshToken(refreshToken)
         const tokenFromDb = await TokenService.findToken(refreshToken)
         if(!userData || !tokenFromDb){
@@ -74,16 +64,25 @@ class UserService{
         const tokens = TokenService.generateTokens({...userDto})
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
-        return{
-            ...tokens,
-            user: userDto
-
-        }
+        return tokens
     }
 
     async getAllUsers(){
         const users = await UserModel.find()
         return users
+    }
+
+    async getMe(accessToken:string){
+        const token = accessToken.replace('Bearer ', '')
+        const userData:any = TokenService.validateAccessToken(token)
+
+        if(!userData){
+            throw ApiError.UnauthorizedError()
+        }
+        const user:any = await UserModel.findById(userData.id)
+        const userDto:any = new UserDto(user)
+
+        return userDto
     }
 
 }
