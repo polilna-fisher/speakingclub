@@ -8,6 +8,7 @@ interface IRoutes{
   create: string,
   update: string,
   notFound: string,
+  login: string,
 }
 
 export const routes:IRoutes = {
@@ -20,4 +21,5 @@ export const routes:IRoutes = {
   create: "/create",
   update: "/update",
   notFound: "*",
+  login: "/login",
 };

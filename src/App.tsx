@@ -24,7 +24,6 @@ const App:FC = () => {
   return (
     <div className="App">
         <Router>
-            {/*<Layout />*/}
             {
                 isLoading ? `loading` :
                     <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>
@@ -32,6 +31,8 @@ const App:FC = () => {
 
 
             {!!accessToken ? <button onClick={() => dispatch(authActions.logout())}>Logout</button> : <LoginForm/>}
+            <Layout />
+
         </Router>
     </div>
   );
