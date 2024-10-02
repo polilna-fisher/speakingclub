@@ -1,7 +1,7 @@
 import "./App.sass";
 import Layout from "./components/layout/layout";
 import { BrowserRouter as Router } from "react-router-dom";
-import LoginForm from "./components/loginForm/loginForm";
+import LoginForm from "./components/content/mainContainer/loginForm/loginForm";
 import {FC, useEffect, useState} from "react";
 import {userActions, userSlice} from "./redux/userSlice";
 import {useAppDispatch, useAppSelector} from "./redux/store";
@@ -24,15 +24,14 @@ const App:FC = () => {
   return (
     <div className="App">
         <Router>
-            {
-                isLoading ? `loading` :
-                    <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>
-            }
+            {/*{*/}
+            {/*    isLoading ? `loading` :*/}
+            {/*        <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>*/}
+            {/*}*/}
 
 
-            {!!accessToken ? <button onClick={() => dispatch(authActions.logout())}>Logout</button> : <LoginForm/>}
+            {/*{!!accessToken ? <button onClick={() => dispatch(authActions.logout())}>Logout</button> : <LoginForm/>}*/}
             <Layout />
-
         </Router>
     </div>
   );

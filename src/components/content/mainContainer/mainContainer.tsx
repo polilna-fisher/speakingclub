@@ -14,7 +14,7 @@ import MeetingItemForUpdate from "./admin/update/meetingItemForUpdate/meetingIte
 import {FC} from "react";
 import ProtectedRoute from "../../protectedRoute";
 import {useAppSelector} from "../../../redux/store";
-import LoginForm from "../../loginForm/loginForm";
+import LoginForm from "./loginForm/loginForm";
 
 const MainContainer:FC = () => {
 
@@ -28,7 +28,7 @@ const MainContainer:FC = () => {
         <Route path={routes.default} element={<GetStarted />} />
         <Route path={routes.schedule} element={<ScheduleContainer />} />
         <Route path={routes.premium} element={<Premium />} />
-        <Route path={routes.help} element={<Help />} />
+        <Route path={routes.help} element={<Help/>} />
         <Route path={routes.notFound} element={<NotFound />} />
         <Route path={routes.profile} element={<ProtectedRoute user={user} children={<Profile/>}/>}/>
         <Route path={routes.admin} element={<ProtectedRoute user={user} children={<Admin/>}/>}/>

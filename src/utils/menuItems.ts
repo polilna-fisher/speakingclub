@@ -10,16 +10,12 @@ import {IMenuItem} from '../models/IMenu'
 
 
 export const menuItemsList:IMenuItem[] = [
-  {
-    name: "Getting started",
-    icon: gettingStarted,
-    id: "started",
-    link: routes.default,
-  },
+  {name: "Log in", icon: signOut, id: "login", link: routes.login},
+  {name: "Getting started", icon: gettingStarted, id: "started", link: routes.default},
   { name: "Schedule", icon: schedule, id: "schedule", link: routes.schedule },
   { name: "Premium", icon: premium, id: "premium", link: routes.premium },
   { name: "View Profile", icon: profile, id: "profile", link: routes.profile },
   { name: "Help", icon: help, id: "help", link: routes.help },
-  { name: "Sign Out", icon: signOut, id: "signout", link: routes.default },
   { name: "God's mode", icon: Admin, id: "admin", link: routes.admin },
+  { name: "Sign Out", icon: signOut, id: "signout", link: routes.login },
 ];

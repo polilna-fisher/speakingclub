@@ -1,19 +1,34 @@
 import styles from "./navbar.module.sass";
 import NavbarItem from "./navbarItem/navbarItem";
 import { menuItemsList } from "../../utils/menuItems";
-import {FC} from "react";
+import {FC, useEffect, useMemo} from "react";
 import {IMenuItem} from '../../models/IMenu'
 import UserNavbarInfo from "./userNavbarInfo/userNavbarInfo";
+import {useAppSelector} from "../../redux/store";
 
 const Navbar:FC = () => {
+    const user = useAppSelector((state) => state.user.user)
+    const menuItems:IMenuItem[] | undefined = useMemo(() => {
+        console.log(user, 'users')
+        if(user){
+            return menuItemsList.filter(item => item.id != 'login')
+        }else{
+            return menuItemsList.filter(item => item.id != 'signout')
+        }
+    }, [user]);
+
+
+
   return (
     <div className={styles.navbar_container}>
       <div className={styles.navbar_header_container}>
         <h2 className={styles.navbar_header}>Welcome to Fishglish</h2>
       </div>
-        <UserNavbarInfo/>
+        {
+            user && <UserNavbarInfo/>
+        }
       <div className={styles.navbar_items_container}>
-        {menuItemsList.map((item:IMenuItem) => (
+        {menuItems.map((item:IMenuItem) => (
           <NavbarItem key={item.id} id={item.id} />
         ))}
       </div>

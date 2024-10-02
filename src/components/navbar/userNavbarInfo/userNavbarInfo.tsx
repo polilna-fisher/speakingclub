@@ -18,12 +18,14 @@ const UserNavbarInfo = () => {
   return (
     <Link to={routes.profile}>
        <div className={styles.navbar_profile_container}>
-           <div className={styles.navbar_profile_photo_container}>
+           {/*<div className={styles.navbar_profile_photo_container}>*/}
 
-           </div>
-           <div>
-               <h2 className={styles.navbar_profile_name}>Guest</h2>
-           </div>
+           {/*</div>*/}
+           {/*<div>*/}
+           {/*    <h2 className={styles.navbar_profile_name}>Guest</h2>*/}
+           {/*</div>*/}
+
+           <button>Login</button>
       </div>
     </Link>
   );
