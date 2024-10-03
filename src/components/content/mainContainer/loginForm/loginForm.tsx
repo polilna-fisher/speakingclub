@@ -16,28 +16,36 @@ const LoginForm: FC = () => {
 
     return (
         <div>
-            {/*{*/}
-            {/*    isLoading ? `loading` :*/}
-            {/*        <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>*/}
-            {/*}*/}
+            {
+                isLoading ? `loading` :
+                    <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>
+            }
 
 
             {!!accessToken
-                ? <button onClick={() => dispatch(authActions.logout())}>Logout</button>
-                : <form className={styles.login_form_container}>
+                ? <div className={styles.login_form_container}>
+                    <button className={styles.login_form_button}
+                            onClick={() => dispatch(authActions.logout())}>Logout</button>
+                </div>
+
+                : <div className={styles.login_form_container}>
                     <input className={styles.login_form_input}
                            type={'text'}
                            placeholder={'email'}
                            value={email}
+                           required={true}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input className={styles.login_form_input}
                            type={'text'}
                            placeholder={'password'}
                            value={password}
+                           required={true}
                            onChange={(event) => setPassword(event.target.value)}/>
-                    <button onClick={() => dispatch(authActions.login({email, password}))}>Login</button>
-                    <button onClick={() => dispatch(authActions.register({email, password}))}>Registration</button>
-                </form>
+                    <button className={styles.login_form_button}
+                            onClick={() => dispatch(authActions.login({email, password}))}>Login</button>
+                    <button className={styles.login_form_button}
+                            onClick={() => dispatch(authActions.register({email, password}))}>Registration</button>
+                </div>
 
 
             }

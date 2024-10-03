@@ -8,24 +8,17 @@ import {useAppSelector} from "../../../redux/store";
 import {routes} from "../../../routes";
 
 const UserNavbarInfo = () => {
-  // const activeItem = useAppSelector((state) => state.common.activeNavItem);
-  // const chosenItem = menuItemsList.filter((item) => item.id === id)[0];
-  // const dispatch = useDispatch();
-  // const activateItem = (id:string) => {
-  //   dispatch(commonActions.toggleActiveNavItem(id));
-  // };
+    const user = useAppSelector((state) => state.user.user);
 
   return (
     <Link to={routes.profile}>
        <div className={styles.navbar_profile_container}>
-           {/*<div className={styles.navbar_profile_photo_container}>*/}
+           <div className={styles.navbar_profile_photo_container}>
 
-           {/*</div>*/}
-           {/*<div>*/}
-           {/*    <h2 className={styles.navbar_profile_name}>Guest</h2>*/}
-           {/*</div>*/}
-
-           <button>Login</button>
+           </div>
+           <div>
+               <h2 className={styles.navbar_profile_name}>{user?.email}</h2>
+           </div>
       </div>
     </Link>
   );

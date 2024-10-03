@@ -17,5 +17,5 @@ export const menuItemsList:IMenuItem[] = [
   { name: "View Profile", icon: profile, id: "profile", link: routes.profile },
   { name: "Help", icon: help, id: "help", link: routes.help },
   { name: "God's mode", icon: Admin, id: "admin", link: routes.admin },
-  { name: "Sign Out", icon: signOut, id: "signout", link: routes.login },
+  { name: "Sign Out", icon: signOut, id: "signout", link: routes.default },
 ];
