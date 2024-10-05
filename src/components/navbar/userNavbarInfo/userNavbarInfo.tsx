@@ -17,7 +17,7 @@ const UserNavbarInfo = () => {
 
            </div>
            <div>
-               <h2 className={styles.navbar_profile_name}>{user?.email}</h2>
+               <h2 className={styles.navbar_profile_name}>{user?.name}</h2>
            </div>
       </div>
     </Link>

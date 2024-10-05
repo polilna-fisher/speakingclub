@@ -38,6 +38,7 @@ router.delete("/deleteOldParts/", partController.deleteOldParts);
 router.post("/registration",
     body('email').isEmail(),
     body('password').isLength({min:3, max:50}),
+    body('name').isLength({min:2, max:50}),
     userController.registration)
 router.post("/login", userController.login)
 router.post("/logout", userController.logout)

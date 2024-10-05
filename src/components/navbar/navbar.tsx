@@ -8,14 +8,20 @@ import {useAppSelector} from "../../redux/store";
 import SignOutItem from "./navbarItem/signOutItem";
 
 const Navbar: FC = () => {
-    const user = useAppSelector((state) => state.user.user)
+    const accessToken = useAppSelector((state) => state.auth.accessToken);
+    const user = useAppSelector((state) => state.user.user);
+
     const menuItems: IMenuItem[] | undefined = useMemo(() => {
-        if (user) {
-            return menuItemsList.filter(item => item.id != 'login')
+        if (accessToken) {
+            if(user?.role !== 'admin'){
+                return menuItemsList.filter(item => (item.id != 'login') && (item.id != 'admin'))
+            }else{
+                return menuItemsList.filter(item => (item.id != 'login'))
+            }
         } else {
-            return menuItemsList.filter(item => item.id != 'signout')
+            return menuItemsList.filter(item => (item.id != 'signout') && (item.id != 'admin') )
         }
-    }, [user]);
+    }, [accessToken]);
 
 
     return (
@@ -24,7 +30,7 @@ const Navbar: FC = () => {
                 <h2 className={styles.navbar_header}>Welcome to Fishglish</h2>
             </div>
             {
-                user && <UserNavbarInfo/>
+                accessToken && <UserNavbarInfo/>
             }
             <div className={styles.navbar_items_container}>
                 {menuItems.map((item: IMenuItem) => {

@@ -1,4 +1,3 @@
-import {ObjectId} from "mongodb";
 
 export interface IUserDto{
     email: string;
@@ -6,5 +5,9 @@ export interface IUserDto{
     isActivated?: boolean | null | undefined;
     activationLink?: string;
     password?: string;
-    _id?: string
+    _id?: string;
+    role: string;
+    name: string;
+    country: string;
+    about: string;
 }

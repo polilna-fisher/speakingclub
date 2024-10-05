@@ -5,17 +5,26 @@ import MailService from './mailService';
 import TokenService from './tokenService';
 import UserDto from '../dtos/userDto';
 import ApiError from '../exceptions/apiError';
+import {AxiosResponse} from "axios";
 
 class UserService{
 
-    async registration(email:string, password:string){
+    async registration(email:string, password:string, name:string, about:string, country: string, role:string='guest'){
         const candidate = await UserModel.findOne({email})
         if(candidate){
             throw ApiError.BadRequest(`User with email ${email} has already exist`)
         }
         const hashPassword = await hash(password, 3)
         const activationLink = uuidv4()
-        const user:any = await UserModel.create({email: email, password: hashPassword, isActivated:false, activationLink: activationLink})
+        const user:any = await UserModel.create({
+            email: email,
+            password: hashPassword,
+            isActivated:false,
+            activationLink: activationLink,
+            name: name,
+            about: about,
+            country: country,
+            role: role})
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
         const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})

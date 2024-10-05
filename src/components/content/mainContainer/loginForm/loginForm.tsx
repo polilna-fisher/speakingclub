@@ -12,6 +12,7 @@ const LoginForm: FC = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
 
 
     return (
@@ -41,10 +42,18 @@ const LoginForm: FC = () => {
                            value={password}
                            required={true}
                            onChange={(event) => setPassword(event.target.value)}/>
+                    <input className={styles.login_form_input}
+                           type={'text'}
+                           placeholder={'name'}
+                           value={name}
+                           required={true}
+                           onChange={(event) => setName(event.target.value)}/>
                     <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.login({email, password}))}>Login</button>
+                            onClick={() => dispatch(authActions.login({email, password}))}>Login
+                    </button>
                     <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.register({email, password}))}>Registration</button>
+                            onClick={() => dispatch(authActions.register({email, password, name}))}>Registration
+                    </button>
                 </div>
 
 

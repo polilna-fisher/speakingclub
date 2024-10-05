@@ -5,13 +5,13 @@ import {AxiosResponse} from "axios";
 import {userActions} from "../userSlice";
 
 interface ILoginSaga {
-    payload: { email: string, password: string }
+    payload: { email: string, password: string , name: string, country?: string, about?: string, role: string}
 }
 
 export function* registerSaga(action: ILoginSaga): Generator<any> {
     try {
-        const {email, password} = action.payload
-        const response = yield call(AuthService.registration, email, password)
+        const {email, password, name, country, about, role} = action.payload
+        const response = yield call(AuthService.registration, email, password, name, country, about, role)
         const responseData = (response as AxiosResponse).data;
 
         localStorage.setItem('accessToken', responseData.accessToken)
