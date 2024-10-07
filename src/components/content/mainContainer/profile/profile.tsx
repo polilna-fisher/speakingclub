@@ -1,7 +1,7 @@
 import styles from "./profile.module.sass";
 import {FC} from "react";
 import {useAppSelector} from "../../../../redux/store";
-import LoginForm from "../loginForm/loginForm";
+import LoginForm from "../signIn/signIn";
 
 const Profile:FC = () => {
     const user = useAppSelector((state) => state.user.user)

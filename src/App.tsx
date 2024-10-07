@@ -1,7 +1,7 @@
 import "./App.sass";
 import Layout from "./components/layout/layout";
 import { BrowserRouter as Router } from "react-router-dom";
-import LoginForm from "./components/content/mainContainer/loginForm/loginForm";
+import LoginForm from "./components/content/mainContainer/signIn/signIn";
 import {FC, useEffect, useState} from "react";
 import {userActions, userSlice} from "./redux/userSlice";
 import {useAppDispatch, useAppSelector} from "./redux/store";

@@ -14,17 +14,19 @@ import MeetingItemForUpdate from "./admin/update/meetingItemForUpdate/meetingIte
 import {FC} from "react";
 import ProtectedRoute from "../../protectedRoute";
 import {useAppSelector} from "../../../redux/store";
-import LoginForm from "./loginForm/loginForm";
+import SignIn from "./signIn/signIn";
+import SignUp from "./signUp/signUp";
+import ResetPassword from "./resetPassword/resetPassword";
 
 const MainContainer:FC = () => {
 
   const user = useAppSelector(state => state.user.user)
-  console.log(user, 'usus')
-
   return (
     <div className={styles.schedule_container}>
       <Routes>
-        <Route path={routes.login} element={<LoginForm />} />
+        <Route path={routes.login} element={<SignIn />} />
+        <Route path={routes.registration} element={<SignUp />} />
+        <Route path={routes.reset} element={<ResetPassword />} />
         <Route path={routes.default} element={<GetStarted />} />
         <Route path={routes.schedule} element={<ScheduleContainer />} />
         <Route path={routes.premium} element={<Premium />} />

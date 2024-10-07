@@ -1,9 +1,12 @@
-import {FC, useEffect, useState} from "react";
-import store, {useAppDispatch, useAppSelector} from "../../../../redux/store";
+import {FC, useState} from "react";
+import {useAppDispatch, useAppSelector} from "../../../../redux/store";
 import {authActions} from "../../../../redux/authSlice";
-import styles from "./loginForm.module.sass";
+import styles from "./signIn.module.sass";
+import {useForm} from 'react-hook-form'
+import {Link} from "react-router-dom";
+import {routes} from "../../../../routes";
 
-const LoginForm: FC = () => {
+const SignIn: FC = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.user.user);
     const accessToken = useAppSelector((state) => state.auth.accessToken);
@@ -12,16 +15,12 @@ const LoginForm: FC = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
+
+    const {register, handleSubmit} = useForm( )
 
 
     return (
         <div>
-            {
-                isLoading ? `loading` :
-                    <h1>{!!accessToken ? `User has authorised + ${user?.email}` : `Please, authorise`}</h1>
-            }
-
 
             {!!accessToken
                 ? <div className={styles.login_form_container}>
@@ -29,34 +28,26 @@ const LoginForm: FC = () => {
                             onClick={() => dispatch(authActions.logout())}>Logout</button>
                 </div>
 
-                : <div className={styles.login_form_container}>
+                : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {console.log(data, 'fdfdfd')})}>
                     <input className={styles.login_form_input}
+                           {...register("email")}
                            type={'text'}
                            placeholder={'email'}
                            value={email}
                            required={true}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input className={styles.login_form_input}
+                           {...register("password")}
                            type={'text'}
                            placeholder={'password'}
                            value={password}
                            required={true}
                            onChange={(event) => setPassword(event.target.value)}/>
-                    <input className={styles.login_form_input}
-                           type={'text'}
-                           placeholder={'name'}
-                           value={name}
-                           required={true}
-                           onChange={(event) => setName(event.target.value)}/>
-                    <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.login({email, password}))}>Login
-                    </button>
-                    <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.register({email, password, name}))}>Registration
-                    </button>
-                </div>
-
-
+                    <input type={'submit'} className={styles.login_form_button}
+                            onClick={() => dispatch(authActions.login({email, password}))} value={'Sign In'}/>
+                    <Link className={styles.login_form_link} to={routes.registration}>I don't have an account</Link>
+                    <Link className={styles.login_form_link} to={routes.reset}>Forgot your password?</Link>
+                </form>
             }
 
         </div>
@@ -64,4 +55,4 @@ const LoginForm: FC = () => {
 
 }
 
-export default LoginForm
+export default SignIn

@@ -1,7 +1,7 @@
 import styles from "./content.module.sass";
 import BookedInfo from "./bookedInfo/bookedInfo";
-import MainContainer from "./mainContainer/mainContainer";
 import {FC} from "react";
+import MainContainer from "./mainContainer/mainContainer";
 
 const Content:FC = () => {
   return (

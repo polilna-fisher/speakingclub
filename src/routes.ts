@@ -9,6 +9,8 @@ interface IRoutes{
   update: string,
   notFound: string,
   login: string,
+  registration: string,
+  reset: string,
 }
 
 export const routes:IRoutes = {
@@ -22,4 +24,6 @@ export const routes:IRoutes = {
   update: "/update",
   notFound: "*",
   login: "/login",
+  registration: "/registration",
+  reset: "/reset-password",
 };
