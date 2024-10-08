@@ -51,6 +51,16 @@ class UserController {
         }
     }
 
+    async resetPassword(req:Request, res:Response, next:NextFunction){
+        try{
+            const resetLink = req.params.link
+            await UserService.resetPassword(resetLink)
+            return res.redirect(String(process.env.CHANGE_PASS_URL))
+        }catch (e){
+            next(e)
+        }
+    }
+
     async refresh(req:Request, res:Response, next:NextFunction){
         try{
             const { refreshToken } = req.body

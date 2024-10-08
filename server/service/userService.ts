@@ -42,6 +42,16 @@ class UserService{
         await user.save()
     }
 
+    async resetPassword(resetLink:string) {
+        const user:any = await UserModel.findOne({resetLink})
+
+        // if(!user){
+        //     throw ApiError.BadRequest('Incorrect link')
+        // }
+        // user.isActivated = true
+        // await user.save()
+    }
+
     async login(email:string, password:string){
         const user:any = await UserModel.findOne({email})
         if(!user){
