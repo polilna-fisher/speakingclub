@@ -51,11 +51,21 @@ class UserController {
         }
     }
 
-    async resetPassword(req:Request, res:Response, next:NextFunction){
+    async reset(req:Request, res:Response, next:NextFunction){
         try{
             const resetLink = req.params.link
-            await UserService.resetPassword(resetLink)
-            return res.redirect(String(process.env.CHANGE_PASS_URL))
+            await UserService.reset(resetLink)
+            return res.redirect(String(process.env.SET_PASS_URL))
+        }catch (e){
+            next(e)
+        }
+    }
+
+    async resetPassword(req:Request, res:Response, next:NextFunction){
+        try{
+            const {email} = req.body
+            await UserService.resetPassword(email)
+            return res.json()
         }catch (e){
             next(e)
         }
@@ -67,16 +77,6 @@ class UserController {
             const userData = await UserService.refresh(refreshToken)
 
             return res.json(userData)
-        }catch (e){
-            next(e)
-
-        }
-    }
-
-    async getUsers(req:Request, res:Response, next:NextFunction){
-        try{
-            const users = await UserService.getAllUsers()
-            return res.json(users)
         }catch (e){
             next(e)
 

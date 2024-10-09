@@ -14,10 +14,6 @@ const SignIn: FC = () => {
     const isError = useAppSelector((state) => state.user.isError);
 
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
-    const [country, setCountry] = useState('')
-    const [info, setInfo] = useState('')
 
     const {register, handleSubmit} = useForm( )
 
@@ -44,7 +40,7 @@ const SignIn: FC = () => {
                            required={true}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input type={'submit'} className={styles.login_form_button}
-                           onClick={() => dispatch(authActions.register({email, password, name}))}
+                           onClick={() => dispatch(authActions.resetPassword({email}))}
                            value={'Reset password'}/>
                     <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
                 </form>

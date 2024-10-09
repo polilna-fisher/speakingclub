@@ -6,6 +6,7 @@ import TokenService from './tokenService';
 import UserDto from '../dtos/userDto';
 import ApiError from '../exceptions/apiError';
 import {AxiosResponse} from "axios";
+import {md5} from "js-md5";
 
 class UserService{
 
@@ -42,14 +43,22 @@ class UserService{
         await user.save()
     }
 
-    async resetPassword(resetLink:string) {
-        const user:any = await UserModel.findOne({resetLink})
+    async resetPassword(email:string) {
+        const candidate = await UserModel.findOne({email})
+        if(!candidate){
+            throw ApiError.BadRequest(`User with email ${email} isn't exist`)
+        }
+        const resetLink = md5(`${email} ${Date.now()} ${process.env.JWT_REFRESH_SECRET}` )
+        await MailService.sendResetPasswordMail(email, `${process.env.API_URL}/api/reset/${resetLink}`)
+    }
 
-        // if(!user){
-        //     throw ApiError.BadRequest('Incorrect link')
-        // }
-        // user.isActivated = true
-        // await user.save()
+    async reset(resetLink:string) {
+        const user:any = await UserModel.findOne({resetLink})
+        if(!user){
+            throw ApiError.BadRequest('Incorrect link')
+        }
+        user.allowReset = true
+        await user.save()
     }
 
     async login(email:string, password:string){
@@ -84,11 +93,6 @@ class UserService{
         await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
         return tokens
-    }
-
-    async getAllUsers(){
-        const users = await UserModel.find()
-        return users
     }
 
     async getMe(accessToken:string){

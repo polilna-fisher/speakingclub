@@ -42,13 +42,15 @@ router.post("/registration",
     userController.registration)
 router.post("/login", userController.login)
 router.post("/logout", userController.logout)
-router.post("/resetPassword", userController.resetPassword)
-
+router.post("/reset-password",
+    body('email').isEmail(),
+    userController.resetPassword)
+// router.patch("/changePassword",
+//     body('password').isLength({min:3, max:50}),
+    // userController.changePassword)
 router.get("/activate/:link", userController.activate)
+router.get("/reset/:link", userController.reset)
 router.post("/refresh", userController.refresh)
-
-
-router.get("/users", authMiddleware, userController.getUsers)
 router.get("/me", authMiddleware, userController.getMe)
 
 export default router;
