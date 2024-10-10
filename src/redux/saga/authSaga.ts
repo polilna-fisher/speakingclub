@@ -5,7 +5,7 @@ import {AxiosResponse} from "axios";
 import {userActions} from "../userSlice";
 
 interface ILoginSaga {
-    payload: { email: string, password: string , name: string, country?: string, about?: string, role: string}
+    payload: { email: string, password: string , name: string, country?: string, about?: string, role: string, link: string };
 }
 
 export function* registerSaga(action: ILoginSaga): Generator<any> {
@@ -76,12 +76,21 @@ export function* resetPasswordSaga(action: ILoginSaga): Generator<any> {
         const {email} = action.payload
         const response = yield call(AuthService.resetPassword, email)
         const responseData = (response as AxiosResponse).data;
-        // localStorage.setItem('accessToken', responseData.accessToken)
-        // localStorage.setItem('refreshToken', responseData.refreshToken)
-        //
-        // yield put(authActions.setTokens({
-        //     accessToken: responseData.accessToken,
-        // }));
+    } catch (e) {
+        if (e instanceof Error) {
+            console.log(e.message);
+        } else {
+            console.error('An unexpected error occurred:', e);
+        }
+    }
+}
+
+export function* setPasswordSaga(action: ILoginSaga): Generator<any> {
+    try {
+        const {link, password} = action.payload
+        console.log(action.payload, link, password, 'sagasagadaga')
+        const response = yield call(AuthService.setPassword, link, password)
+        const responseData = (response as AxiosResponse).data;
     } catch (e) {
         if (e instanceof Error) {
             console.log(e.message);
@@ -96,4 +105,5 @@ export function* authSagaWatcher(): Generator<any> {
     yield takeLatest(authActions.login, loginSaga);
     yield takeLatest(authActions.logout, logoutSaga);
     yield takeLatest(authActions.resetPassword, resetPasswordSaga);
+    yield takeLatest(authActions.setPassword, setPasswordSaga);
 }

@@ -45,9 +45,9 @@ router.post("/logout", userController.logout)
 router.post("/reset-password",
     body('email').isEmail(),
     userController.resetPassword)
-// router.patch("/changePassword",
-//     body('password').isLength({min:3, max:50}),
-    // userController.changePassword)
+router.patch("/changePassword",
+    body('password').isLength({min:3, max:50}),
+    userController.changePassword)
 router.get("/activate/:link", userController.activate)
 router.get("/reset/:link", userController.reset)
 router.post("/refresh", userController.refresh)

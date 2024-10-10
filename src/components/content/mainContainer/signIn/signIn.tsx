@@ -46,7 +46,7 @@ const SignIn: FC = () => {
                     <input type={'submit'} className={styles.login_form_button}
                             onClick={() => dispatch(authActions.login({email, password}))} value={'Sign In'}/>
                     <Link className={styles.login_form_link} to={routes.registration}>I don't have an account</Link>
-                    <Link className={styles.login_form_link} to={routes.reset}>Forgot your password?</Link>
+                    <Link className={styles.login_form_link} to={routes.resetPassword}>Forgot your password?</Link>
                 </form>
             }
 

@@ -16,6 +16,7 @@ export const authSlice = createSlice({
     register: (_, action) => {},
     login: (_, action) => {},
     resetPassword: (_, action) => {},
+    setPassword: (_, action) => {},
     logout: () => {},
     setTokens: (state, action: PayloadAction<{ accessToken?: string }>) => {
       state.accessToken = action.payload.accessToken;

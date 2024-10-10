@@ -14,14 +14,14 @@ const Navbar: FC = () => {
     const menuItems: IMenuItem[] | undefined = useMemo(() => {
         if (accessToken) {
             if(user?.role !== 'admin'){
-                return menuItemsList.filter(item => (item.id != 'login') && (item.id != 'admin'))
+                return menuItemsList.filter(item => (item.id !== 'login') && (item.id !== 'admin'))
             }else{
-                return menuItemsList.filter(item => (item.id != 'login'))
+                return menuItemsList.filter(item => (item.id !== 'login'))
             }
         } else {
-            return menuItemsList.filter(item => (item.id != 'signout') && (item.id != 'admin') )
+            return menuItemsList.filter(item => (item.id !== 'signout') && (item.id !== 'admin') )
         }
-    }, [accessToken]);
+    }, [accessToken, user]);
 
 
     return (

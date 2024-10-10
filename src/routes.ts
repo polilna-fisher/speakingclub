@@ -10,7 +10,8 @@ interface IRoutes{
   notFound: string,
   login: string,
   registration: string,
-  reset: string,
+  resetPassword: string,
+  setPassword: string,
 }
 
 export const routes:IRoutes = {
@@ -25,5 +26,6 @@ export const routes:IRoutes = {
   notFound: "*",
   login: "/login",
   registration: "/registration",
-  reset: "/reset-password",
+  resetPassword: "/reset-password",
+  setPassword: "/set-password/:link"
 };

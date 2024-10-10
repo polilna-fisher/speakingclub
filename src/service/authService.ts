@@ -26,4 +26,9 @@ export default class AuthService {
         return $api.post('/reset-password', {email})
     }
 
+    static async setPassword(link: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+        console.log(password, 'paspaspaspaspaspas')
+        return $api.patch('/changePassword', {link, password})
+    }
+
 }

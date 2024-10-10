@@ -55,7 +55,7 @@ class UserController {
         try{
             const resetLink = req.params.link
             await UserService.reset(resetLink)
-            return res.redirect(String(process.env.SET_PASS_URL))
+            return res.redirect(String(process.env.SET_PASS_URL) + '/' + resetLink)
         }catch (e){
             next(e)
         }
@@ -87,6 +87,16 @@ class UserController {
         try{
             const me = await UserService.getMe(req?.headers?.authorization || '')
             return res.json(me)
+        }catch (e){
+            next(e)
+        }
+    }
+
+    async changePassword(req:Request, res:Response, next:NextFunction){
+        try{
+            const {link, password} = req.body
+            await UserService.changePassword(link, password)
+            return res.json()
         }catch (e){
             next(e)
         }

@@ -1,19 +1,33 @@
 import {FC, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../redux/store";
 import {authActions} from "../../../../redux/authSlice";
-import styles from "./resetPassword.module.sass";
+import styles from "./setPassword.module.sass";
 import {useForm} from 'react-hook-form'
 import {Link} from "react-router-dom";
 import {routes} from "../../../../routes";
+import {userActions} from "../../../../redux/userSlice";
 
-const ResetPassword: FC = () => {
+const SetPassword: FC = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.user.user);
     const accessToken = useAppSelector((state) => state.auth.accessToken);
     const isLoading = useAppSelector((state) => state.user.isLoading);
     const isError = useAppSelector((state) => state.user.isError);
 
-    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [againPassword, setAgainPassword] = useState('')
+
+    const setNewPassword = () => {
+        if((password.length > 3) && (password === againPassword)){
+            dispatch(authActions.setPassword({password}))
+            const link = window.location.href.split('/')[window.location.href.split('/').length - 1]
+            console.log(password, 'newPasswordnewPassword pass')
+            dispatch(authActions.setPassword({link, password}))
+        }else{
+            console.log('Passwords are different')
+        }
+
+    }
 
     const {register, handleSubmit} = useForm( )
 
@@ -27,20 +41,26 @@ const ResetPassword: FC = () => {
                 </div>
 
                 : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
-                    console.log(data, 'fdfdfd')
                 })}>
                     <div className={styles.login_form_text}>
-                        Enter your email address and we'll send you a link you can use to pick a new password.
+                        Change your password
                     </div>
                     <input className={styles.login_form_input}
-                           {...register("email")}
+                           {...register("new password")}
                            type={'text'}
-                           placeholder={'email'}
-                           value={email}
+                           placeholder={'new password'}
+                           value={password}
                            required={true}
-                           onChange={(event) => setEmail(event.target.value)}/>
+                           onChange={(event) => setPassword(event.target.value)}/>
+                    <input className={styles.login_form_input}
+                           {...register("again password")}
+                           type={'text'}
+                           placeholder={'again password'}
+                           value={againPassword}
+                           required={true}
+                           onChange={(event) => setAgainPassword(event.target.value)}/>
                     <input type={'submit'} className={styles.login_form_button}
-                           onClick={() => dispatch(authActions.resetPassword({email}))}
+                           onClick={() => setNewPassword()}
                            value={'Reset password'}/>
                     <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
                 </form>
@@ -53,4 +73,4 @@ const ResetPassword: FC = () => {
 
 }
 
-export default ResetPassword
+export default SetPassword

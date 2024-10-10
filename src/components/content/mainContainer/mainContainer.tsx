@@ -17,6 +17,7 @@ import {useAppSelector} from "../../../redux/store";
 import SignIn from "./signIn/signIn";
 import SignUp from "./signUp/signUp";
 import ResetPassword from "./resetPassword/resetPassword";
+import SetPassword from "./setPassword/setPassword";
 
 const MainContainer:FC = () => {
 
@@ -26,7 +27,8 @@ const MainContainer:FC = () => {
       <Routes>
         <Route path={routes.login} element={<SignIn />} />
         <Route path={routes.registration} element={<SignUp />} />
-        <Route path={routes.reset} element={<ResetPassword />} />
+        <Route path={routes.resetPassword} element={<ResetPassword />} />
+        <Route path={routes.setPassword} element={<SetPassword />} />
         <Route path={routes.default} element={<GetStarted />} />
         <Route path={routes.schedule} element={<ScheduleContainer />} />
         <Route path={routes.premium} element={<Premium />} />

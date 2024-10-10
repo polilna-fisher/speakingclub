@@ -22,6 +22,8 @@ class UserService{
             password: hashPassword,
             isActivated:false,
             activationLink: activationLink,
+            resetPasswordLink: '',
+            allowReset: false,
             name: name,
             about: about,
             country: country,
@@ -43,22 +45,36 @@ class UserService{
         await user.save()
     }
 
-    async resetPassword(email:string) {
-        const candidate = await UserModel.findOne({email})
-        if(!candidate){
-            throw ApiError.BadRequest(`User with email ${email} isn't exist`)
-        }
-        const resetLink = md5(`${email} ${Date.now()} ${process.env.JWT_REFRESH_SECRET}` )
-        await MailService.sendResetPasswordMail(email, `${process.env.API_URL}/api/reset/${resetLink}`)
-    }
-
-    async reset(resetLink:string) {
-        const user:any = await UserModel.findOne({resetLink})
+    async reset(resetPasswordLink:string) {
+        const user:any = await UserModel.findOne({resetPasswordLink})
         if(!user){
             throw ApiError.BadRequest('Incorrect link')
         }
         user.allowReset = true
         await user.save()
+    }
+
+    async resetPassword(email:string) {
+        const candidate = await UserModel.findOne({email})
+        if(!candidate){
+            throw ApiError.BadRequest(`User with email ${email} isn't exist`)
+        }
+        const resetLink = uuidv4()
+        const user:any = await UserModel.updateOne({email: email}, {resetPasswordLink: resetLink})
+        await MailService.sendResetPasswordMail(email, `${process.env.API_URL}/api/reset/${resetLink}`)
+
+        return user
+    }
+
+    async changePassword(link:string, password:string) {
+        const candidate = await UserModel.findOne({resetPasswordLink: link, allowReset: true})
+        console.log(password, candidate, 'resres pass')
+        if(!candidate){
+            throw ApiError.BadRequest(`Your link is incorrect. Please, try again`)
+        }
+        const hashPassword = await hash(password, 3)
+        const user:any = await UserModel.updateOne({resetPasswordLink: link}, {password: hashPassword, allowReset: false, resetPasswordLink: ''})
+        return user
     }
 
     async login(email:string, password:string){
