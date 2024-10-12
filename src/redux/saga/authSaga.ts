@@ -1,8 +1,10 @@
 import {call, put, takeLatest} from "redux-saga/effects";
 import {authActions} from "../authSlice";
 import AuthService from "../../service/authService";
-import {AxiosResponse} from "axios";
+import {AxiosError, AxiosResponse} from "axios";
 import {userActions} from "../userSlice";
+import {showToast} from "../../utils/toast";
+import {ToastType} from "../toastSlice";
 
 interface ILoginSaga {
     payload: { email: string, password: string , name: string, country?: string, about?: string, role: string, link: string };
@@ -42,11 +44,9 @@ export function* loginSaga(action: ILoginSaga): Generator<any> {
             accessToken: responseData.accessToken,
         }));
     } catch (e) {
-        if (e instanceof Error) {
-            console.log(e.message);
-        } else {
-            console.error('An unexpected error occurred:', e);
-        }
+        const error = e as any
+
+        yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
 

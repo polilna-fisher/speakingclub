@@ -80,11 +80,11 @@ class UserService{
     async login(email:string, password:string){
         const user:any = await UserModel.findOne({email})
         if(!user){
-            throw ApiError.BadRequest('User is not exist')
+            throw ApiError.BadRequest('Email or password is incorrect. Please try again.')
         }
         const isPassEqual = await compare(password, user.password)
         if(!isPassEqual){
-            throw ApiError.BadRequest('Password is incorrect')
+            throw ApiError.BadRequest('Email or password is incorrect. Please try again.')
         }
         const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})

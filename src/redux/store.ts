@@ -4,6 +4,7 @@ import partReducer from "./partSlice"
 import commonReducer from "./commonSlice"
 import userReducer from "./userSlice"
 import authSlice from "./authSlice";
+import toastSlice from "./toastSlice";
 import createSagaMiddleware from "redux-saga";
 import {meetingCurrentWatcher} from "./saga/saga";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
@@ -18,6 +19,7 @@ const store = configureStore({
         common: commonReducer,
         user: userReducer,
         auth: authSlice,
+        toast: toastSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
 });
