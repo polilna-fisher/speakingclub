@@ -14,20 +14,20 @@ const ResetPassword: FC = () => {
     const isError = useAppSelector((state) => state.user.isError);
 
     const [email, setEmail] = useState('')
+    const [reset, setReset] = useState(false)
 
     const {register, handleSubmit} = useForm( )
 
 
     return (
         <div>
-            {!!accessToken
-                ? <div className={styles.login_form_container}>
-                    <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.logout())}>Logout</button>
+            {reset
+                ? <div className={styles.text_container} >
+                    <p>Instructions for resetting your password have been sent to your email.</p>
+                    <p>Please check your inbox (and your spam folder, if necessary) to complete the process.</p>
                 </div>
 
-                : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
-                    console.log(data, 'fdfdfd')
+                : <form className={styles.login_form_container} onSubmit={handleSubmit(() => {
                 })}>
                     <div className={styles.login_form_text}>
                         Enter your email address and we'll send you a link you can use to pick a new password.
@@ -40,7 +40,9 @@ const ResetPassword: FC = () => {
                            required={true}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input type={'submit'} className={styles.login_form_button}
-                           onClick={() => dispatch(authActions.resetPassword({email}))}
+                           onClick={() => {
+                               dispatch(authActions.resetPassword({email})); setReset(true)
+                           }}
                            value={'Reset password'}/>
                     <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
                 </form>
