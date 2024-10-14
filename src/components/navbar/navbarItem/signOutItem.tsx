@@ -16,7 +16,8 @@ const SignOutItem = ({ id } : {id: string}) => {
     dispatch(commonActions.toggleActiveNavItem(id));
   };
 
-  return (
+
+    return (
     <Link to={routes.default} onClick={() => dispatch(authActions.logout())}>
       <div
         className={cx([

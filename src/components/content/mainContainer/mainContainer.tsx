@@ -18,6 +18,7 @@ import SignIn from "./signIn/signIn";
 import SignUp from "./signUp/signUp";
 import ResetPassword from "./resetPassword/resetPassword";
 import SetPassword from "./setPassword/setPassword";
+import RestrictedForAuthorizedRoute from "../../restrictedForAuthorzedRoute";
 
 const MainContainer:FC = () => {
 
@@ -25,15 +26,15 @@ const MainContainer:FC = () => {
   return (
     <div className={styles.schedule_container}>
       <Routes>
-        <Route path={routes.login} element={<SignIn />} />
-        <Route path={routes.registration} element={<SignUp />} />
-        <Route path={routes.resetPassword} element={<ResetPassword />} />
-        <Route path={routes.setPassword} element={<SetPassword />} />
+        <Route path={routes.login} element={<RestrictedForAuthorizedRoute user={user} children={<SignIn/>}/>}/>
+        <Route path={routes.registration} element={<RestrictedForAuthorizedRoute user={user} children={<SignUp/>}/>}/>
+        <Route path={routes.resetPassword} element={<RestrictedForAuthorizedRoute user={user} children={<ResetPassword/>}/>}/>
+        <Route path={routes.setPassword} element={<RestrictedForAuthorizedRoute user={user} children={<SetPassword/>}/>}/>
         <Route path={routes.default} element={<GetStarted />} />
         <Route path={routes.schedule} element={<ScheduleContainer />} />
-        <Route path={routes.premium} element={<Premium />} />
+        <Route path={routes.premium} element={<Premium/>} />
         <Route path={routes.help} element={<Help/>} />
-        <Route path={routes.notFound} element={<NotFound />} />
+        <Route path={routes.notFound} element={<NotFound/>} />
         <Route path={routes.profile} element={<ProtectedRoute user={user} children={<Profile/>}/>}/>
         <Route path={routes.admin} element={<ProtectedRoute user={user} children={<Admin/>}/>}/>
         <Route path={routes.create} element={<ProtectedRoute user={user} children={<Create/>}/>}/>

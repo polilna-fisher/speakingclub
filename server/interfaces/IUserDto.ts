@@ -10,4 +10,5 @@ export interface IUserDto{
     name: string;
     country: string;
     about: string;
+    bookedParts?: string[]
 }

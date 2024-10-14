@@ -5,6 +5,7 @@ import styles from "./signUp.module.sass";
 import {useForm} from 'react-hook-form'
 import {Link} from "react-router-dom";
 import {routes} from "../../../../routes";
+import StateModal from "../stateModal/stateModal";
 
 const SignIn: FC = () => {
     const dispatch = useAppDispatch()
@@ -25,12 +26,14 @@ const SignIn: FC = () => {
     return (
         <div>
             {!!accessToken
-                ? <div className={styles.login_form_container}>
-                    <button className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.logout())}>Logout</button>
+                ? <div className={styles.text_container}>
+                    <p>Activation link has been sent to your email.</p>
+                    <p>Please check your inbox (and your spam folder, if necessary) to complete the process.</p>
                 </div>
 
-                : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {console.log(data, 'fdfdfd')})}>
+                : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
+                    console.log(data, 'fdfdfd')
+                })}>
                     <input className={styles.login_form_input}
                            {...register("email")}
                            type={'text'}

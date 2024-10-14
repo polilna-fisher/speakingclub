@@ -8,6 +8,7 @@ export default class UserDto{
     name;
     country;
     about;
+    bookedParts;
 
     constructor(model:IUserDto) {
         this.email = model.email;
@@ -17,6 +18,6 @@ export default class UserDto{
         this.country = model.country
         this.name = model.name
         this.about = model.about
-
+        this,this.bookedParts = model.bookedParts
     }
 }

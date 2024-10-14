@@ -6,4 +6,5 @@ export interface IUser{
     name: string,
     country?: string,
     about?: string,
+    bookedParts?: string[]
 }

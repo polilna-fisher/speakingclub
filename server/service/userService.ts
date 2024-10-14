@@ -10,7 +10,8 @@ import {md5} from "js-md5";
 
 class UserService{
 
-    async registration(email:string, password:string, name:string, about:string, country: string, role:string='guest'){
+    async registration(email:string, password:string, name:string, about:string, country: string,
+                       role:string='guest', bookedParts=[]){
         const candidate = await UserModel.findOne({email})
         if(candidate){
             throw ApiError.BadRequest(`User with email ${email} has already exist`)
@@ -27,7 +28,8 @@ class UserService{
             name: name,
             about: about,
             country: country,
-            role: role})
+            role: role,
+            bookedParts: bookedParts})
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
         const userDto:any = new UserDto(user)
         const tokens = TokenService.generateTokens({...userDto})
