@@ -44,7 +44,7 @@ export function* loginSaga(action: ILoginSaga): Generator<any> {
         yield put(authActions.authenticated())
     } catch (e) {
         const error = e as any
-
+        yield put(authActions.error())
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
