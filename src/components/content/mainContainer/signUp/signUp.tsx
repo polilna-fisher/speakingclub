@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../redux/store";
 import {authActions} from "../../../../redux/authSlice";
 import styles from "./signUp.module.sass";
@@ -11,8 +11,11 @@ const SignIn: FC = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.user.user);
     const accessToken = useAppSelector((state) => state.auth.accessToken);
-    const isLoading = useAppSelector((state) => state.user.isLoading);
-    const isError = useAppSelector((state) => state.user.isError);
+    const isLoading = useAppSelector((state) => state.auth.isLoading);
+    const isError = useAppSelector((state) => state.auth.isError);
+    useEffect(() => {
+        console.log(accessToken, 'qweqwe')
+    }, [user, accessToken]);
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -25,6 +28,11 @@ const SignIn: FC = () => {
 
     return (
         <div>
+            {isLoading
+                ? <StateModal setModal={() => {}} modal={true}/>
+                : <StateModal setModal={() => {}} modal={false}/>
+            }
+
             {!!accessToken
                 ? <div className={styles.text_container}>
                     <p>Activation link has been sent to your email.</p>
@@ -32,7 +40,6 @@ const SignIn: FC = () => {
                 </div>
 
                 : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
-                    console.log(data, 'fdfdfd')
                 })}>
                     <input className={styles.login_form_input}
                            {...register("email")}

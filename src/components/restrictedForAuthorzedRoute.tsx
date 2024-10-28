@@ -4,7 +4,7 @@ import {routes} from "../routes";
 
 
 const RestrictedForAuthorizedRoute = ({ user, children }: {user:IUser | null, children:any}) => {
-    if (user) {
+    if (user && user.isActivated) {
         return <Navigate to={routes.default} replace />;
     }
 

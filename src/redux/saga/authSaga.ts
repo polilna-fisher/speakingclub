@@ -18,13 +18,13 @@ export function* registerSaga(action: ILoginSaga): Generator<any> {
 
         localStorage.setItem('accessToken', responseData.accessToken)
         localStorage.setItem('refreshToken', responseData.refreshToken)
-
+        yield put(authActions.activeForm())
         yield put(authActions.setTokens({
             accessToken: responseData.accessToken,
         }));
     } catch (e) {
         const error = e as any
-
+        yield put(authActions.error())
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
@@ -41,7 +41,7 @@ export function* loginSaga(action: ILoginSaga): Generator<any> {
         yield put(authActions.setTokens({
             accessToken: responseData.accessToken,
         }));
-        yield put(authActions.authenticated())
+        yield put(authActions.activeForm())
     } catch (e) {
         const error = e as any
         yield put(authActions.error())
@@ -74,9 +74,10 @@ export function* resetPasswordSaga(action: ILoginSaga): Generator<any> {
         const {email} = action.payload
         const response = yield call(AuthService.resetPassword, email)
         const responseData = (response as AxiosResponse).data;
+        yield call(authActions.allowResetPassword, true)
     } catch (e) {
         const error = e as any
-
+        yield call(authActions.allowResetPassword, false)
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
@@ -86,6 +87,8 @@ export function* setPasswordSaga(action: ILoginSaga): Generator<any> {
         const {link, password} = action.payload
         const response = yield call(AuthService.setPassword, link, password)
         const responseData = (response as AxiosResponse).data;
+        yield call(authActions.allowResetPassword, false)
+
     } catch (e) {
         const error = e as any
 

@@ -6,6 +6,7 @@ interface IAuthSlice {
   isLoading?: boolean,
   isError?: boolean,
   isAuth?: boolean,
+  resetAllowed?: boolean
 }
 
 const initialState: IAuthSlice = {
@@ -13,13 +14,13 @@ const initialState: IAuthSlice = {
   isLoading: false,
   isError: false,
   isAuth: false,
+  resetAllowed: false,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    register: (_, action) => {},
     login: (_, action) => {},
     resetPassword: (_, action) => {},
     setPassword: (_, action) => {},
@@ -27,17 +28,24 @@ export const authSlice = createSlice({
     setTokens: (state, action: PayloadAction<{ accessToken?: string }>) => {
       state.accessToken = action.payload.accessToken;
     },
+    register: (state, action) => {
+      state.isLoading = true
+      state.isError = false
+    },
     loading: (state, action) => {
       state.isLoading = true
       state.isError = false
     },
-    authenticated: (state) => {
+    activeForm: (state) => {
       state.isLoading = false
       state.isError = false
     },
     error: (state) => {
       state.isLoading = false
       state.isError = true
+    },
+    allowResetPassword: (state, action) => {
+     state.resetAllowed = action.payload;
     }
   },
 });
