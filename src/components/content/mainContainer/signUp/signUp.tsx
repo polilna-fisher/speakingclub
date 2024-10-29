@@ -13,9 +13,6 @@ const SignIn: FC = () => {
     const accessToken = useAppSelector((state) => state.auth.accessToken);
     const isLoading = useAppSelector((state) => state.auth.isLoading);
     const isError = useAppSelector((state) => state.auth.isError);
-    useEffect(() => {
-        console.log(accessToken, 'qweqwe')
-    }, [user, accessToken]);
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -32,14 +29,7 @@ const SignIn: FC = () => {
                 ? <StateModal setModal={() => {}} modal={true}/>
                 : <StateModal setModal={() => {}} modal={false}/>
             }
-
-            {!!accessToken
-                ? <div className={styles.text_container}>
-                    <p>Activation link has been sent to your email.</p>
-                    <p>Please check your inbox (and your spam folder, if necessary) to complete the process.</p>
-                </div>
-
-                : <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
+            <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
                 })}>
                     <input className={styles.login_form_input}
                            {...register("email")}
@@ -80,9 +70,6 @@ const SignIn: FC = () => {
                             onClick={() => dispatch(authActions.register({email, password, name}))}  value={'Sign Up'}/>
                     <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
                 </form>
-
-
-            }
 
         </div>
     )

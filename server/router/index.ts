@@ -50,6 +50,7 @@ router.patch("/changePassword",
     userController.changePassword)
 router.get("/activate/:link", userController.activate)
 router.get("/reset/:link", userController.reset)
+router.post("/send-activation-link-again", body('email').isEmail(), userController.repeatedlySendActivationLink)
 router.post("/refresh", userController.refresh)
 router.get("/me", authMiddleware, userController.getMe)
 

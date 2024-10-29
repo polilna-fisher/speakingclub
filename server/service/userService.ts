@@ -38,6 +38,18 @@ class UserService{
         return tokens
     }
 
+    async repeatedlySendActivationLink(email:string) {
+        const candidate = await UserModel.findOne({email})
+        if(!candidate){
+            throw ApiError.BadRequest(`User with email ${email} isn't exist`)
+        }
+        const newActivationLink = uuidv4()
+        const user:any = await UserModel.updateOne({email: email}, {activationLink: newActivationLink})
+        await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${newActivationLink}`)
+
+        return user
+    }
+
     async activate(activationLink:string) {
         const user:any = await UserModel.findOne({activationLink})
         if(!user){

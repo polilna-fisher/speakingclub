@@ -1,5 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../models/IUser";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IAuthSlice {
   accessToken?: string,
@@ -7,6 +6,8 @@ interface IAuthSlice {
   isError?: boolean,
   isAuth?: boolean,
   resetAllowed?: boolean
+  isResetLoading?: boolean,
+  isResetError?: boolean,
 }
 
 const initialState: IAuthSlice = {
@@ -15,6 +16,8 @@ const initialState: IAuthSlice = {
   isError: false,
   isAuth: false,
   resetAllowed: false,
+  isResetLoading: false,
+  isResetError: false,
 };
 
 export const authSlice = createSlice({
@@ -22,9 +25,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (_, action) => {},
-    resetPassword: (_, action) => {},
     setPassword: (_, action) => {},
     logout: () => {},
+    againSendActivationLink: (_, action) => {},
     setTokens: (state, action: PayloadAction<{ accessToken?: string }>) => {
       state.accessToken = action.payload.accessToken;
     },
@@ -45,10 +48,23 @@ export const authSlice = createSlice({
       state.isError = true
     },
     allowResetPassword: (state, action) => {
-     state.resetAllowed = action.payload;
+      state.resetAllowed = action.payload;
+    },
+    resetLoading: (state, action) => {
+      state.isResetLoading = true
+      state.isResetError = false
+    },
+    resetError: (state) => {
+      state.isResetLoading = false
+      state.isResetError = true
+    },
+    isResetPassword: (state) => {
+      state.isResetLoading = false
+      state.isResetError = false
     }
-  },
+
+  }
 });
 
-export default authSlice.reducer;
 export const authActions = authSlice.actions;
+export default authSlice.reducer;

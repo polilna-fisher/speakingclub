@@ -19,6 +19,7 @@ import SignUp from "./signUp/signUp";
 import ResetPassword from "./resetPassword/resetPassword";
 import SetPassword from "./setPassword/setPassword";
 import RestrictedForAuthorizedRoute from "../../restrictedForAuthorzedRoute";
+import InactiveUserMessage from "./inactiveUserMessage/inactiveUserMessage";
 
 const MainContainer:FC = () => {
 
@@ -35,7 +36,11 @@ const MainContainer:FC = () => {
         <Route path={routes.premium} element={<Premium/>} />
         <Route path={routes.help} element={<Help/>} />
         <Route path={routes.notFound} element={<NotFound/>} />
-        <Route path={routes.profile} element={<ProtectedRoute user={user} children={<Profile/>}/>}/>
+        <Route path={routes.profile} element={<ProtectedRoute
+            user={user}
+            children={<Profile/>}
+            redirectInactiveUsers={<InactiveUserMessage/>}
+        />}/>
         <Route path={routes.admin} element={<ProtectedRoute user={user} children={<Admin/>}/>}/>
         <Route path={routes.create} element={<ProtectedRoute user={user} children={<Create/>}/>}/>
         <Route path={routes.update} element={<ProtectedRoute user={user} children={<Update/>}/>}/>

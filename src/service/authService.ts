@@ -27,8 +27,11 @@ export default class AuthService {
     }
 
     static async setPassword(link: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        console.log(password, 'paspaspaspaspaspas')
         return $api.patch('/changePassword', {link, password})
+    }
+
+    static async sendActivationLink(email: string): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post('/send-activation-link-again', {email})
     }
 
 }

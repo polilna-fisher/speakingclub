@@ -74,10 +74,12 @@ export function* resetPasswordSaga(action: ILoginSaga): Generator<any> {
         const {email} = action.payload
         const response = yield call(AuthService.resetPassword, email)
         const responseData = (response as AxiosResponse).data;
+        yield put(authActions.isResetPassword())
         yield call(authActions.allowResetPassword, true)
     } catch (e) {
         const error = e as any
         yield call(authActions.allowResetPassword, false)
+        yield put(authActions.resetError())
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
@@ -96,10 +98,23 @@ export function* setPasswordSaga(action: ILoginSaga): Generator<any> {
     }
 }
 
+export function* repeatedlySendActivationLink(action: ILoginSaga): Generator<any> {
+    try {
+        const {email} = action.payload
+        console.log(action.payload, email, typeof(email), 'saga')
+        const response = yield call(AuthService.sendActivationLink, email)
+        const responseData = (response as AxiosResponse).data;
+    } catch (e) {
+        const error = e as any
+        yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
+    }
+}
+
 export function* authSagaWatcher(): Generator<any> {
     yield takeLatest(authActions.register, registerSaga);
     yield takeLatest(authActions.loading, loginSaga);
     yield takeLatest(authActions.logout, logoutSaga);
-    yield takeLatest(authActions.resetPassword, resetPasswordSaga);
+    yield takeLatest(authActions.resetLoading, resetPasswordSaga);
     yield takeLatest(authActions.setPassword, setPasswordSaga);
+    yield takeLatest(authActions.againSendActivationLink, repeatedlySendActivationLink);
 }

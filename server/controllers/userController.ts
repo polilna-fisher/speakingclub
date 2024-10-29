@@ -20,6 +20,16 @@ class UserController {
         }
     }
 
+    async repeatedlySendActivationLink(req:Request, res:Response, next:NextFunction){
+        try{
+            const {email} = req.body
+            await UserService.repeatedlySendActivationLink(email)
+            return res.json()
+        }catch (e){
+            next(e)
+        }
+    }
+
     async login(req:Request, res:Response, next:NextFunction){
         try{
             const {email, password} = req.body

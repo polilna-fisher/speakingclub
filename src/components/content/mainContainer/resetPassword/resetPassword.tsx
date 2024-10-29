@@ -5,13 +5,13 @@ import styles from "./resetPassword.module.sass";
 import {useForm} from 'react-hook-form'
 import {Link} from "react-router-dom";
 import {routes} from "../../../../routes";
+import StateModal from "../stateModal/stateModal";
 
 const ResetPassword: FC = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.user.user);
     const accessToken = useAppSelector((state) => state.auth.accessToken);
-    const isLoading = useAppSelector((state) => state.user.isLoading);
-    const isError = useAppSelector((state) => state.user.isError);
+    const isLoading = useAppSelector((state) => state.auth.isResetLoading);
     const isResetAllowed = useAppSelector((state) => state.auth.resetAllowed);
 
     const [email, setEmail] = useState('')
@@ -20,6 +20,12 @@ const ResetPassword: FC = () => {
 
     return (
         <div>
+            {
+                isLoading
+                    ? <StateModal setModal={() => {}} modal={true}/>
+                    : <StateModal setModal={() => {}} modal={false}/>
+            }
+
             {isResetAllowed
                 ? <div className={styles.text_container} >
                     <p>Instructions for resetting your password have been sent to your email.</p>
@@ -40,7 +46,7 @@ const ResetPassword: FC = () => {
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input type={'submit'} className={styles.login_form_button}
                            onClick={() => {
-                               dispatch(authActions.resetPassword({email}))
+                               dispatch(authActions.resetLoading({email}))
                            }}
                            value={'Reset password'}/>
                     <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
