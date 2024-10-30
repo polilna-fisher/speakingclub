@@ -74,7 +74,9 @@ class UserService{
             throw ApiError.BadRequest(`User with email ${email} isn't exist`)
         }
         const resetLink = uuidv4()
-        const user:any = await UserModel.updateOne({email: email}, {resetPasswordLink: resetLink})
+        const user = await UserModel.updateOne({email: email}, {resetPasswordLink: resetLink, allowReset: true})
+        const candidate2 = await UserModel.findOne({email})
+        console.log(candidate2, 'useuse')
         await MailService.sendResetPasswordMail(email, `${process.env.API_URL}/api/reset/${resetLink}`)
 
         return user
@@ -87,7 +89,7 @@ class UserService{
             throw ApiError.BadRequest(`Your link is incorrect. Please, try again`)
         }
         const hashPassword = await hash(password, 3)
-        const user:any = await UserModel.updateOne({resetPasswordLink: link}, {password: hashPassword, allowReset: false, resetPasswordLink: ''})
+        const user:any = await UserModel.updateOne({resetPasswordLink: ''}, {password: hashPassword, allowReset: false, resetPasswordLink: ''})
         return user
     }
 

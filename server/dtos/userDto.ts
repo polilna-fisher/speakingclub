@@ -8,6 +8,8 @@ export default class UserDto{
     name;
     country;
     about;
+    resetPasswordLink;
+    allowReset;
     bookedParts;
 
     constructor(model:IUserDto) {
@@ -18,6 +20,8 @@ export default class UserDto{
         this.country = model.country
         this.name = model.name
         this.about = model.about
+        this.resetPasswordLink = model.resetPasswordLink
+        this.allowReset = model.allowReset
         this,this.bookedParts = model.bookedParts
     }
 }

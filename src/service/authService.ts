@@ -23,7 +23,7 @@ export default class AuthService {
     }
 
     static async resetPassword(email: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post('/reset-password', {email})
+        return $api.patch('/reset-password', {email})
     }
 
     static async setPassword(link: string, password: string): Promise<AxiosResponse<AuthResponse>> {

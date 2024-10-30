@@ -6,5 +6,6 @@ export interface IUser{
     name: string,
     country?: string,
     about?: string,
+    allowReset: boolean,
     bookedParts?: string[]
 }

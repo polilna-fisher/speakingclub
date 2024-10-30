@@ -5,7 +5,6 @@ interface IAuthSlice {
   isLoading?: boolean,
   isError?: boolean,
   isAuth?: boolean,
-  resetAllowed?: boolean
   isResetLoading?: boolean,
   isResetError?: boolean,
 }
@@ -15,7 +14,6 @@ const initialState: IAuthSlice = {
   isLoading: false,
   isError: false,
   isAuth: false,
-  resetAllowed: false,
   isResetLoading: false,
   isResetError: false,
 };
@@ -46,9 +44,6 @@ export const authSlice = createSlice({
     error: (state) => {
       state.isLoading = false
       state.isError = true
-    },
-    allowResetPassword: (state, action) => {
-      state.resetAllowed = action.payload;
     },
     resetLoading: (state, action) => {
       state.isResetLoading = true

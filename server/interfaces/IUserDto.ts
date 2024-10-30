@@ -10,5 +10,7 @@ export interface IUserDto{
     name: string;
     country: string;
     about: string;
+    allowReset: boolean;
+    resetPasswordLink: string;
     bookedParts?: string[]
 }

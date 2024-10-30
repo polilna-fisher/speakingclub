@@ -72,13 +72,11 @@ export function* logoutSaga(): Generator<any> {
 export function* resetPasswordSaga(action: ILoginSaga): Generator<any> {
     try {
         const {email} = action.payload
-        const response = yield call(AuthService.resetPassword, email)
-        const responseData = (response as AxiosResponse).data;
+        const resetResponse = yield call(AuthService.resetPassword, email)
+        const responseData = (resetResponse as AxiosResponse).data;
         yield put(authActions.isResetPassword())
-        yield call(authActions.allowResetPassword, true)
     } catch (e) {
         const error = e as any
-        yield call(authActions.allowResetPassword, false)
         yield put(authActions.resetError())
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
@@ -89,7 +87,6 @@ export function* setPasswordSaga(action: ILoginSaga): Generator<any> {
         const {link, password} = action.payload
         const response = yield call(AuthService.setPassword, link, password)
         const responseData = (response as AxiosResponse).data;
-        yield call(authActions.allowResetPassword, false)
 
     } catch (e) {
         const error = e as any

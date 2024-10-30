@@ -74,8 +74,8 @@ class UserController {
     async resetPassword(req:Request, res:Response, next:NextFunction){
         try{
             const {email} = req.body
-            await UserService.resetPassword(email)
-            return res.json()
+            const userData = await UserService.resetPassword(email)
+            return res.json(userData)
         }catch (e){
             next(e)
         }
@@ -111,7 +111,6 @@ class UserController {
             next(e)
         }
     }
-
 
 }
 

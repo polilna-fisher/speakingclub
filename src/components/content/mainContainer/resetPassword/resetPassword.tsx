@@ -12,7 +12,7 @@ const ResetPassword: FC = () => {
     const user = useAppSelector((state) => state.user.user);
     const accessToken = useAppSelector((state) => state.auth.accessToken);
     const isLoading = useAppSelector((state) => state.auth.isResetLoading);
-    const isResetAllowed = useAppSelector((state) => state.auth.resetAllowed);
+    const isResetAllowed = useAppSelector((state) => state.user.user?.allowReset);
 
     const [email, setEmail] = useState('')
     const {register, handleSubmit} = useForm( )
