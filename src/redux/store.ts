@@ -6,7 +6,7 @@ import userReducer from "./userSlice"
 import authSlice from "./authSlice";
 import toastSlice from "./toastSlice";
 import createSagaMiddleware from "redux-saga";
-import {meetingCurrentWatcher} from "./saga/saga";
+import {meetingCurrentWatcher} from "./saga/meetingsSaga";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {authSagaWatcher} from "./saga/authSaga";
 import {all} from "redux-saga/effects";

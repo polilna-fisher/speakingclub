@@ -6,6 +6,7 @@ import {userActions} from "../userSlice";
 import {showToast} from "../../utils/toast";
 import {ToastType} from "../toastSlice";
 
+
 interface ILoginSaga {
     payload: { email: string, password: string , name: string, country?: string, about?: string, role: string, link: string };
 }
@@ -87,10 +88,11 @@ export function* setPasswordSaga(action: ILoginSaga): Generator<any> {
         const {link, password} = action.payload
         const response = yield call(AuthService.setPassword, link, password)
         const responseData = (response as AxiosResponse).data;
+        yield put(authActions.passwordHasChanged())
 
     } catch (e) {
         const error = e as any
-
+        yield put(authActions.setPasswordError())
         yield call(showToast, error.response.data.message, {type: ToastType.ERROR})
     }
 }
@@ -112,6 +114,6 @@ export function* authSagaWatcher(): Generator<any> {
     yield takeLatest(authActions.loading, loginSaga);
     yield takeLatest(authActions.logout, logoutSaga);
     yield takeLatest(authActions.resetLoading, resetPasswordSaga);
-    yield takeLatest(authActions.setPassword, setPasswordSaga);
+    yield takeLatest(authActions.setPasswordLoading, setPasswordSaga);
     yield takeLatest(authActions.againSendActivationLink, repeatedlySendActivationLink);
 }

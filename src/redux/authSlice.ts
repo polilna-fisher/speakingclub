@@ -7,6 +7,10 @@ interface IAuthSlice {
   isAuth?: boolean,
   isResetLoading?: boolean,
   isResetError?: boolean,
+  isResetPasswordAllowed?: boolean,
+  isSettingPasswordLoading?: boolean,
+  isSettingPasswordError?: boolean,
+  isPasswordHasSuccessfullyChanged?: boolean,
 }
 
 const initialState: IAuthSlice = {
@@ -16,6 +20,10 @@ const initialState: IAuthSlice = {
   isAuth: false,
   isResetLoading: false,
   isResetError: false,
+  isResetPasswordAllowed: false,
+  isSettingPasswordLoading: false,
+  isSettingPasswordError: false,
+  isPasswordHasSuccessfullyChanged: false,
 };
 
 export const authSlice = createSlice({
@@ -23,7 +31,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (_, action) => {},
-    setPassword: (_, action) => {},
     logout: () => {},
     againSendActivationLink: (_, action) => {},
     setTokens: (state, action: PayloadAction<{ accessToken?: string }>) => {
@@ -52,11 +59,29 @@ export const authSlice = createSlice({
     resetError: (state) => {
       state.isResetLoading = false
       state.isResetError = true
+      state.isResetPasswordAllowed = false
     },
     isResetPassword: (state) => {
       state.isResetLoading = false
       state.isResetError = false
+      state.isResetPasswordAllowed = true
+    },
+    setPasswordLoading: (state, action) => {
+      state.isSettingPasswordLoading = true
+      state.isSettingPasswordError = false
+      state.isPasswordHasSuccessfullyChanged = false
+    },
+    setPasswordError: (state) => {
+      state.isSettingPasswordLoading = false
+      state.isSettingPasswordError = true
+      state.isPasswordHasSuccessfullyChanged = false
+    },
+    passwordHasChanged: (state) => {
+      state.isSettingPasswordLoading = false
+      state.isSettingPasswordError = false
+      state.isPasswordHasSuccessfullyChanged = true
     }
+
 
   }
 });

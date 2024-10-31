@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../redux/store";
 import {authActions} from "../../../../redux/authSlice";
 import styles from "./resetPassword.module.sass";
@@ -9,13 +9,12 @@ import StateModal from "../stateModal/stateModal";
 
 const ResetPassword: FC = () => {
     const dispatch = useAppDispatch()
-    const user = useAppSelector((state) => state.user.user);
-    const accessToken = useAppSelector((state) => state.auth.accessToken);
+    const isResetPasswordAllowed = useAppSelector((state) => state.auth.isResetPasswordAllowed);
     const isLoading = useAppSelector((state) => state.auth.isResetLoading);
-    const isResetAllowed = useAppSelector((state) => state.user.user?.allowReset);
 
     const [email, setEmail] = useState('')
     const {register, handleSubmit} = useForm( )
+
 
 
     return (
@@ -26,7 +25,7 @@ const ResetPassword: FC = () => {
                     : <StateModal setModal={() => {}} modal={false}/>
             }
 
-            {isResetAllowed
+            {isResetPasswordAllowed
                 ? <div className={styles.text_container} >
                     <p>Instructions for resetting your password have been sent to your email.</p>
                     <p>Please check your inbox (and your spam folder, if necessary) to complete the process.</p>
