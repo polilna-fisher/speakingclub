@@ -16,7 +16,6 @@ const Meeting:FC = () => {
     type: '',
     name: '',
     dateTime: '',
-    booked: false,
     topic: '',
     questions: ['']
   }

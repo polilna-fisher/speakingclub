@@ -11,11 +11,11 @@ export async function fetchPartsList(): Promise<IPart[] | []> {
   return await response.json();
 }
 
-export const bookPart = async (data:{id:string, isBooked:boolean}):Promise<boolean> => {
-  const response = await fetch(`${baseURL}/api/bookPart/${data.id}`, {
-    method: "PATCH",
+export const getPartsInfo = async (partsList: Array<string>):Promise<IPart[]> => {
+  const response = await fetch(`${baseURL}/api/getPartListByIds`, {
+    method: "PUT",
     body: JSON.stringify({
-      booked: !data.isBooked,
+      partsList
     }),
     headers: {
       "Content-Type": "application/json",
@@ -24,6 +24,7 @@ export const bookPart = async (data:{id:string, isBooked:boolean}):Promise<boole
   return await response.json();
 };
 
+
 export const createPart = async (part:IPart):Promise<IPart> => {
   const response = await fetch(`${baseURL}/api/createPart`, {
     method: "POST",
@@ -31,7 +32,6 @@ export const createPart = async (part:IPart):Promise<IPart> => {
       type: part.type,
       name: part.name,
       dateTime: part.dateTime,
-      booked: part.booked,
       topic: part.topic,
       questions: part.questions,
     }),

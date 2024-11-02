@@ -7,7 +7,6 @@ const partSchema = new Schema({
   dateTime: { type: Date, required: true, unique: false },
   topic: { type: String, required: true, unique: false },
   questions: { type: Array, required: true, unique: false },
-  booked: { type: Boolean, required: true, unique: false },
 });
 
 const PartModel = mongoose.model('Part', partSchema);

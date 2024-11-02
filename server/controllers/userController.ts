@@ -2,6 +2,7 @@ import UserService from '../service/userService'
 import {validationResult} from 'express-validator'
 import ApiError from '../exceptions/apiError'
 import {NextFunction, Request, Response} from 'express'
+import userService from "../service/userService";
 
 class UserController {
 
@@ -105,11 +106,24 @@ class UserController {
     async changePassword(req:Request, res:Response, next:NextFunction){
         try{
             const {link, password} = req.body
-            await UserService.changePassword(link, password)
-            return res.json()
+            const userData = await UserService.changePassword(link, password)
+            console.log(userData)
+            return res.json(userData)
         }catch (e){
             next(e)
         }
+    }
+
+    async bookPart(req:Request, res:Response, next:NextFunction) {
+      try {
+          console.log(req.body, 'body')
+        const userId = req.body.userId;
+        const partId = req.body.id;
+        const data = await userService.bookPart(partId, userId);
+        return res.json(data);
+      } catch (e) {
+          next(e)
+      }
     }
 
 }

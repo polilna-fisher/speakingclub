@@ -12,13 +12,22 @@ class PartService {
     const part = await PartModel.findOne({ _id: id });
     return part;
   }
+  async getPartListByIds(partList: Array<string>): Promise<IPart[]> {
+    console.log(partList, 'pfpfpf');
+    const partsListInfo = await Promise.all(
+        partList.map(async (id) => {
+          const part = await PartModel.findOne({ _id: id }).lean();
+          console.log(part, `Part for id ${id}`); // Логируем каждую часть
+          return part; // Или создайте новый объект, как показано выше
+        })
+    );
+    console.log(partsListInfo, 'gfdgfdgfdgfdgfdgfdgfd');
+    return partsListInfo.filter(part => part !== null);
+  }
+
   async createPart(data:IPart):Promise<IPart | null> {
     const part = await PartModel.create(data);
     return part;
-  }
-  async bookPart(id:string, booked:boolean):Promise<{id:string, booked: boolean}> {
-    const part = await PartModel.updateOne({ _id: id }, { booked: booked });
-    return {id, booked};
   }
   async updatePart(id:string, data:IPart):Promise<UpdateWriteOpResult> {
     const part = await PartModel.updateOne({ _id: id }, data);

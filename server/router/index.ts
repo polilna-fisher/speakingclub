@@ -10,6 +10,7 @@ router.get("/getMeetingsList", meetingController.getMeetingList);
 router.get("/getPartsList", partController.getPartsList);
 router.get("/getMeeting/:id", meetingController.getMeeting);
 router.get("/getPart/:id", partController.getPart);
+router.put("/getPartListByIds/", partController.getPartListByIds)
 router.post("/createMeeting",
     body('name').notEmpty(),
     body('type').notEmpty(),
@@ -26,7 +27,7 @@ router.post("/createPart",
     body('dateTime').notEmpty().isDate(),
     body('questions').isArray(),
     partController.createPart);
-router.patch("/bookPart/:id", partController.bookPart);
+router.patch("/bookPart/", userController.bookPart);
 router.put("/updateMeeting/:id", meetingController.updateMeeting);
 router.put("/updatePart/:id", partController.updatePart);
 router.delete("/deleteMeeting/:id", meetingController.deleteMeeting);

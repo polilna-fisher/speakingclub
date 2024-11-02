@@ -6,6 +6,8 @@ interface IUserSlice {
   isAuth: boolean,
   isLoading: boolean,
   isError: boolean,
+  loadingBooking: boolean,
+  errorBooking: boolean,
 }
 
 const initialState:IUserSlice = {
@@ -13,6 +15,8 @@ const initialState:IUserSlice = {
   isAuth: false,
   isLoading: true,
   isError: false,
+  loadingBooking: false,
+  errorBooking: false,
 };
 
 export const userSlice = createSlice({
@@ -26,10 +30,23 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
     },
-
     userError: (state) => {
       state.isError = true
-    }
+    },
+    fetchBookingPart: (state, action) => {
+      state.loadingBooking = true;
+      state.errorBooking = false;
+    },
+    fetchBookingPartError: (state) => {
+      state.loadingBooking = false;
+      state.errorBooking = true;
+    },
+    fetchBookingPartSuccess: (state) => {
+      state.loadingBooking = false;
+      state.errorBooking = false;
+      // state.user?.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
+    },
+
   },
 });
 

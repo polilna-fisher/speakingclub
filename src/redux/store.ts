@@ -10,6 +10,8 @@ import {meetingCurrentWatcher} from "./saga/meetingsSaga";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {authSagaWatcher} from "./saga/authSaga";
 import {all} from "redux-saga/effects";
+import {partCurrentWatcher} from "./saga/partsSaga";
+import {userCurrentWatcher} from "./saga/userSaga";
 
 const saga = createSagaMiddleware();
 const store = configureStore({
@@ -28,7 +30,9 @@ function* rootSaga() {
     yield all(
         [
             authSagaWatcher(),
-            meetingCurrentWatcher()
+            meetingCurrentWatcher(),
+            partCurrentWatcher(),
+            userCurrentWatcher(),
         ]
     )
 }

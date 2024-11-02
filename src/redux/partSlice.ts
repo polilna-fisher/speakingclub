@@ -5,24 +5,26 @@ interface IPartState {
     loadingParts: boolean,
     errorParts: boolean,
     partsList: IPart[] | [],
-    loadingBooking: boolean,
-    errorBooking: boolean,
     bookedParts: IPart[] | [],
     newPart1: IPart | null,
     newPart2: IPart | null,
-    isPartsReceived: boolean
+    isPartsReceived: boolean,
+    loadingInfo: boolean,
+    errorInfo: boolean,
+    bookedPartsInfo: IPart[] | []
 }
 
 const initialState:IPartState = {
     loadingParts: true,
     errorParts: false,
     partsList: [],
-    loadingBooking: false,
-    errorBooking: false,
     bookedParts: [],
     newPart1: null,
     newPart2: null,
-    isPartsReceived: false
+    isPartsReceived: false,
+    loadingInfo: false,
+    errorInfo: false,
+    bookedPartsInfo: []
 };
 
 export const partSlice = createSlice({
@@ -42,28 +44,16 @@ export const partSlice = createSlice({
             state.loadingParts = false;
             state.errorParts = true;
         },
-        fetchBookingPart: (state, _action) => {
-            state.loadingBooking = true;
-            state.errorBooking = false;
-        },
-        fetchBookingPartSuccess: (state) => {
-            state.loadingBooking = false;
-            state.errorBooking = false;
-            state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
-        },
-        updatePartList: (state, action) => {
-            let changedPart = state.partsList.find(item => item._id === action.payload.id);
-            if (changedPart) {
-                changedPart.booked = action.payload.booked
-                state.partsList = state.partsList.filter(item => item._id !== action.payload.id)
-                state.partsList = [...state.partsList, changedPart];
-                state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
-            }
-        },
-        fetchBookingPartError: (state) => {
-            state.loadingBooking = false;
-            state.errorBooking = true;
-        },
+        // updatePartList: (state, action) => {
+        //     let changedPart = state.partsList.find(item => item._id === action.payload.id);
+        //     if (changedPart) {
+        //         changedPart.booked = action.payload.booked
+        //         state.partsList = state.partsList.filter(item => item._id !== action.payload.id)
+        //         state.partsList = [...state.partsList, changedPart];
+        //         state.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
+        //     }
+        // },
+
         fetchNewPart1: (state, action) => {
             state.newPart1 = action.payload;
         },
@@ -72,6 +62,19 @@ export const partSlice = createSlice({
         },
         receiveParts: (state, action) => {
             state.isPartsReceived = action.payload;
+        },
+        fetchPartsInfo: (state, action) => {
+            state.loadingInfo = true;
+            state.errorInfo = false
+        },
+        errorPartsInfo: (state) => {
+            state.loadingInfo = false;
+            state.errorInfo = true
+        },
+        partsInfoFetched: (state, action) => {
+            state.loadingInfo = false;
+            state.errorInfo = false;
+            state.bookedPartsInfo = action.payload;
         }
     },
 });
