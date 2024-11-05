@@ -1,6 +1,6 @@
 import styles from "./bookedInfo.module.sass";
 import BookedItem from "./bookedItem/bookedItem";
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import {baseRoute} from "../../../constants";
 import {routes} from "../../../routes";
 import {partActions} from "../../../redux/partSlice";
@@ -13,6 +13,7 @@ import PartModal from "../mainContainer/schedule/partModal/partModal";
 import Modal from "../../modal/modal";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {IPart} from "../../../models/IPart";
+import {userActions} from "../../../redux/userSlice";
 
 interface IModalMeeting {
     [key: string]: JSX.Element;
@@ -21,7 +22,7 @@ interface IModalMeeting {
 const BookedInfo:FC = () => {
     const bookedPartsInfo = useAppSelector((state) => state.parts.bookedPartsInfo);
     const bookedPartList = useAppSelector((state) => state.user.user?.bookedParts);
-    const user = useAppSelector((state) => state.user.user);
+    const partsList = useAppSelector((state) => state.parts.partsList);
     const dispatch = useAppDispatch();
     const [modal, setModal] = useState<null | string>(null);
     const [modalData, setModalData] = useState<null | IPart>(null)
@@ -35,16 +36,20 @@ const BookedInfo:FC = () => {
         Part: <PartModal  part={modalData}  />,
     };
 
-    useEffect(() => {
-        if(!!bookedPartList?.length){
-            dispatch(partActions.fetchPartsInfo([...bookedPartList]))
-        }
-    }, [user, bookedPartList]);
+    const list = useMemo(() => {
+        const hash = partsList.reduce((acc, el) => {
+                acc[el._id] = el
+            return acc
+        }, {} as { [key: string]: IPart })
+
+        return bookedPartList?.map(id => hash[id]) || []
+    }, [partsList, bookedPartList])
+
 
     return (
         <div className={styles.booked_info_container}>
 
-            {!bookedPartsInfo?.length
+            {!list?.length
                 ? (
                     <div className={styles.booked_info_no_items_container}>
                         <a
@@ -61,7 +66,7 @@ const BookedInfo:FC = () => {
                         pagination={{ clickable: true }}
                         slidesPerView={3}>
                         {
-                            bookedPartsInfo?.map((bookedItem, i) => {
+                            list?.map((bookedItem, i) => {
                                 return (
                                     <SwiperSlide key={bookedItem._id}>
                                         <BookedItem

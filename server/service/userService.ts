@@ -149,18 +149,18 @@ class UserService {
     }
 
     async bookPart(partId: string, userId: string): Promise<IUser> {
-        console.log(userId, 'useril')
         const candidate = await UserModel.findOne({_id: userId});
-        console.log(candidate, 'candidate')
         const partsList = candidate?.bookedParts
         const isPartBooked = partsList?.filter(part => { return part !== partId })
         if(isPartBooked?.length !== partsList?.length) {
-            const user: any = await UserModel.updateOne({ _id: userId }, {bookedParts: isPartBooked});
+            const updatedUser: any = await UserModel.updateOne({ _id: userId }, {bookedParts: isPartBooked});
+            const user:any = await UserModel.findOne({_id: userId});
             const userDto: any = new UserDto(user)
             return userDto
         }else{
             partsList?.push(partId)
-            const user:any = await UserModel.updateOne({ _id: userId }, {bookedParts: partsList});
+            const updatedUser:any = await UserModel.updateOne({ _id: userId }, {bookedParts: partsList});
+            const user:any = await UserModel.findOne({_id: userId});
             const userDto: any = new UserDto(user)
             return userDto
         }

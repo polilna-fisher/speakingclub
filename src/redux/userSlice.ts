@@ -44,7 +44,6 @@ export const userSlice = createSlice({
     fetchBookingPartSuccess: (state) => {
       state.loadingBooking = false;
       state.errorBooking = false;
-      // state.user?.bookedParts = !!state.partsList.length ? state.partsList.filter(item => item.booked) : []
     },
 
   },

@@ -13,15 +13,13 @@ class PartService {
     return part;
   }
   async getPartListByIds(partList: Array<string>): Promise<IPart[]> {
-    console.log(partList, 'pfpfpf');
     const partsListInfo = await Promise.all(
         partList.map(async (id) => {
           const part = await PartModel.findOne({ _id: id }).lean();
-          console.log(part, `Part for id ${id}`); // Логируем каждую часть
-          return part; // Или создайте новый объект, как показано выше
+          console.log(part, `Part for id ${id}`);
+          return part;
         })
     );
-    console.log(partsListInfo, 'gfdgfdgfdgfdgfdgfdgfd');
     return partsListInfo.filter(part => part !== null);
   }
 

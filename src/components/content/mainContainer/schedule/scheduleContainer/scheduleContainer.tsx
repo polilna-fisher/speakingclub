@@ -1,14 +1,16 @@
 import styles from "./scheduleContainer.module.sass";
 import ScheduleHeader from "../scheduleHeader/scheduleHeader";
 import ScheduleItem from "../scheduleItem/scheduleItem";
-import {FC, useMemo, useState} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import moment from "moment";
 import {dateFormats, formatDate, fromUtcToLocalTime} from "../../../../../utils/dateCount";
 import PartModal from "../partModal/partModal";
 import ItemModal from "../itemModal/itemModal";
 import Modal from "../../../../modal/modal";
-import {useAppSelector} from "../../../../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../../../../redux/store";
 import {IPart} from "../../../../../models/IPart";
+import {meetingActions} from "../../../../../redux/meetingSlice";
+import {partActions} from "../../../../../redux/partSlice";
 
 interface IModalMeeting {
     Part: JSX.Element;
@@ -23,10 +25,16 @@ const ScheduleContainer:FC = () => {
   const loading = useAppSelector((state) => state.meetings.loadingMeetings);
   const error = useAppSelector((state) => state.meetings.loadingMeetings);
   const [modal, setModal] = useState<null | string>(null);
-    const [modalData, setModalData] = useState<null | IPart | IPart[]>(null)
+  const [modalData, setModalData] = useState<null | IPart | IPart[]>(null)
+  const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(meetingActions.fetchMeetingsList())
+        dispatch(partActions.fetchPartsList())
+    }, []);
 
 
-    const meetingList = useMemo(() => {
+    const getMeetingList = useMemo(() => {
     if (!!meetingsList.length) {
       const forChosenDateData = meetingsList?.filter((el) => {
         return formatDate(fromUtcToLocalTime(el.dateTime), dateFormats.normal) === chosenDate;
@@ -52,7 +60,7 @@ const ScheduleContainer:FC = () => {
     <div>
       <ScheduleHeader setChosenDate={setChosenDate} />
       <div className={styles.items_container}>
-        {meetingList?.map((item) => (
+        {getMeetingList?.map((item) => (
           <ScheduleItem item={item} key={item._id} openModal={openModal}/>
         ))}
       </div>

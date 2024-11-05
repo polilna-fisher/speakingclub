@@ -5,7 +5,7 @@ export interface IPart {
     dateTime: string,
     topic: string,
     questions: Array<string>
-    _id?: string
+    _id: string
 }
 
 

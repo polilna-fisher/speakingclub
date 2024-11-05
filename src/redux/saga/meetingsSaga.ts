@@ -17,5 +17,5 @@ export function* getMeetingsList(): Generator<any> {
 
 
 export function* meetingCurrentWatcher(): Generator<any> {
-    yield takeLatest(meetingActions.fetchMeetingsList.type, getMeetingsList);
+    yield takeLatest(meetingActions.fetchMeetingsList, getMeetingsList);
 }

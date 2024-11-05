@@ -1,7 +1,6 @@
 import styles from "./itemContent.module.sass";
 import {useAppSelector} from "../../../../../../redux/store";
 import {FC} from "react";
-import {useSelector} from "react-redux";
 import {IMeeting} from "../../../../../../models/IMeeting";
 import {IPart} from "../../../../../../models/IPart";
 

@@ -20,8 +20,8 @@ const PartModal:FC<IPartModal> = ({ part }) => {
     const errorBooking = useAppSelector(state => state.user.errorBooking)
     const partStatus = bookedParts?.find(partId => partId === part?._id)
 
-    const bookingPart = async (id: string | undefined) => {
-        dispatch(userActions.fetchBookingPart({id, userId}))
+    const bookingPart = async (partId: string | undefined) => {
+        dispatch(userActions.fetchBookingPart({partId, userId}))
   };
 
   return (

@@ -21,14 +21,11 @@ export function* getBookedPartsInfo(action: IGetPartsAction): Generator<any> {
     try {
         const partIds = action.payload
         const payload = yield call(getPartsInfo, partIds)
-
         yield put(partActions.partsInfoFetched(payload));
     } catch (e) {
         yield put(partActions.errorPartsInfo());
     }
 }
-
-
 
 export function* getPartsList(): Generator<any> {
     try {

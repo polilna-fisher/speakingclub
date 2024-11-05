@@ -116,9 +116,8 @@ class UserController {
 
     async bookPart(req:Request, res:Response, next:NextFunction) {
       try {
-          console.log(req.body, 'body')
         const userId = req.body.userId;
-        const partId = req.body.id;
+        const partId = req.body.partId;
         const data = await userService.bookPart(partId, userId);
         return res.json(data);
       } catch (e) {

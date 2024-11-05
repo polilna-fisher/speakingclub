@@ -30,10 +30,9 @@ export function* getMeSaga(): Generator<any> {
 export function* bookingPart(action: IBookingPartAction): Generator<any> {
     try {
         const {partId, userId} = action.payload;
-        console.log(userId, 'fdfdfdfdfdfdfdfd');
-
         const payload = yield call(UserService.bookPart, {partId, userId});
         yield put(userActions.setUser(payload));
+        yield put(userActions.fetchBookingPartSuccess())
     } catch (e) {
         yield put(userActions.fetchBookingPartError());
     }

@@ -13,6 +13,7 @@ const Meeting:FC = () => {
   const newPart1 = useAppSelector((state) => state.parts.newPart1);
   const newPart2 = useAppSelector((state) => state.parts.newPart2);
   const defaultPart: IPart = {
+    _id: '',
     type: '',
     name: '',
     dateTime: '',
