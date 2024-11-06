@@ -4,8 +4,7 @@ export interface IUser{
     id: string,
     role: string,
     name: string,
-    country?: string,
-    about?: string,
+    info?: string,
     allowReset: boolean,
     bookedParts?: string[]
 }

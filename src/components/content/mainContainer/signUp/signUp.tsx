@@ -17,7 +17,6 @@ const SignIn: FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
-    const [country, setCountry] = useState('')
     const [info, setInfo] = useState('')
 
     const {register, handleSubmit} = useForm( )
@@ -30,46 +29,47 @@ const SignIn: FC = () => {
                 : <StateModal setModal={() => {}} modal={false}/>
             }
             <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {
-                })}>
-                    <input className={styles.login_form_input}
-                           {...register("email")}
-                           type={'text'}
-                           placeholder={'email'}
-                           value={email}
-                           required={true}
-                           onChange={(event) => setEmail(event.target.value)}/>
-                    <input className={styles.login_form_input}
-                           {...register("password")}
-                           type={'text'}
-                           placeholder={'password'}
-                           value={password}
-                           required={true}
-                           onChange={(event) => setPassword(event.target.value)}/>
-                    <input className={styles.login_form_input}
-                           {...register("name")}
-                           type={'text'}
-                           placeholder={'name'}
-                           value={name}
-                           required={true}
-                           onChange={(event) => setName(event.target.value)}/>
-                    <input className={styles.login_form_input}
-                           {...register("country")}
-                           type={'text'}
-                           placeholder={'country'}
-                           value={country}
-                           required={false}
-                           onChange={(event) => setCountry(event.target.value)}/>
-                    <input className={styles.login_form_input}
-                           {...register("info")}
-                           type={'text'}
-                           placeholder={'info'}
-                           value={info}
-                           required={false}
-                           onChange={(event) => setInfo(event.target.value)}/>
-                    <input type={'submit'}  className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.register({email, password, name}))}  value={'Sign Up'}/>
-                    <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
-                </form>
+            })}>
+                <input className={styles.login_form_input}
+                       {...register("email")}
+                       type={'text'}
+                       placeholder={'email'}
+                       value={email}
+                       required={true}
+                       onChange={(event) => setEmail(event.target.value)}/>
+                <input className={styles.login_form_input}
+                       {...register("password")}
+                       type={'text'}
+                       placeholder={'password'}
+                       value={password}
+                       required={true}
+                       onChange={(event) => setPassword(event.target.value)}/>
+                <input className={styles.login_form_input}
+                       {...register("password")}
+                       type={'text'}
+                       placeholder={'password'}
+                       value={password}
+                       // required={true}
+                       // onChange={(event) => setPassword(event.target.value)}
+                />
+                <input className={styles.login_form_input}
+                       {...register("name")}
+                       type={'text'}
+                       placeholder={'name'}
+                       value={name}
+                       required={true}
+                       onChange={(event) => setName(event.target.value)}/>
+                <input className={styles.login_form_input}
+                       {...register("info")}
+                       type={'text'}
+                       placeholder={'info'}
+                       value={info}
+                       required={false}
+                       onChange={(event) => setInfo(event.target.value)}/>
+                <input type={'submit'} className={styles.login_form_button}
+                       onClick={() => dispatch(authActions.register({email, password, name, info}))} value={'Sign Up'}/>
+                <Link className={styles.login_form_link} to={routes.login}>I have an account</Link>
+            </form>
 
         </div>
     )

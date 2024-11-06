@@ -2,7 +2,15 @@ import Icon1 from "./month1.png";
 import Icon2 from "./month3.png";
 import Icon3 from "./month6.png";
 
-const premiumItemsInfo = [
+export interface IPremiumItemInfo {
+  title: string,
+  icon: string,
+  benefits: Array<string>,
+  price: string,
+  sale: string,
+}
+
+const premiumItemsInfo:IPremiumItemInfo[] = [
   {
     title: "1 month",
     icon: Icon1,

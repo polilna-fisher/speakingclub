@@ -8,8 +8,7 @@ export interface IUserDto{
     _id?: string;
     role: string;
     name: string;
-    country: string;
-    about: string;
+    info: string;
     allowReset: boolean;
     resetPasswordLink: string;
     bookedParts?: string[]

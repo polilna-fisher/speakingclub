@@ -6,8 +6,7 @@ export default class UserDto{
     isActivated;
     role;
     name;
-    country;
-    about;
+    info;
     resetPasswordLink;
     allowReset;
     bookedParts;
@@ -17,11 +16,10 @@ export default class UserDto{
         this.id = model._id;
         this.isActivated = model.isActivated
         this.role = model.role
-        this.country = model.country
         this.name = model.name
-        this.about = model.about
+        this.info = model.info
         this.resetPasswordLink = model.resetPasswordLink
         this.allowReset = model.allowReset
-        this,this.bookedParts = model.bookedParts
+        this.bookedParts = model.bookedParts
     }
 }

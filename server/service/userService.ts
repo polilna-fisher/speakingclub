@@ -12,7 +12,7 @@ import PartModel from "../models/partModel";
 
 class UserService {
 
-    async registration(email: string, password: string, name: string, about: string, country: string,
+    async registration(email: string, password: string, name: string, info?: string,
                        role: string = 'guest', bookedParts = []) {
         const candidate = await UserModel.findOne({email})
         if (candidate) {
@@ -28,8 +28,7 @@ class UserService {
             resetPasswordLink: '',
             allowReset: false,
             name: name,
-            about: about,
-            country: country,
+            info: info,
             role: role,
             bookedParts: bookedParts
         })

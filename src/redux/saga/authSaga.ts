@@ -8,13 +8,13 @@ import {ToastType} from "../toastSlice";
 
 
 interface ILoginSaga {
-    payload: { email: string, password: string , name: string, country?: string, about?: string, role: string, link: string };
+    payload: { email: string, password: string , name: string, info?: string, role: string, link: string };
 }
 
 export function* registerSaga(action: ILoginSaga): Generator<any> {
     try {
-        const {email, password, name, country, about, role} = action.payload
-        const response = yield call(AuthService.registration, email, password, name, country, about, role)
+        const {email, password, name, info, role} = action.payload
+        const response = yield call(AuthService.registration, email, password, name, info, role)
         const responseData = (response as AxiosResponse).data;
 
         localStorage.setItem('accessToken', responseData.accessToken)

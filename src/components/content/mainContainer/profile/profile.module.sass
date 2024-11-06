@@ -1,16 +1,29 @@
 @import "../../../../App"
+//@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap')
+
 .profile_container
     background-color: var(--white)
     padding: 15px
     border-radius: 15px
     display: flex
-    flex-direction: column
-    flex-grow: 1
+    height: 100%
     gap: 20px
+    justify-content: space-between
 
 .profile_info
     background: var(--violet)
+    max-width: 300px
+    width: 100%
     padding: 15px
+    text-align: center
+    border-radius: 15px
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+    @include text_light
+
+.profile_settings
+    background: var(--violet)
+    padding: 15px
+    width: 100%
     text-align: center
     border-radius: 15px
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
@@ -23,3 +36,57 @@
     display: flex
     flex-direction: column
     text-align: center
+
+.profile_photo_container
+    border: 1px solid var(--violet)
+    background: var(--white)
+    padding: 2px 20px
+    height: 100px
+    cursor: pointer
+    border-radius: 15px
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 10px
+    margin-bottom: 10px
+
+.profile_photo_inner_container
+    border: 1px solid var(--violet)
+    background-color: var(--violet)
+    border-radius: 42px
+    height: 80px
+    width: 80px
+
+.icon_edit
+    width: 15px
+    height: 15px
+    cursor: pointer
+
+.fields_list
+    display: flex
+    flex-direction: column
+    gap: 20px
+    padding-top: 10px
+
+.field
+    display: flex
+    gap: 10px
+    justify-content: space-between
+    align-items: center
+
+.field_name
+    @include h3_light
+
+.field_value
+    @include text_light
+    background-color: var(--violet)
+    border: none
+    padding: 5px
+    //font-family: 'Fleur De Leah', sans-serif
+
+.field_value_active
+    @include text_light
+    background-color: var(--violet)
+    padding: 5px
+    border: 1px solid white
+    border-radius: 15px
