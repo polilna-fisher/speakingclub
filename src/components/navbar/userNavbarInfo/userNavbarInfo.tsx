@@ -1,11 +1,8 @@
 import styles from "./userNavbarInfo.module.sass";
 import { Link } from "react-router-dom";
-import cx from "classnames";
-import { menuItemsList } from "../../../utils/menuItems";
-import { useDispatch, useSelector } from "react-redux";
-import {commonActions} from "../../../redux/commonSlice";
 import {useAppSelector} from "../../../redux/store";
 import {routes} from "../../../routes";
+import ProfileDefaultImg from './profile.png'
 
 const UserNavbarInfo = () => {
     const user = useAppSelector((state) => state.user.user);
@@ -14,7 +11,7 @@ const UserNavbarInfo = () => {
     <Link to={routes.profile}>
        <div className={styles.navbar_profile_container}>
            <div className={styles.navbar_profile_photo_container}>
-
+                <img alt='icon' src={ProfileDefaultImg} className={styles.navbar_profile_photo}/>
            </div>
            <div>
                <h2 className={styles.navbar_profile_name}>{user?.name}</h2>
