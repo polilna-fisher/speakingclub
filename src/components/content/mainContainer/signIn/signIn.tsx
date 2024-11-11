@@ -17,7 +17,9 @@ const SignIn: FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const {register, handleSubmit} = useForm( )
+    const {register, handleSubmit, formState: {errors}} = useForm( )
+
+    console.log(errors, 'cvcvcv')
 
 
     return (
@@ -29,14 +31,14 @@ const SignIn: FC = () => {
 
             <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {console.log(data, 'fdfdfd')})}>
                     <input className={styles.login_form_input}
-                           {...register("email")}
+                           {...register("email", {required: true})}
                            type={'text'}
                            placeholder={'email'}
                            value={email}
                            required={true}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <input className={styles.login_form_input}
-                           {...register("password")}
+                           {...register("password", {required: true, minLength: 4})}
                            type={'text'}
                            placeholder={'password'}
                            value={password}

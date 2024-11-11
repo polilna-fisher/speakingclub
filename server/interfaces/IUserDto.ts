@@ -12,4 +12,5 @@ export interface IUserDto{
     allowReset: boolean;
     resetPasswordLink: string;
     bookedParts?: string[]
+    subscription: number | null
 }

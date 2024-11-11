@@ -11,20 +11,6 @@ export async function fetchPartsList(): Promise<IPart[] | []> {
   return await response.json();
 }
 
-export const getPartsInfo = async (partsList: Array<string>):Promise<IPart[]> => {
-  const response = await fetch(`${baseURL}/api/getPartListByIds`, {
-    method: "PUT",
-    body: JSON.stringify({
-      partsList
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json();
-};
-
-
 export const createPart = async (part:IPart):Promise<IPart> => {
   const response = await fetch(`${baseURL}/api/createPart`, {
     method: "POST",

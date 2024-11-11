@@ -62,19 +62,6 @@ export const partSlice = createSlice({
         },
         receiveParts: (state, action) => {
             state.isPartsReceived = action.payload;
-        },
-        fetchPartsInfo: (state, action) => {
-            state.loadingInfo = true;
-            state.errorInfo = false
-        },
-        errorPartsInfo: (state) => {
-            state.loadingInfo = false;
-            state.errorInfo = true
-        },
-        partsInfoFetched: (state, action) => {
-            state.loadingInfo = false;
-            state.errorInfo = false;
-            state.bookedPartsInfo = action.payload;
         }
     },
 });

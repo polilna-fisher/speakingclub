@@ -25,30 +25,6 @@ class PartController {
     }
   }
 
-  async getPartListByIds(req:Request, res:Response) {
-    try {
-      console.log(req.body, 'ggggggggggg')
-      const partList = req.body.partsList;
-      const data = await partService.getPartListByIds(partList);
-      if (!data || !data.length) {
-        throw new Error();
-      } else {
-        // const date = new Date();
-        // const yesterday = date.setDate(date.getDate() - 1)
-        // const filteredData = data.filter(
-        //     item => {
-        //       return new Date(item?.dateTime) >= new Date(yesterday)
-        //     },
-        // );
-        return res.json(data);
-      }
-    } catch (e:any) {
-      res.send(
-          errorHandler(res.statusCode, e.message || "No available parts"),
-      );
-    }
-  }
-
   async getPart(req:Request, res:Response) {
     try {
       const partId = req.params.id;

@@ -5,15 +5,12 @@ import MailService from './mailService';
 import TokenService from './tokenService';
 import UserDto from '../dtos/userDto';
 import ApiError from '../exceptions/apiError';
-import {AxiosResponse} from "axios";
-import {md5} from "js-md5";
 import {IUser} from "../../src/models/IUser";
-import PartModel from "../models/partModel";
 
 class UserService {
 
     async registration(email: string, password: string, name: string, info?: string,
-                       role: string = 'guest', bookedParts = []) {
+                       role: string = 'guest', bookedParts = [], subscription = null) {
         const candidate = await UserModel.findOne({email})
         if (candidate) {
             throw ApiError.BadRequest(`User with email ${email} has already exist`)
@@ -30,7 +27,8 @@ class UserService {
             name: name,
             info: info,
             role: role,
-            bookedParts: bookedParts
+            bookedParts: bookedParts,
+            subscription: subscription
         })
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
         const userDto: any = new UserDto(user)

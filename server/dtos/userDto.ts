@@ -10,6 +10,7 @@ export default class UserDto{
     resetPasswordLink;
     allowReset;
     bookedParts;
+    subscription
 
     constructor(model:IUserDto) {
         this.email = model.email;
@@ -21,5 +22,6 @@ export default class UserDto{
         this.resetPasswordLink = model.resetPasswordLink
         this.allowReset = model.allowReset
         this.bookedParts = model.bookedParts
+        this.subscription = model.subscription
     }
 }

@@ -12,17 +12,6 @@ class PartService {
     const part = await PartModel.findOne({ _id: id });
     return part;
   }
-  async getPartListByIds(partList: Array<string>): Promise<IPart[]> {
-    const partsListInfo = await Promise.all(
-        partList.map(async (id) => {
-          const part = await PartModel.findOne({ _id: id }).lean();
-          console.log(part, `Part for id ${id}`);
-          return part;
-        })
-    );
-    return partsListInfo.filter(part => part !== null);
-  }
-
   async createPart(data:IPart):Promise<IPart | null> {
     const part = await PartModel.create(data);
     return part;

@@ -6,5 +6,6 @@ export interface IUser{
     name: string,
     info?: string,
     allowReset: boolean,
-    bookedParts?: string[]
+    bookedParts?: string[],
+    subscription: number | null
 }

@@ -10,7 +10,6 @@ router.get("/getMeetingsList", meetingController.getMeetingList);
 router.get("/getPartsList", partController.getPartsList);
 router.get("/getMeeting/:id", meetingController.getMeeting);
 router.get("/getPart/:id", partController.getPart);
-router.put("/getPartListByIds/", partController.getPartListByIds)
 router.post("/createMeeting",
     body('name').notEmpty(),
     body('type').notEmpty(),
