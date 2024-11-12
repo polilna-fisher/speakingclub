@@ -14,12 +14,11 @@ const SignIn: FC = () => {
     const isLoading = useAppSelector((state) => state.auth.isLoading);
     const isError = useAppSelector((state) => state.auth.isError);
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const {register, handleSubmit, formState: {errors}} = useForm( )
-
-    console.log(errors, 'cvcvcv')
+    const {register, handleSubmit, watch,  formState: {errors}} = useForm({defaultValues:{
+        email: '', password: ''
+        }})
+    const email = watch('email')
+    const password = watch('password')
 
 
     return (
@@ -29,26 +28,40 @@ const SignIn: FC = () => {
                 : <StateModal setModal={() => {}} modal={false}/>
             }
 
-            <form className={styles.login_form_container} onSubmit={handleSubmit((data) => {console.log(data, 'fdfdfd')})}>
+            <form className={styles.login_form_container}
+                  onSubmit={handleSubmit(() => dispatch(authActions.loading({email, password})))}>
+                <>
                     <input className={styles.login_form_input}
-                           {...register("email", {required: true})}
+                           {...register("email", {
+                               required: 'This field is required',
+                               pattern: {value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Email is incorrect'}
+                           })}
                            type={'text'}
                            placeholder={'email'}
                            value={email}
-                           required={true}
-                           onChange={(event) => setEmail(event.target.value)}/>
+                    />
+                    <p className={styles.error_message}>{errors.email?.message}</p>
+                </>
+                <>
                     <input className={styles.login_form_input}
-                           {...register("password", {required: true, minLength: 4})}
-                           type={'text'}
+                           {...register("password", {
+                               required: 'This field is required', minLength: {
+                                   value: 4, message: 'Min length is 4 '
+                               }
+                           })}
+                           type={'password'}
                            placeholder={'password'}
                            value={password}
-                           required={true}
-                           onChange={(event) => setPassword(event.target.value)}/>
-                    <input type={'submit'} className={styles.login_form_button}
-                            onClick={() => dispatch(authActions.loading({email, password}))} value={'Sign In'}/>
-                    <Link className={styles.login_form_link} to={routes.registration}>I don't have an account</Link>
-                    <Link className={styles.login_form_link} to={routes.resetPassword}>Forgot your password?</Link>
-                </form>
+                    />
+                    <p className={styles.error_message}>{errors.password?.message}</p>
+                </>
+
+                <input type={'submit'} className={styles.login_form_button}
+                       value={'Sign In'}
+                />
+                <Link className={styles.login_form_link} to={routes.registration}>I don't have an account</Link>
+                <Link className={styles.login_form_link} to={routes.resetPassword}>Forgot your password?</Link>
+            </form>
 
         </div>
     )
