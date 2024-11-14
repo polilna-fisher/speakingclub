@@ -30,10 +30,10 @@ const SignIn: FC = () => {
 
             <form className={styles.login_form_container}
                   onSubmit={handleSubmit(() => dispatch(authActions.loading({email, password})))}>
-                <>
+                <div className={styles.login_form_inner_container}>
                     <input className={styles.login_form_input}
                            {...register("email", {
-                               required: 'This field is required',
+                               required: 'Email is required',
                                pattern: {value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Email is incorrect'}
                            })}
                            type={'text'}
@@ -41,11 +41,11 @@ const SignIn: FC = () => {
                            value={email}
                     />
                     <p className={styles.error_message}>{errors.email?.message}</p>
-                </>
-                <>
+                </div>
+                <div className={styles.login_form_inner_container}>
                     <input className={styles.login_form_input}
                            {...register("password", {
-                               required: 'This field is required', minLength: {
+                               required: 'Password is required', minLength: {
                                    value: 4, message: 'Min length is 4 '
                                }
                            })}
@@ -54,7 +54,7 @@ const SignIn: FC = () => {
                            value={password}
                     />
                     <p className={styles.error_message}>{errors.password?.message}</p>
-                </>
+                </div>
 
                 <input type={'submit'} className={styles.login_form_button}
                        value={'Sign In'}
