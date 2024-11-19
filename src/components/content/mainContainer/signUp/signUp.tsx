@@ -14,14 +14,14 @@ const SignIn: FC = () => {
     const isLoading = useAppSelector((state) => state.auth.isLoading);
     const isError = useAppSelector((state) => state.auth.isError);
 
-    const [name, setName] = useState('')
-    const [info, setInfo] = useState('')
-
     const {register, handleSubmit, watch,  formState: {errors}} = useForm({defaultValues:{
             email: '', password: '', confirmPassword: '', name: '', info: ''
         }})
     const email = watch('email')
     const password = watch('password')
+    const confirmPassword = watch('confirmPassword')
+    const name = watch('name')
+    const info = watch('info')
 
 
     return (
@@ -59,22 +59,24 @@ const SignIn: FC = () => {
                 </div>
                 <div className={styles.login_form_inner_container}>
                     <input className={styles.login_form_input}
-                           {...register("password")}
-                           type={'text'}
-                           placeholder={'password'}
-                           value={password}
-                        // required={true}
-                        // onChange={(event) => setPassword(event.target.value)}
+                           {...register("confirmPassword", {
+                               required: 'Password is required'
+                           })}
+                           type={'password'}
+                           placeholder={'confirm password'}
+                           value={confirmPassword}
                     />
+                    <p className={styles.error_message}>{errors.confirmPassword?.message}</p>
                 </div>
                 <div className={styles.login_form_inner_container}>
                     <input className={styles.login_form_input}
-                           {...register("name")}
+                           {...register("name", {
+                               required: 'Name is required'
+                           })}
                            type={'text'}
                            placeholder={'name'}
                            value={name}
-                           required={true}
-                           onChange={(event) => setName(event.target.value)}/>
+                    />
                 </div>
                 <div className={styles.login_form_inner_container}>
                     <input className={styles.login_form_input}
@@ -82,8 +84,7 @@ const SignIn: FC = () => {
                            type={'text'}
                            placeholder={'info'}
                            value={info}
-                           required={false}
-                           onChange={(event) => setInfo(event.target.value)}/>
+                    />
                 </div>
                 <input type={'submit'}
                        className={styles.login_form_button}
